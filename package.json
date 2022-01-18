@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/MissLiner/battleship_game#readme",
   "devDependencies": {
+    "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
+    "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.7.0",
     "jest": "^27.4.7",

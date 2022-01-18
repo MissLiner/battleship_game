@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --watch",
+    "test": "jest --verbose --watchAll *.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/MissLiner/battleship_game/issues"
   },
-  "homepage": "https://github.com/MissLiner/battleship_game#readme"
+  "homepage": "https://github.com/MissLiner/battleship_game#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.8",
+    "css-loader": "^6.5.1",
+    "eslint": "^8.7.0",
+    "jest": "^27.4.7",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  }
 }

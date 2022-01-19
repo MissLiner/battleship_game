@@ -1,18 +1,19 @@
 
-function addOne(target) {
-  target += 1;
-}
-
 const shipFactory = (length) => {
   let hits = 0;
-  const sunk = false;
-  const hit = addOne(hits);
-  function test() {
-    return 1;
+  let sunk = false;
+  function hit() {
+    hits += 1;
+    if (hits == length) {
+      sunk = true;
+    }
   }
-  return { length, hits, sunk, hit }
+  function getHits() { return hits };
+  function getSunk() {
+    return sunk;
+  }
+  return { length, hit, getHits, sunk, getSunk }
 }
 export {
-  addOne,
   shipFactory,
 }

@@ -13,5 +13,5 @@ test('shipFactory.hit() adds hits', () => {
 test('shipFactory sinks', () => {
   const ship3 = makeShips.shipFactory(1);
   ship3.hit();
-  expect(ship3.getSunk()).toBe(true);
+  expect(ship3.getStatus()).toBe('sunk');
 })

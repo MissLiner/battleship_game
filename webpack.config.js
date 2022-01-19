@@ -7,7 +7,7 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    watch: true,
+    watch: false,
     watchOptions: {
       aggregateTimeout: 600,
       ignored: /node_modules/,

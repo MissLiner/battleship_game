@@ -11,11 +11,15 @@ const boardFactory = () => {
                   'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
                   'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o',
                   'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o']
-
-  function placeShip(ship) {
-    board[0] = 's';
+  function getRandomInt(maxNum) {
+    return Math.floor(Math.random() * maxNum);
+  }
+  function placeShip() {
+    const firstIndex = getRandomInt(101);
+    // mock this for test**************
+    board[firstIndex-1] = 's';
   }
   //const newShip = shipFactory(length);
-  return { placeShip, board }
+  return { placeShip, board, getRandomInt }
 }
 export { boardFactory }

@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack --watch",
-    "test": "jest --verbose --watchAll *.js"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "css-loader": "^6.5.1",
     "eslint": "^8.7.0",
     "jest": "^27.4.7",
+    "jest-mock-random": "^1.1.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1"

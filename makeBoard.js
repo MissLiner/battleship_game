@@ -19,9 +19,7 @@ const boardFactory = (height, width) => {
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
   }
-  // const armada1 = [];
-  // const armada2 = [];
-  function buildArmada(armadaArr) {
+  function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = getRandomInt(2);
@@ -37,7 +35,6 @@ const boardFactory = (height, width) => {
     const position = [rowIndex, columnIndex];
     return position;
   }
-  //const newShip = shipFactory(length);
   return { placeShip, getRandomInt, rows, buildArmada }
 }
 export { boardFactory }

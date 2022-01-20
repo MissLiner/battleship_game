@@ -15,3 +15,9 @@ test.skip('shipFactory sinks', () => {
   ship3.hit();
   expect(ship3.getStatus()).toBe('sunk');
 })
+test.skip('ship records hits', () => {
+  const ship4 = makeShips.shipFactory(2, [a, b]);
+  ship4.hit('a');
+  expect(ship4.positions[0].status).toBe('damaged');
+  expect(ship4.positions[1].status).toBe('safe');
+})

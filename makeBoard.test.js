@@ -10,7 +10,7 @@ describe('makeBoard tests', () => {
   })
   test('places ships randomly', () => {
     mockRandom([0.7, 0.3]);
-    expect(testBoard.placeShip()).toStrictEqual([6, 2]);
+    expect(testBoard.positionShip()).toStrictEqual([6, 2]);
     resetMockRandom();
   })
   test('draws correct number of rows', () => {
@@ -26,6 +26,9 @@ describe('makeBoard tests', () => {
 
     test.only('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
+    })
+    test('throws error of ship placed off of board', () => {
+
     })
     test('adds armada to board', ()=> {
       testBoard.placeArmada(testArmada);

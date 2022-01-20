@@ -19,7 +19,7 @@ const boardFactory = (height, width) => {
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
   }
-  function placeShip(size, direction) {
+  function positionShip(size, direction) {
     let rowIndex = (getRandomInt(10)) - 1;
     let columnIndex = (getRandomInt(10)) - 1;
     if (direction === 0) {
@@ -34,27 +34,31 @@ const boardFactory = (height, width) => {
     const shipLengths = [2, 3, 3, 4, 5];
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = getRandomInt(2);
-      const position = placeShip(shipLengths[i], direction);
+      const position = positionShip(shipLengths[i], direction);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       armadaArr.push(newShip);
     }
   }
+  function 
   function placeArmada(armada, board) {
     for (let ship in armada) {
       const rowPosition = ship.position[0];
-      const columnPostion = ship.position[1];
+      const columnPosition = ship.position[1];
       if (ship.direction = 0) {
         for (let i = 0; i < ship.size; i++) {
-          board.rows[rowPosition][columnPostion + i] = 's';
+          if (columnPosition + i > board.rows[0].length - 1) {
+            throw 'ship fell off the right edge!'
+          }
+          board.rows[rowPosition][columnPosition + i] = 's';
         }
       } else {
         for (let i = 0; i < ship.size; i++) {
-          board.rows[rowPosition + 1][columnPostion] = 's';
+          board.rows[rowPosition + i][columnPosition] = 's';
         }
       }
     }
   }
-  return { placeShip, getRandomInt, rows, buildArmada }
+  return { positionShip, getRandomInt, rows, buildArmada }
 }
 
 export { boardFactory }

@@ -19,16 +19,16 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  define('armada tests', () => {  
+  describe('armada tests', () => {  
     const testArmada = [];
     const testPlayer = 'testPlayer';
     testBoard.buildArmada(testPlayer, testArmada);
 
-    test.only('armada is an array of objects', () => {
+    test('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
     })
-    test('throws error of ship placed off of board', () => {
-
+    test.only('throws error of ship placed off of board', () => {
+      expect(testBoard.placeShip([8, 2], 1, 5, testBoard)).toThrow();
     })
     test('adds armada to board', ()=> {
       testBoard.placeArmada(testArmada);

@@ -2,7 +2,6 @@
 const shipFactory = (player, size, position, direction) => {
   let status = 'afloat';
   let hits = 0;
-
   // for (let position of positions) {
   //   position.status = 'safe';
   // }

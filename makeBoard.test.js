@@ -1,4 +1,6 @@
 const makeBoard = require ('./makeBoard');
+const makeShips = require('./makeShips');
+
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeBoard tests', () => {
@@ -18,6 +20,11 @@ describe('makeBoard tests', () => {
   })
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
+  })
+  test('places horizontal ship on board', () => {
+    const testShip = makeShips.shipFactory('caroline', 2, [3, 5], 'horizontal');
+    testBoard.placeShip(testShip);
+    expect(testBoard.rows[3]).toBe(['o', 'o', 'o', 'o', 'o', 's', 's', 's', 'o', 'o']);
   })
   describe('armada tests', () => {  
     const testArmada = [];

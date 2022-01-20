@@ -17,12 +17,12 @@ const boardFactory = (height, width) => {
   })()
 
   function getRandomInt(maxNum) {
-    return Math.floor(Math.random() * maxNum);
+    return Math.floor(Math.random() * (maxNum + 1));
   }
   function placeShip() {
-    const rowIndex = (getRandomInt(height + 1)) - 1;
-    const columnIndex = (getRandomInt(width + 1)) - 1;
-    rows[rowIndex-1][columnIndex -1] = 's';
+    const rowIndex = (getRandomInt(10)) - 1;
+    const columnIndex = (getRandomInt(10)) - 1;
+    rows[rowIndex][columnIndex] = 's';
   }
   //const newShip = shipFactory(length);
   return { placeShip, getRandomInt, rows }

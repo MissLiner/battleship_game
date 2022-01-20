@@ -3,28 +3,28 @@ import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory(10, 10);
-  test('places ships', () => {
-    testBoard.placeShip(1);
-    expect(testBoard.board[0]).toBe('s');
-  }) 
+  // test.only('places ships', () => {
+  //   testBoard.placeShip(1);
+  //   expect(testBoard.rows[0]).toBe('s');
+  // }) 
   test('getRandomInt returns a number', () => {
     expect(testBoard.getRandomInt(50)).toEqual(expect.any(Number));
   })
   test('getRandomInt returns number between 0 and maxNum', () => {
     for (let i = 0; i < 10; i++) {
-      expect(testBoard.getRandomInt(50)).toBeLessThan(50);
+      expect(testBoard.getRandomInt(10)).toBeLessThan(11);
     }
   })
-  test('places ships randomly', () => {
-    mockRandom(0.22);
+  test.only('places ships randomly', () => {
+    mockRandom(0.7, 0.3);
     testBoard.placeShip(1);
-    expect(testBoard.board[21]).toBe('s');
+    expect(testBoard.rows[7][3]).toBe('s');
     resetMockRandom();
   })
-  test.only('draws correct number of rows', () => {
+  test('draws correct number of rows', () => {
     expect(testBoard.rows.length).toBe(10);
   })
-  test.only('draws correct number of columns', () => {
+  test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
 })

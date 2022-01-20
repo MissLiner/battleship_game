@@ -40,11 +40,20 @@ const boardFactory = (height, width) => {
     const position = [rowIndex, columnIndex];
     return position;
   }
+  function assignPosition(lengthsArr, direction, positionArr) {
+    let position = positionShip(lengthsArr[i], direction);
+    while (allPositions.contains(position)) {
+      position = positionShip(lengthsArr[i], direction);
+    }
+    positionArr.push(position)
+    return position;
+  } 
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
+    const allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = getRandomInt(2);
-      const position = positionShip(shipLengths[i], direction);
+      const position = assignPosition(shipLengths, direction, allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       armadaArr.push(newShip);
     }

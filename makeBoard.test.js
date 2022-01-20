@@ -30,6 +30,9 @@ describe('makeBoard tests', () => {
     testBoard.placeShip(testShip, testBoard);
     expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
   })
+  test('no duplicate positions', () => {
+    
+  })
   describe('armada tests', () => {  
     const testArmada = [];
     const testPlayer = 'testPlayer';

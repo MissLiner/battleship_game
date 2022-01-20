@@ -63,34 +63,15 @@ const boardFactory = (height, width) => {
         checkIfOnBoard(newColumn, 'right');
         board.rows[rowPosition][newColumn] = 's';
       }
-      return;
     } else {
       for (let i = 0; i < ship.size; i++) {
         const newColumn = columnPosition + i;
-        board.rows[rowPosition][newColumn] = 's';
         checkIfOnBoard(newColumn, 'bottom');
+        board.rows[rowPosition][newColumn] = 's';
       }
     }
   }
-  // function placeShip(shipPosition, shipDirection, shipSize, board) {
-  //   const rowPosition = shipPosition[0];
-  //   const columnPosition = shipPosition[1];
-  //   if (shipDirection = 0) {
-  //     for (let i = 0; i < shipSize; i++) {
-  //       if (columnPosition + i > board.rows[0].length - 1) {
-  //         throw 'ship fell off the right edge!'
-  //       }
-  //       board.rows[rowPosition][columnPosition + i] = 's';
-  //     }
-  //   } else {
-  //     for (let i = 0; i < shipSize; i++) {
-  //       board.rows[rowPosition + i][columnPosition] = 's';
-  //       if (columnPosition + i > board.rows[0].length - 1) {
-  //         throw 'ship fell off the bottom edge!'
-  //       }
-  //     }
-  //   }
-  // }
+  
   function placeArmada(armada, board) {
     for (let ship in armada) {
       placeShip(ship, board);

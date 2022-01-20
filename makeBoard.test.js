@@ -20,8 +20,12 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test.only('places horizontal ship on board', () => {
-    //const testBoard2 = makeBoard.boardFactory(10, 10);
+  test('throws error of ship placed off of board', () => {
+    expect(() => {
+      testBoard.checkIfOnBoard(11, 'right');
+    }).toThrow();
+  })
+  test('places horizontal ship on board', () => {
     const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
     testBoard.placeShip(testShip, testBoard);
     expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
@@ -34,14 +38,8 @@ describe('makeBoard tests', () => {
     test('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
     })
-    test('throws error of ship placed off of board', () => {
-      expect(() => {
-        testBoard.checkIfOnBoard(11, 'right');
-      }).toThrow();
-    })
-    test('adds armada to board', ()=> {
-      testBoard.placeArmada(testArmada);
-      expect(testBoard.rows).toContain('s');
+    test.only('armada array.length is 5', () => {
+      expect(testArmada.length).toBe(5);
     })
   })
 })

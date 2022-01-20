@@ -28,12 +28,14 @@ const boardFactory = (height, width) => {
     }
   }
   function positionShip(size, direction) {
-    let rowIndex = (getRandomInt(11)) - 1;
-    let columnIndex = (getRandomInt(11)) - 1;
+    let rowIndex;
+    let columnIndex;
     if (direction === 'horizontal') {
-      rowIndex -= size;
+      rowIndex = getRandomInt(11) - 1;
+      columnIndex = (getRandomInt(11 - size)) - 1;
     } else {
-      columnIndex -= size;
+      rowIndex = (getRandomInt(11 - size)) - 1;
+      columnIndex = getRandomInt(11) - 1;
     }
     const position = [rowIndex, columnIndex];
     return position;

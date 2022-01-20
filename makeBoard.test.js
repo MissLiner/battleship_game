@@ -10,9 +10,8 @@ describe('makeBoard tests', () => {
       expect(testBoard.getRandomInt(10)).toBeLessThan(11);
     }
   })
-  test('places ships randomly', () => {
-    mockRandom([0.7, 0.3]);
-    expect(testBoard.positionShip()).toStrictEqual([6, 2]);
+  test.only('assigns two numbers for ship position', () => {
+    expect(testBoard.positionShip(5, 'horizonal')).toEqual([expect.any(Number), expect.any(Number)]);
     resetMockRandom();
   })
   test('draws correct number of rows', () => {
@@ -34,7 +33,7 @@ describe('makeBoard tests', () => {
     test('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
     })
-    test.only('throws error of ship placed off of board', () => {
+    test('throws error of ship placed off of board', () => {
       expect(() => {
         testBoard.checkIfOnBoard(11, 'right');
       }).toThrow();

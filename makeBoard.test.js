@@ -3,19 +3,12 @@ import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory(10, 10);
-  // test.only('places ships', () => {
-  //   testBoard.placeShip(1);
-  //   expect(testBoard.rows[0]).toBe('s');
-  // }) 
-  test('getRandomInt returns a number', () => {
-    expect(testBoard.getRandomInt(50)).toEqual(expect.any(Number));
-  })
   test('getRandomInt returns number between 0 and maxNum', () => {
     for (let i = 0; i < 10; i++) {
       expect(testBoard.getRandomInt(10)).toBeLessThan(11);
     }
   })
-  test.only('places ships randomly', () => {
+  test('places ships randomly', () => {
     mockRandom([0.7, 0.3]);
     testBoard.placeShip(1);
     expect(testBoard.rows[6][2]).toContain('s');

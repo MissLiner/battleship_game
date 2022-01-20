@@ -30,9 +30,7 @@ describe('makeBoard tests', () => {
     testBoard.placeShip(testShip, testBoard);
     expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
   })
-  test('no duplicate positions', () => {
-    
-  })
+  
   describe('armada tests', () => {  
     const testArmada = [];
     const testPlayer = 'testPlayer';
@@ -41,8 +39,14 @@ describe('makeBoard tests', () => {
     test('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
     })
-    test.only('armada array.length is 5', () => {
+    test('armada array.length is 5', () => {
       expect(testArmada.length).toBe(5);
+    })
+    test('throws error if duplicate positions', () => {
+      const testArr = [1, 2, 2, 3, 4];
+      expect(() => {
+        testBoard.checkForDupes(testArr);
+      }).toThrow();
     })
   })
 })

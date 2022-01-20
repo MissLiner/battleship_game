@@ -19,14 +19,24 @@ const boardFactory = (height, width) => {
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
   }
-  function chooseDirection () {
+  function assignDirection() {
     const directNum = getRandomInt(3);
+    let direction;
     if (directNum === 1) {
-      return 'horizontal';
+      direction = 'horizontal';
     } else {
-      return 'vertical';
+      direction = 'vertical';
     }
+    return direction;
   }
+  function assignPosition(lengthsArr, direction, positionArr) {
+    let position = positionShip(lengthsArr, direction);
+    while (positionArr.includes(position)) {
+      position = positionShip(lengthsArr, direction);
+    }
+    positionArr.push(position)
+    return position;
+  } 
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
@@ -40,14 +50,13 @@ const boardFactory = (height, width) => {
     const position = [rowIndex, columnIndex];
     return position;
   }
-  function assignPosition(lengthsArr, direction, positionArr) {
-    let position = positionShip(lengthsArr[i], direction);
-    while (allPositions.contains(position)) {
-      position = positionShip(lengthsArr[i], direction);
+
+  function checkForDupes(arr) {
+    const noDupeArr = new Set(arr);
+    if (noDupeArr.length !== arr.length) {
+      throw 'Ship positions are overlapping!'
     }
-    positionArr.push(position)
-    return position;
-  } 
+  }
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
     const allPositions = [];
@@ -57,6 +66,7 @@ const boardFactory = (height, width) => {
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       armadaArr.push(newShip);
     }
+    checkForDupes(allPositions);
   }
   function checkIfOnBoard(position, edge) {
     if (position > 9) {
@@ -86,7 +96,7 @@ const boardFactory = (height, width) => {
       placeShip(ship, board);
     }
   }
-  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard }
+  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes }
 }
 
 export { boardFactory }

@@ -59,10 +59,11 @@ const boardFactory = (height, width) => {
     const columnPosition = ship.position[1];
     if (ship.direction === 'horizontal') {
       for (let i = 0; i < ship.size; i++) {
-        const newRow = rowPosition + i;
-        checkIfOnBoard(newRow, 'right')
-        board.rows[newRow][columnPosition] = 's';
+        const newColumn = columnPosition + i;
+        checkIfOnBoard(newColumn, 'right');
+        board.rows[rowPosition][newColumn] = 's';
       }
+      return;
     } else {
       for (let i = 0; i < ship.size; i++) {
         const newColumn = columnPosition + i;

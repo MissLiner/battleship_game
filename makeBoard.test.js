@@ -10,7 +10,7 @@ describe('makeBoard tests', () => {
       expect(testBoard.getRandomInt(10)).toBeLessThan(11);
     }
   })
-  test.only('assigns two numbers for ship position', () => {
+  test('assigns two numbers for ship position', () => {
     expect(testBoard.positionShip(5, 'horizonal')).toEqual([expect.any(Number), expect.any(Number)]);
     resetMockRandom();
   })
@@ -20,10 +20,11 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test('places horizontal ship on board', () => {
-    const testShip = makeShips.shipFactory('caroline', 2, [3, 5], 'horizontal');
-    testBoard.placeShip(testShip);
-    expect(testBoard.rows[3]).toBe(['o', 'o', 'o', 'o', 'o', 's', 's', 's', 'o', 'o']);
+  test.only('places horizontal ship on board', () => {
+    //const testBoard2 = makeBoard.boardFactory(10, 10);
+    const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
+    testBoard.placeShip(testShip, testBoard);
+    expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
   })
   describe('armada tests', () => {  
     const testArmada = [];

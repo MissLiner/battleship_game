@@ -1,8 +1,7 @@
 
-const shipFactory = (length, positions) => {
+const shipFactory = (player, length, positions, direction) => {
   let status = 'afloat';
   let hits = 0;
-  //const positions = positions;
 
   for (let position of positions) {
     position.status = 'safe';
@@ -23,7 +22,7 @@ const shipFactory = (length, positions) => {
   function getStatus() {
     return status;
   }
-  return { length, hit, getHits, getStatus }
+  return { length, direction, hit, getHits, getStatus }
 }
 export {
   shipFactory,

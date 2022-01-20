@@ -93,7 +93,7 @@ const boardFactory = (height, width) => {
       placeShip(ship, board);
     }
   }
-  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada }
+  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard }
 }
 
 export { boardFactory }

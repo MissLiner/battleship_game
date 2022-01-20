@@ -28,7 +28,9 @@ describe('makeBoard tests', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
     })
     test.only('throws error of ship placed off of board', () => {
-      expect(testBoard.placeShip([8, 2], 1, 5, testBoard)).toThrow();
+      expect(() => {
+        testBoard.checkIfOnBoard(11, 'right');
+      }).toThrow();
     })
     test('adds armada to board', ()=> {
       testBoard.placeArmada(testArmada);

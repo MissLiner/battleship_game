@@ -31,6 +31,7 @@ const boardFactory = (height, width) => {
   }
   function assignPosition(lengthsArr, direction, positionArr) {
     let position = positionShip(lengthsArr, direction);
+    //let positionID = 
     while (positionArr.includes(position)) {
       position = positionShip(lengthsArr, direction);
     }
@@ -40,21 +41,22 @@ const boardFactory = (height, width) => {
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
+    // DO THIS - factor size back in
     if (direction === 'horizontal') {
-      rowIndex = getRandomInt(11) - 1;
-      columnIndex = (getRandomInt(11 - size)) - 1;
+      rowIndex = getRandomInt(10);
+      columnIndex = getRandomInt(10);
     } else {
-      rowIndex = (getRandomInt(11 - size)) - 1;
-      columnIndex = getRandomInt(11) - 1;
+      rowIndex = getRandomInt(10);
+      columnIndex = getRandomInt(10);
     }
-    const position = [rowIndex, columnIndex];
+    const position = Number('' + rowIndex + columnIndex);
     return position;
   }
 
   function checkForDupes(arr) {
-    const noDupeArr = new Set(arr);
-    if (noDupeArr.length !== arr.length) {
-      throw 'Ship positions are overlapping!'
+    const noDupeSet = new Set(arr);
+    if (noDupeSet.size !== arr.length) {
+      throw 'Ship positions are overlapping!' + arr;
     }
   }
   function buildArmada(player, armadaArr) {
@@ -69,7 +71,7 @@ const boardFactory = (height, width) => {
     checkForDupes(allPositions);
   }
   function checkIfOnBoard(position, edge) {
-    if (position > 9) {
+    if (position.length > 2) {
       throw 'ship fell off the ' + edge + ' edge!';
     }
   }

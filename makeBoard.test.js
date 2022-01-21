@@ -12,7 +12,6 @@ describe('makeBoard tests', () => {
   })
   test('assigns two numbers for ship position', () => {
     expect(testBoard.positionShip(5, 'horizonal')).toEqual([expect.any(Number), expect.any(Number)]);
-    resetMockRandom();
   })
   test('draws correct number of rows', () => {
     expect(testBoard.rows.length).toBe(10);
@@ -22,7 +21,7 @@ describe('makeBoard tests', () => {
   })
   test('throws error of ship placed off of board', () => {
     expect(() => {
-      testBoard.checkIfOnBoard(11, 'right');
+      testBoard.checkIfOnBoard(111, 'right');
     }).toThrow();
   })
   test('places horizontal ship on board', () => {

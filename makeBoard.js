@@ -31,11 +31,10 @@ const boardFactory = (height, width) => {
   }
   function assignPosition(lengthsArr, direction, positionArr) {
     let position = positionShip(lengthsArr, direction);
-    //let positionID = 
     while (positionArr.includes(position)) {
       position = positionShip(lengthsArr, direction);
     }
-    positionArr.push(position)
+    positionArr.push(position);
     return position;
   } 
   function positionShip(size, direction) {
@@ -49,7 +48,7 @@ const boardFactory = (height, width) => {
       rowIndex = getRandomInt(10);
       columnIndex = getRandomInt(10);
     }
-    const position = Number('' + rowIndex + columnIndex);
+    const position = { row: rowIndex, column: columnIndex };
     return position;
   }
 

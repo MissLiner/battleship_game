@@ -11,7 +11,7 @@ describe('makeBoard tests', () => {
     }
   })
   test('assigns two numbers for ship position', () => {
-    expect(testBoard.positionShip(5, 'horizonal')).toEqual([expect.any(Number), expect.any(Number)]);
+    expect(testBoard.positionShip(5, 'horizonal')).toEqual({ row: expect.any(Number), column: expect.any(Number)});
   })
   test('draws correct number of rows', () => {
     expect(testBoard.rows.length).toBe(10);
@@ -41,7 +41,7 @@ describe('makeBoard tests', () => {
     test('armada array.length is 5', () => {
       expect(testArmada.length).toBe(5);
     })
-    test('throws error if duplicate positions', () => {
+    test.only('throws error if duplicate positions', () => {
       const testArr = [1, 2, 2, 3, 4];
       expect(() => {
         testBoard.checkForDupes(testArr);

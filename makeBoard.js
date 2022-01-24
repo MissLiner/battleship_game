@@ -31,9 +31,9 @@ const boardFactory = (height, width) => {
   }
   function assignPosition(lengthsArr, direction, positionArr) {
     let position = positionShip(lengthsArr, direction);
-    while (positionArr.includes(position)) {
+    do {
       position = positionShip(lengthsArr, direction);
-    }
+    } while (positionArr.indexOf(position) !== -1);
     positionArr.push(position);
     return position;
   } 

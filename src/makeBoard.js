@@ -69,8 +69,8 @@ const boardFactory = (height, width) => {
       const direction = assignDirection();
       const position = assignPosition(shipLengths[i], direction, allPositions);
       allPositions.push(position);
-      console.log(allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
+      newShip.positions = addPositions(newShip);
       armadaArr.push(newShip);
     }
     // should be a new separate function??
@@ -92,9 +92,10 @@ const boardFactory = (height, width) => {
   // restart adding positions
 
   function addPositions(ship) {
-    const rowPosition = ship.position[0];
-    const columnPosition = ship.position[1];
-    const positions = [ ship.position ];
+    const positions = [];
+    const rowPosition = ship.positions[0];
+    const columnPosition = ship.positions[1];
+
     if (ship.direction === 'horizontal') {
       for (let i = 0; i < ship.size; i++) {
         const newColumn = columnPosition + i;
@@ -106,7 +107,7 @@ const boardFactory = (height, width) => {
       for (let i = 0; i < ship.size; i++) {
         const newRow = rowPosition + i;
         const newPosition = { row: newRow, column: columnPosition }
-        checkIfOnBoard(newColumn, 'bottom');
+        checkIfOnBoard(newRow, 'bottom');
         positions.push(newPosition);
       }
     }

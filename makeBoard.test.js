@@ -56,10 +56,13 @@ describe('makeBoard tests', () => {
       expect(testArmada[1].position.column).not.toBeNaN();
     })
     describe('ship placement tests', () => {
-      test.only('addPositions returns array of objects', () => {
+      test('addPositions returns array of objects', () => {
         const testPositions = testBoard.addPositions(testArmada[2]);
         expect(testPositions[1]).toStrictEqual(expect.any(Object));
       })
+      test.only('ship has as many positions as length', () => {
+        expect(testArmada[1].positions.length).toStrictEqual(testArmada[1].size);
+      }) 
       test('flips direction if overlapping ship', () => {
   
       })

@@ -19,9 +19,9 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test('throws error of ship placed off of board', () => {
+  test('throws error if coordinate off of board', () => {
     expect(() => {
-      testBoard.checkIfOnBoard(111, 'right');
+      testBoard.checkIfOnBoard(11, 'right edge');
     }).toThrow();
   })
   test('places horizontal ship on board', () => {

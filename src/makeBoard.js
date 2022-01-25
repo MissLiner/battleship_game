@@ -79,9 +79,9 @@ const boardFactory = (height, width) => {
       throw 'Ship positions are overlapping!'
     }
   }
-  function checkIfOnBoard(position, edge) {
-    if (position.length > 2) {
-      throw 'ship fell off the ' + edge + ' edge!';
+  function checkIfOnBoard(coordinate, edge) {
+    if (coordinate > 10) {
+      throw 'ship fell off the ' + edge;
     }
   }
   function placeShip(ship, board) {
@@ -90,7 +90,7 @@ const boardFactory = (height, width) => {
     if (ship.direction === 'horizontal') {
       for (let i = 0; i < ship.size; i++) {
         const newColumn = columnPosition + i;
-        checkIfOnBoard(newColumn, 'right');
+        checkIfOnBoard(newColumn, 'right edge');
         board.rows[rowPosition][newColumn] = 's';
       }
     } else {

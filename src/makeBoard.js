@@ -29,29 +29,15 @@ const boardFactory = (height, width) => {
     }
     return direction;
   }
-  function useDiffMax(newMax) {
-    let newIndex;
-    switch(newMax) {
-      case 5: 
-        newIndex = getRandomInt(5);
-      case 6: 
-        newIndex = getRandomInt(6);
-      case 7: 
-        newIndex = getRandomInt(7);
-      case 8: 
-        newIndex = getRandomInt(8);
-    }
-    return newIndex;
-  }
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
-    const adjustedMax = 10 - Number(size);
+    let adjustedMax = 10 - size;
     if (direction === 'horizontal') {
       rowIndex = getRandomInt(10);
-      columnIndex = useDiffMax(adjustedMax);
+      columnIndex = getRandomInt(adjustedMax);
     } else {
-      rowIndex = useDiffMax(adjustedMax);
+      rowIndex = getRandomInt(adjustedMax);
       columnIndex = getRandomInt(10);
     }
     const position = { row: rowIndex, column: columnIndex };
@@ -81,7 +67,7 @@ const boardFactory = (height, width) => {
     const allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = assignDirection();
-      const position = assignPosition(shipLengths, direction, allPositions);
+      const position = assignPosition(shipLengths[i], direction, allPositions);
       allPositions.push(position);
       console.log(allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);

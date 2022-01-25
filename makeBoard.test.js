@@ -40,17 +40,13 @@ describe('makeBoard tests', () => {
     test('armada array.length is 5', () => {
       expect(testArmada.length).toBe(5);
     })
-    test.only('throws error if duplicate positions', () => {
+    test('dupe check - with dupes', () => {
       const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
-      expect(() => {
-        testBoard.checkForDupes(testArr, 'row', 'column');
-      }).toThrow();
+        expect(testBoard.checkForDupes(testArr, 'row', 'column')).toBe(true);
     })
-    test.only('no error if no duplicate positions', () => {
+    test('dupe check - no dupes', () => {
       const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
-      expect(() => {
-        testBoard.checkForDupes(testArr, 'row', 'column');
-      }).not.toThrow();
+        expect(testBoard.checkForDupes(testArr, 'row', 'column')).toBe(false);
     })
   })
 })

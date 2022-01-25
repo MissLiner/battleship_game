@@ -49,6 +49,7 @@ const boardFactory = (height, width) => {
       const dupes2 = dupes1.filter(newItem2 => newItem2[key2] === item[key2]);
       if(dupes2.length > 1) { return true }
     }
+    return false;
   }
   function assignPosition(lengthsArr, direction, positionArr) {
     let position = positionShip(lengthsArr, direction);

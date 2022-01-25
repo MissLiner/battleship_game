@@ -1,5 +1,5 @@
-const makeBoard = require ('./makeBoard');
-const makeShips = require('./makeShips');
+const makeBoard = require ('./src/makeBoard');
+const makeShips = require('./src/makeShips');
 
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
@@ -32,8 +32,7 @@ describe('makeBoard tests', () => {
   
   describe('armada tests', () => {  
     const testArmada = [];
-    const testPlayer = 'testPlayer';
-    testBoard.buildArmada(testPlayer, testArmada);
+    testBoard.buildArmada('testPlayer', testArmada);
 
     test('armada is an array of objects', () => {
       expect(testArmada[2]).toStrictEqual(expect.any(Object));
@@ -42,10 +41,16 @@ describe('makeBoard tests', () => {
       expect(testArmada.length).toBe(5);
     })
     test.only('throws error if duplicate positions', () => {
-      const testArr = [1, 2, 2, 3, 4];
+      const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(() => {
-        testBoard.checkForDupes(testArr);
+        testBoard.checkForDupes(testArr, 'row', 'column');
       }).toThrow();
+    })
+    test.only('no error if no duplicate positions', () => {
+      const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
+      expect(() => {
+        testBoard.checkForDupes(testArr, 'row', 'column');
+      }).not.toThrow();
     })
   })
 })

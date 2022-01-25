@@ -29,14 +29,6 @@ const boardFactory = (height, width) => {
     }
     return direction;
   }
-  function assignPosition(lengthsArr, direction, positionArr) {
-    let position = positionShip(lengthsArr, direction);
-    do {
-      position = positionShip(lengthsArr, direction);
-    } while (positionArr.indexOf(position) !== -1);
-    positionArr.push(position);
-    return position;
-  } 
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
@@ -51,23 +43,63 @@ const boardFactory = (height, width) => {
     const position = { row: rowIndex, column: columnIndex };
     return position;
   }
-
-  function checkForDupes(arr) {
-    const noDupeSet = new Set(arr);
-    if (noDupeSet.size !== arr.length) {
-      throw 'Ship positions are overlapping!' + arr;
+  function assignPosition(lengthsArr, direction, positionArr) {
+    let position = positionShip(lengthsArr, direction);
+    while (positionArr.indexOf(position) !== -1) {
+      position = positionShip(lengthsArr, direction);
+    }
+    return position;
+  } 
+  // function checkForDupes(arr) {
+  //   const stringifiedArr = JSON.stringify(arr);
+  //   const noDupeSet = new Set(stringifiedArr);
+  //   if (noDupeSet.size !== stringifiedArr.length) {
+  //     throw 'Ship positions are overlapping!' + stringifiedArr;
+  //   }
+  // }
+  // const shallowEqual = (previousValue, currentValue) => {
+  //   console.log(previousValue);
+  //   console.log(currentValue);
+  //   const keys1 = Object.keys(currentValue);
+  //   const keys2 = Object.keys(previousValue);
+  //   let results = 0;
+  //   // console.log(previousValue.row);
+  //   // console.log(currentValue.row);
+  //   for (let key of keys1) {
+  //     if (currentValue[key] === previousValue[key]) {
+  //       console.log(currentValue[key]);
+  //       results += 1;
+  //     }
+  //   }
+  //   console.log(results);
+  //   if (results >= keys1.length) {
+  //     return true;
+  //   } 
+  // }
+  function checkForDupes(arr, key1, key2) {
+    const dupeItems = [];
+    for(let item of arr) {
+      const dupes1 = arr.filter(newItem1 => newItem1[key1] === item[key1]);
+      const dupes2 = dupes1.filter(newItem2 => newItem2[key2] === item[key2]);
+      if(dupes2.length > 1) { dupeItems.push(dupes2); }
+    }
+    console.log(dupeItems);
+    if(dupeItems.length !== 0) {
+        throw 'Ship positions are overlapping!' + dupeItems;
     }
   }
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
     const allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
-      const direction = getRandomInt(2);
+      const direction = assignDirection();
       const position = assignPosition(shipLengths, direction, allPositions);
+      allPositions.push(position);
+      console.log(allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       armadaArr.push(newShip);
     }
-    checkForDupes(allPositions);
+    checkForDupes(allPositions, 'row', 'column');
   }
   function checkIfOnBoard(position, edge) {
     if (position.length > 2) {
@@ -100,4 +132,4 @@ const boardFactory = (height, width) => {
   return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes }
 }
 
-export { boardFactory }
+export { boardFactory } 

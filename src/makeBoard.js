@@ -68,9 +68,9 @@ const boardFactory = (height, width) => {
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = assignDirection();
       const position = assignPosition(shipLengths[i], direction, allPositions);
-      allPositions.push(position);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
-      newShip.positions = addPositions(newShip);
+      newShip.positions = addPositions(newShip, allPositions);
+      allPositions.push(newShip.positions);
       armadaArr.push(newShip);
     }
     // should be a new separate function??
@@ -90,28 +90,86 @@ const boardFactory = (height, width) => {
   // if it does, undo previous moves
   // flip direction
   // restart adding positions
-
-  function addPositions(ship) {
-    const positions = [];
+  function flipDirection(ship) {
+    if(ship.direction === 'horizontal') {
+      ship.direction === 'vertical';
+    } else if(ship.direction === 'horizontal') {
+      ship.direction === 'vertical';
+    }
+  }
+  function suggestPosition(ship, i) {
+    const newColumn = ship.positions.column + 1 + i;
+    const newRow = ship.positions.row + 1 + i;
+    if(ship.direction === 'horizontal') {
+      return { row: ship.positions.row, column: newColumn }
+    } else if(ship.direction === 'vertical') {
+      return { row: newRow, column: ship.positions.column }
+    }
+  }
+  function addPositions(ship, positionsArr) {
+    const newPositions = [ ship.positions ];
     const rowPosition = ship.positions.row;
     const columnPosition = ship.positions.column;
-
+    let draftPositions = [];
+    
+    
     if (ship.direction === 'horizontal') {
-      for (let i = 0; i < ship.size; i++) {
-        const newColumn = columnPosition + i;
+      // let horPositions = [];
+      for (let i = 0; i < ship.size - 1; i++) {
+        const newColumn = columnPosition + 1 + i;
         const newPosition = { row: rowPosition, column: newColumn }
         checkIfOnBoard(newColumn, 'right edge');
-        positions.push(newPosition);
+        let draftPositions = positionsArr.concat(newPosition);
+        const isDupe = checkForDupes(draftPositions, 'row', 'column');
+        if(isDupe === false) { 
+          horPositions.push(newPosition); 
+        } else {
+          flipDirection(ship);
+          horPositions = [];
+          const newRow = rowPosition + i;
+          const newPosition = { row: newRow, column: columnPosition };
+          checkIfOnBoard(newRow, 'bottom');
+          draftPositions = positionsArr.concat(newPosition);
+          const isDupe = checkForDupes(draftPositions, 'row', 'column');
+          if(isDupe === false) {
+            horPositions.push(newPosition);
+          } else {
+            throw 'flipping ship did not help';
+          }
+        }
       }
-    } else {
+      newPositions.push(horPositions);
+    } 
+    else if(ship.direction === 'vertical') {
+      let vertPositions = [];
       for (let i = 0; i < ship.size; i++) {
         const newRow = rowPosition + i;
         const newPosition = { row: newRow, column: columnPosition }
         checkIfOnBoard(newRow, 'bottom');
-        positions.push(newPosition);
+        let draftPositions = positionsArr.concat(newPosition);
+        const isDupe = checkForDupes(draftPositions, 'row', 'column');
+        if(isDupe === false) {
+          vertPositions.push(newPosition);
+          } else {
+            flipDirection(ship);
+            vertPositions = [];
+            const newRow = rowPosition + i;
+            const newPosition = { row: newRow, column: columnPosition };
+            checkIfOnBoard(newRow, 'bottom');
+            draftPositions = positionsArr.concat(newPosition);
+            const isDupe = checkForDupes(draftPositions, 'row', 'column');
+            if(isDupe === false) {
+              horPositions.push(newPosition);
+            } else {
+              throw 'flipping ship did not help';
+            }
+          }
       }
+      newPositions.push(vertPositions);
+    } else {
+      throw 'ship has no direction';
     }
-    return positions;
+    return newPositions;
   }
   function placeShip(ship, board) {
         // board.rows[rowPosition][newColumn] = 's';

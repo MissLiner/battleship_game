@@ -85,22 +85,35 @@ const boardFactory = (height, width) => {
       throw 'ship fell off the ' + edge;
     }
   }
-  function placeShip(ship, board) {
+  // keep track of all positions
+  // check if new position overlaps existing position
+  // if it does, undo previous moves
+  // flip direction
+  // restart adding positions
+
+  function addPositions(ship) {
     const rowPosition = ship.position[0];
     const columnPosition = ship.position[1];
+    const positions = [ ship.position ];
     if (ship.direction === 'horizontal') {
       for (let i = 0; i < ship.size; i++) {
         const newColumn = columnPosition + i;
+        const newPosition = { row: rowPosition, column: newColumn }
         checkIfOnBoard(newColumn, 'right edge');
-        board.rows[rowPosition][newColumn] = 's';
+        positions.push(newPosition);
       }
     } else {
       for (let i = 0; i < ship.size; i++) {
-        const newColumn = columnPosition + i;
+        const newRow = rowPosition + i;
+        const newPosition = { row: newRow, column: columnPosition }
         checkIfOnBoard(newColumn, 'bottom');
-        board.rows[rowPosition][newColumn] = 's';
+        positions.push(newPosition);
       }
     }
+    return positions;
+  }
+  function placeShip(ship, board) {
+        // board.rows[rowPosition][newColumn] = 's';
   }
   
   function placeArmada(armada, board) {
@@ -108,7 +121,7 @@ const boardFactory = (height, width) => {
       placeShip(ship, board);
     }
   }
-  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes }
+  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes, addPositions }
 }
 
 export { boardFactory } 

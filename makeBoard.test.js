@@ -21,6 +21,7 @@ describe('makeBoard tests', () => {
   })
   test('adjusts ship position to account for size', () => {
   })
+
   test('places horizontal ship on board', () => {
     const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
     testBoard.placeShip(testShip, testBoard);
@@ -50,9 +51,18 @@ describe('makeBoard tests', () => {
       const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
         expect(testBoard.checkForDupes(testArr, 'row', 'column')).toBe(false);
     })
-    test.only('ship positions are two numbers', () => {
+    test('ship positions are two numbers', () => {
       expect(testArmada[1].position.row).not.toBeNaN();
       expect(testArmada[1].position.column).not.toBeNaN();
+    })
+    describe('ship placement tests', () => {
+      test.only('addPositions returns array of objects', () => {
+        const testPositions = testBoard.addPositions(testArmada[2]);
+        expect(testPositions[1]).toStrictEqual(expect.any(Object));
+      })
+      test('flips direction if overlapping ship', () => {
+  
+      })
     })
   })
 })

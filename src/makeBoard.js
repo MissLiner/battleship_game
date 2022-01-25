@@ -97,80 +97,47 @@ const boardFactory = (height, width) => {
       ship.direction === 'vertical';
     }
   }
-  function suggestPosition(ship, i) {
-    const newColumn = ship.positions.column + 1 + i;
-    const newRow = ship.positions.row + 1 + i;
-    if(ship.direction === 'horizontal') {
-      return { row: ship.positions.row, column: newColumn }
-    } else if(ship.direction === 'vertical') {
-      return { row: newRow, column: ship.positions.column }
-    }
-  }
+
   function addPositions(ship, positionsArr) {
-    const newPositions = [ ship.positions ];
-    const rowPosition = ship.positions.row;
-    const columnPosition = ship.positions.column;
-    let draftPositions = [];
-    
-    
-    if (ship.direction === 'horizontal') {
-      // let horPositions = [];
-      for (let i = 0; i < ship.size - 1; i++) {
-        const newColumn = columnPosition + 1 + i;
-        const newPosition = { row: rowPosition, column: newColumn }
-        checkIfOnBoard(newColumn, 'right edge');
-        let draftPositions = positionsArr.concat(newPosition);
-        const isDupe = checkForDupes(draftPositions, 'row', 'column');
-        if(isDupe === false) { 
-          horPositions.push(newPosition); 
-        } else {
-          flipDirection(ship);
-          horPositions = [];
-          const newRow = rowPosition + i;
-          const newPosition = { row: newRow, column: columnPosition };
-          checkIfOnBoard(newRow, 'bottom');
-          draftPositions = positionsArr.concat(newPosition);
-          const isDupe = checkForDupes(draftPositions, 'row', 'column');
-          if(isDupe === false) {
-            horPositions.push(newPosition);
-          } else {
-            throw 'flipping ship did not help';
-          }
-        }
+    let newPositions = [ ship.positions ];
+    let hasFlipped = false;
+    let isDupe;
+
+    function suggestPosition() {
+      const newColumn = ship.positions.column + 1 + i;
+      const newRow = ship.positions.row + 1 + i;
+      if(ship.direction === 'horizontal') {
+        return { row: ship.positions.row, column: newColumn }
+      } else if(ship.direction === 'vertical') {
+        return { row: newRow, column: ship.positions.column }
       }
-      newPositions.push(horPositions);
-    } 
-    else if(ship.direction === 'vertical') {
-      let vertPositions = [];
-      for (let i = 0; i < ship.size; i++) {
-        const newRow = rowPosition + i;
-        const newPosition = { row: newRow, column: columnPosition }
-        checkIfOnBoard(newRow, 'bottom');
-        let draftPositions = positionsArr.concat(newPosition);
-        const isDupe = checkForDupes(draftPositions, 'row', 'column');
-        if(isDupe === false) {
-          vertPositions.push(newPosition);
-          } else {
-            flipDirection(ship);
-            vertPositions = [];
-            const newRow = rowPosition + i;
-            const newPosition = { row: newRow, column: columnPosition };
-            checkIfOnBoard(newRow, 'bottom');
-            draftPositions = positionsArr.concat(newPosition);
-            const isDupe = checkForDupes(draftPositions, 'row', 'column');
-            if(isDupe === false) {
-              horPositions.push(newPosition);
-            } else {
-              throw 'flipping ship did not help';
-            }
-          }
-      }
-      newPositions.push(vertPositions);
-    } else {
-      throw 'ship has no direction';
     }
-    return newPositions;
+    function popAllPositions() {
+      for(let i = 0; i < ship.size - 1; i++) {
+        const newPosition = suggestPosition();
+        newPositions.push(newPosition);
+      }
+    }
+    function checkOverlap() {
+      const dupeCheckArr = positionsArr.concat(newPositions);
+      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+    }
+    popAllPositions();
+    checkOverlap();
+    if(isDupe === true && hasFlipped === false) {
+      flipDirection(ship);
+      hasFlipped = true;
+      newPositions = [ ship.positions ];
+      popAllPositions();
+      checkOverlap();
+      if(isDupe === true) {
+        throw 'flipping ship did not help';
+      }
+    } 
+  return newPositions;
   }
+
+
   function placeShip(ship, board) {
         // board.rows[rowPosition][newColumn] = 's';
   }

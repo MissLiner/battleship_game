@@ -1,7 +1,7 @@
 
 const makeShips = require('./src/makeShips');
 
-describe.skip('makeShips tests', () => {
+describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, [4, 2], 'horizontal')
   test('ship has size', () => {
     expect(testShip.size).toBe(5);

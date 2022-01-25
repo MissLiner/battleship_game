@@ -19,15 +19,17 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test('throws error if coordinate off of board', () => {
-    expect(() => {
-      testBoard.checkIfOnBoard(11, 'right edge');
-    }).toThrow();
+  test('adjusts ship position to account for size', () => {
   })
   test('places horizontal ship on board', () => {
     const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
     testBoard.placeShip(testShip, testBoard);
     expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
+  })
+  test('throws error if coordinate off of board', () => {
+    expect(() => {
+      testBoard.checkIfOnBoard(11, 'right edge');
+    }).toThrow();
   })
   
   describe('armada tests', () => {  
@@ -47,6 +49,10 @@ describe('makeBoard tests', () => {
     test('dupe check - no dupes', () => {
       const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
         expect(testBoard.checkForDupes(testArr, 'row', 'column')).toBe(false);
+    })
+    test.only('ship positions are two numbers', () => {
+      expect(testArmada[1].position.row).not.toBeNaN();
+      expect(testArmada[1].position.column).not.toBeNaN();
     })
   })
 })

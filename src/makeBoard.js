@@ -32,12 +32,12 @@ const boardFactory = (height, width) => {
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
-    // DO THIS - factor size back in
+    const adjustedMax = 10 - Number(size);
     if (direction === 'horizontal') {
       rowIndex = getRandomInt(10);
-      columnIndex = getRandomInt(10);
+      columnIndex = getRandomInt(adjustedMax);
     } else {
-      rowIndex = getRandomInt(10);
+      rowIndex = getRandomInt(adjustedMax);
       columnIndex = getRandomInt(10);
     }
     const position = { row: rowIndex, column: columnIndex };
@@ -78,6 +78,7 @@ const boardFactory = (height, width) => {
     if(isDupe === true) { 
       throw 'Ship positions are overlapping!'
     }
+    console.log(armadaArr);
   }
   function checkIfOnBoard(coordinate, edge) {
     if (coordinate > 10) {

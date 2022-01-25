@@ -93,8 +93,8 @@ const boardFactory = (height, width) => {
 
   function addPositions(ship) {
     const positions = [];
-    const rowPosition = ship.positions[0];
-    const columnPosition = ship.positions[1];
+    const rowPosition = ship.positions.row;
+    const columnPosition = ship.positions.column;
 
     if (ship.direction === 'horizontal') {
       for (let i = 0; i < ship.size; i++) {

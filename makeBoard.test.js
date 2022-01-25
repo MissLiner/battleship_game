@@ -22,11 +22,11 @@ describe('makeBoard tests', () => {
   test('adjusts ship position to account for size', () => {
   })
 
-  test('places horizontal ship on board', () => {
-    const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
-    testBoard.placeShip(testShip, testBoard);
-    expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
-  })
+  // test('places horizontal ship on board', () => {
+  //   const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
+  //   testBoard.placeShip(testShip, testBoard);
+  //   expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
+  // })
   test('throws error if coordinate off of board', () => {
     expect(() => {
       testBoard.checkIfOnBoard(11, 'right edge');
@@ -52,15 +52,15 @@ describe('makeBoard tests', () => {
         expect(testBoard.checkForDupes(testArr, 'row', 'column')).toBe(false);
     })
     test('ship positions are two numbers', () => {
-      expect(testArmada[1].position.row).not.toBeNaN();
-      expect(testArmada[1].position.column).not.toBeNaN();
+      expect(testArmada[1].positions.row).not.toBeNaN();
+      expect(testArmada[1].positions.column).not.toBeNaN();
     })
     describe('ship placement tests', () => {
       test('addPositions returns array of objects', () => {
         const testPositions = testBoard.addPositions(testArmada[2]);
         expect(testPositions[1]).toStrictEqual(expect.any(Object));
       })
-      test.only('ship has as many positions as length', () => {
+      test('ship has as many positions as length', () => {
         expect(testArmada[1].positions.length).toStrictEqual(testArmada[1].size);
       }) 
       test('flips direction if overlapping ship', () => {

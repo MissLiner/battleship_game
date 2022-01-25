@@ -43,51 +43,24 @@ const boardFactory = (height, width) => {
     const position = { row: rowIndex, column: columnIndex };
     return position;
   }
-  function assignPosition(lengthsArr, direction, positionArr) {
-    let position = positionShip(lengthsArr, direction);
-    while (positionArr.indexOf(position) !== -1) {
-      position = positionShip(lengthsArr, direction);
-    }
-    return position;
-  } 
-  // function checkForDupes(arr) {
-  //   const stringifiedArr = JSON.stringify(arr);
-  //   const noDupeSet = new Set(stringifiedArr);
-  //   if (noDupeSet.size !== stringifiedArr.length) {
-  //     throw 'Ship positions are overlapping!' + stringifiedArr;
-  //   }
-  // }
-  // const shallowEqual = (previousValue, currentValue) => {
-  //   console.log(previousValue);
-  //   console.log(currentValue);
-  //   const keys1 = Object.keys(currentValue);
-  //   const keys2 = Object.keys(previousValue);
-  //   let results = 0;
-  //   // console.log(previousValue.row);
-  //   // console.log(currentValue.row);
-  //   for (let key of keys1) {
-  //     if (currentValue[key] === previousValue[key]) {
-  //       console.log(currentValue[key]);
-  //       results += 1;
-  //     }
-  //   }
-  //   console.log(results);
-  //   if (results >= keys1.length) {
-  //     return true;
-  //   } 
-  // }
   function checkForDupes(arr, key1, key2) {
-    const dupeItems = [];
     for(let item of arr) {
       const dupes1 = arr.filter(newItem1 => newItem1[key1] === item[key1]);
       const dupes2 = dupes1.filter(newItem2 => newItem2[key2] === item[key2]);
-      if(dupes2.length > 1) { dupeItems.push(dupes2); }
-    }
-    console.log(dupeItems);
-    if(dupeItems.length !== 0) {
-        throw 'Ship positions are overlapping!' + dupeItems;
+      if(dupes2.length > 1) { return true }
     }
   }
+  function assignPosition(lengthsArr, direction, positionArr) {
+    let position = positionShip(lengthsArr, direction);
+    const dupeCheckArr = positionArr.concat(position);
+    let isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+    while(isDupe === true) {
+      position = positionShip(lengthsArr, direction);
+      const dupeCheckArr = positionArr.concat(position);
+      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+    }
+    return position;
+  } 
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
     const allPositions = [];
@@ -99,7 +72,11 @@ const boardFactory = (height, width) => {
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       armadaArr.push(newShip);
     }
-    checkForDupes(allPositions, 'row', 'column');
+    // should be a new separate function??
+    const isDupe = checkForDupes(allPositions, 'row', 'column');
+    if(isDupe === true) { 
+      throw 'Ship positions are overlapping!'
+    }
   }
   function checkIfOnBoard(position, edge) {
     if (position.length > 2) {

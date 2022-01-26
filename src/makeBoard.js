@@ -95,13 +95,7 @@ const boardFactory = (height, width) => {
   // flip direction
   // restart adding positions
 
-  function flipDirection(ship) {
-    if(ship.direction === 'horizontal') {
-      ship.direction === 'vertical';
-    } else if(ship.direction === 'horizontal') {
-      ship.direction === 'vertical';
-    }
-  }
+
   function addPositions(ship, positionsArr) {
     let newPositions = [ ship.positions ];
     let isDupe;

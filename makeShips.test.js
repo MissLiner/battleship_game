@@ -1,7 +1,7 @@
 
 const makeShips = require('./src/makeShips');
 
-describe.skip('makeShips tests', () => {
+describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, [4, 2], 'horizontal')
   test('ship has size', () => {
     expect(testShip.size).toBe(5);
@@ -15,6 +15,10 @@ describe.skip('makeShips tests', () => {
     expect(testShip.getStatus()).toBe('sunk');
   })
   test('ship position is two numbers', () => {
-    expect(testShip.position).toEqual([expect.any(Number), expect.any(Number)]);
+    expect(testShip.positions).toEqual([expect.any(Number), expect.any(Number)]);
+  })
+  test.only('ship flips direction', () => {
+    testShip.flip();
+    expect(testShip.getDirection()).toBe('vertical');
   })
 })

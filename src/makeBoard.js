@@ -16,20 +16,7 @@ const boardFactory = (height, width) => {
     }
   })()
 
-  function positionShip(size, direction) {
-    let rowIndex;
-    let columnIndex;
-    let adjustedMax = 10 - size;
-    if (direction === 'horizontal') {
-      rowIndex = getRandomInt(10);
-      columnIndex = getRandomInt(adjustedMax);
-    } else {
-      rowIndex = getRandomInt(adjustedMax);
-      columnIndex = getRandomInt(10);
-    }
-    const position = { row: rowIndex, column: columnIndex };
-    return position;
-  }
+
   function checkForDupes(arr, key1, key2) {
     for(let item of arr) {
       const dupes1 = arr.filter(newItem1 => newItem1[key1] === item[key1]);
@@ -38,7 +25,7 @@ const boardFactory = (height, width) => {
     }
     return false;
   }
-  function assignPosition(size, direction, positionArr) {
+  function assignPosition(positionArr) {
     let position = positionShip(size, direction);
     const dupeCheckArr = positionArr.concat(position);
     let isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
@@ -82,56 +69,56 @@ const boardFactory = (height, width) => {
   // restart adding positions
 
 
-  function addPositions(ship, positionsArr) {
-    let newPositions = [ ship.positions ];
-    let isDupe;
+  // function addPositions(ship, positionsArr) {
+  //   let newPositions = [ ship.positions ];
+  //   let isDupe;
 
-    function popAllPositions(initPosition) {
-      let rowPos = initPosition.row;
-      let colPos = initPosition.column;
+  //   function popAllPositions(initPosition) {
+  //     let rowPos = initPosition.row;
+  //     let colPos = initPosition.column;
       
-      for(let i = 0; i < ship.size - 1; i++) {
-        let newColumn = colPos + 1 + i;
-        let newRow = rowPos + 1 + i;
-        let newPosition;
-        if(ship.direction === 'horizontal') {
-          newPosition = { row: rowPos, column: newColumn }
-        } else if(ship.direction === 'vertical') {
-          newPosition = { row: newRow, column: colPos }
-        }
-        checkIfOnBoard(newPosition);
-        newPositions.push(newPosition); 
-      }
-    }
-    function checkOverlap() {
-      const dupeCheckArr = positionsArr.concat(newPositions);
-      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
-    }
+  //     for(let i = 0; i < ship.size - 1; i++) {
+  //       let newColumn = colPos + 1 + i;
+  //       let newRow = rowPos + 1 + i;
+  //       let newPosition;
+  //       if(ship.direction === 'horizontal') {
+  //         newPosition = { row: rowPos, column: newColumn }
+  //       } else if(ship.direction === 'vertical') {
+  //         newPosition = { row: newRow, column: colPos }
+  //       }
+  //       checkIfOnBoard(newPosition);
+  //       newPositions.push(newPosition); 
+  //     }
+  //   }
+  //   function checkOverlap() {
+  //     const dupeCheckArr = positionsArr.concat(newPositions);
+  //     isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+  //   }
 
-    popAllPositions(ship.positions);
-    checkOverlap();
+  //   popAllPositions(ship.positions);
+  //   checkOverlap();
 
-    if(isDupe === true) {
-      let flipCounter = 0;
-      newPositions.length = 0;
-      do {
-        if(flipCounter > 5) {
-          throw 'I\'m dizzy from too much flipping!!';
-        }
-        flipDirection(ship);
-        flipCounter++;
-        console.log(flipCounter);
-        const resetPosition = assignPosition(ship.size, ship.direction, positionsArr);
-        newPositions.push(resetPosition);
-        console.log(newPositions);
-        console.log(resetPosition);
-        popAllPositions(ship.positions);
-        checkOverlap();
-      }
-      while(isDupe === true); 
-    } 
-  return newPositions;
-  }
+  //   if(isDupe === true) {
+  //     let flipCounter = 0;
+  //     newPositions.length = 0;
+  //     do {
+  //       if(flipCounter > 5) {
+  //         throw 'I\'m dizzy from too much flipping!!';
+  //       }
+  //       flipDirection(ship);
+  //       flipCounter++;
+  //       console.log(flipCounter);
+  //       const resetPosition = assignPosition(ship.size, ship.direction, positionsArr);
+  //       newPositions.push(resetPosition);
+  //       console.log(newPositions);
+  //       console.log(resetPosition);
+  //       popAllPositions(ship.positions);
+  //       checkOverlap();
+  //     }
+  //     while(isDupe === true); 
+  //   } 
+  // return newPositions;
+  // }
 
   function placeShip(ship, board) {
         // board.rows[rowPosition][newColumn] = 's';

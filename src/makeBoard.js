@@ -51,12 +51,12 @@ const boardFactory = (height, width) => {
     }
     return false;
   }
-  function assignPosition(lengthsArr, direction, positionArr) {
-    let position = positionShip(lengthsArr, direction);
+  function assignPosition(size, direction, positionArr) {
+    let position = positionShip(size, direction);
     const dupeCheckArr = positionArr.concat(position);
     let isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
     while(isDupe === true) {
-      position = positionShip(lengthsArr, direction);
+      position = positionShip(size, direction);
       const dupeCheckArr2 = positionArr.concat(position);
       isDupe = checkForDupes(dupeCheckArr2, 'row', 'column');
     }
@@ -79,6 +79,7 @@ const boardFactory = (height, width) => {
       throw 'Ship positions are overlapping!'
     }
     console.log(armadaArr);
+    console.log(allPositions);
   }
   function checkIfOnBoard(coordinates) {
     if(coordinates.row > 10) {
@@ -93,6 +94,7 @@ const boardFactory = (height, width) => {
   // if it does, undo previous moves
   // flip direction
   // restart adding positions
+
   function flipDirection(ship) {
     if(ship.direction === 'horizontal') {
       ship.direction === 'vertical';
@@ -100,15 +102,14 @@ const boardFactory = (height, width) => {
       ship.direction === 'vertical';
     }
   }
-
   function addPositions(ship, positionsArr) {
     let newPositions = [ ship.positions ];
-    let hasFlipped = false;
     let isDupe;
 
-    function popAllPositions() {
-      const rowPos = ship.positions.row;
-      const colPos = ship.positions.column;
+    function popAllPositions(initPosition) {
+      let rowPos = initPosition.row;
+      let colPos = initPosition.column;
+      
       for(let i = 0; i < ship.size - 1; i++) {
         let newColumn = colPos + 1 + i;
         let newRow = rowPos + 1 + i;
@@ -122,29 +123,35 @@ const boardFactory = (height, width) => {
         newPositions.push(newPosition); 
       }
     }
-    // function checkOverlap() {
-    //   const dupeCheckArr = positionsArr.concat(newPositions);
-    //   isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
-    // }
-    popAllPositions();
-    const dupeCheckArr = positionsArr.concat(newPositions);
-    isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
-    // checkOverlap();
-    if(isDupe === true && hasFlipped === false) {
-      flipDirection(ship);
-      hasFlipped = true;
-      newPositions = [ ship.positions ];
-      popAllPositions();
-      // checkOverlap();
+    function checkOverlap() {
       const dupeCheckArr = positionsArr.concat(newPositions);
       isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
-      if(isDupe === true) {
-        throw 'flipping ship did not help';
+    }
+
+    popAllPositions(ship.positions);
+    checkOverlap();
+
+    if(isDupe === true) {
+      let flipCounter = 0;
+      newPositions.length = 0;
+      do {
+        if(flipCounter > 5) {
+          throw 'I\'m dizzy from too much flipping!!';
+        }
+        flipDirection(ship);
+        flipCounter++;
+        console.log(flipCounter);
+        const resetPosition = assignPosition(ship.size, ship.direction, positionsArr);
+        newPositions.push(resetPosition);
+        console.log(newPositions);
+        console.log(resetPosition);
+        popAllPositions(ship.positions);
+        checkOverlap();
       }
+      while(isDupe === true); 
     } 
   return newPositions;
   }
-
 
   function placeShip(ship, board) {
         // board.rows[rowPosition][newColumn] = 's';

@@ -27,12 +27,16 @@ describe('makeBoard tests', () => {
   //   testBoard.placeShip(testShip, testBoard);
   //   expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
   // })
-  test('throws error if coordinate off of board', () => {
+  test('throws error if coordinate off bottom of board', () => {
     expect(() => {
-      testBoard.checkIfOnBoard(11, 'right edge');
+      testBoard.checkIfOnBoard({ row: 11, column: 9});
     }).toThrow();
   })
-  
+  test('throws error if coordinate off right of board', () => {
+    expect(() => {
+      testBoard.checkIfOnBoard({ row: 11, column: 9});
+    }).toThrow();
+  })
   describe('armada tests', () => {  
     const testArmada = [];
     testBoard.buildArmada('testPlayer', testArmada);
@@ -57,13 +61,14 @@ describe('makeBoard tests', () => {
     })
     describe('ship placement tests', () => {
       test('addPositions returns array of objects', () => {
-        const testPositions = testBoard.addPositions(testArmada[2]);
+        const testArray = [];
+        const testPositions = testBoard.addPositions(testArmada[2], testArray);
         expect(testPositions[1]).toStrictEqual(expect.any(Object));
       })
       test('ship has as many positions as length', () => {
         expect(testArmada[1].positions.length).toStrictEqual(testArmada[1].size);
       }) 
-      test('flips direction if overlapping ship', () => {
+      test('adds', () => {
   
       })
     })

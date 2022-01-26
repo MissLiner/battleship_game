@@ -20,7 +20,7 @@ const boardFactory = (height, width) => {
     return Math.floor(Math.random() * (maxNum + 1));
   }
   function assignDirection() {
-    const directNum = getRandomInt(3);
+    const directNum = getRandomInt(1);
     let direction;
     if (directNum === 1) {
       direction = 'horizontal';
@@ -57,20 +57,20 @@ const boardFactory = (height, width) => {
     let isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
     while(isDupe === true) {
       position = positionShip(lengthsArr, direction);
-      const dupeCheckArr = positionArr.concat(position);
-      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+      const dupeCheckArr2 = positionArr.concat(position);
+      isDupe = checkForDupes(dupeCheckArr2, 'row', 'column');
     }
     return position;
   } 
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
-    const allPositions = [];
+    let allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
       const direction = assignDirection();
       const position = assignPosition(shipLengths[i], direction, allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       newShip.positions = addPositions(newShip, allPositions);
-      allPositions.push(newShip.positions);
+      allPositions = allPositions.concat(newShip.positions);
       armadaArr.push(newShip);
     }
     // should be a new separate function??
@@ -80,9 +80,12 @@ const boardFactory = (height, width) => {
     }
     console.log(armadaArr);
   }
-  function checkIfOnBoard(coordinate, edge) {
-    if (coordinate > 10) {
-      throw 'ship fell off the ' + edge;
+  function checkIfOnBoard(coordinates) {
+    if(coordinates.row > 10) {
+      throw 'ship fell off the bottom edge!'
+    }
+    else if(coordinates.column > 10) {
+      throw 'ship fell off the right side!';
     }
   }
   // keep track of all positions
@@ -103,33 +106,38 @@ const boardFactory = (height, width) => {
     let hasFlipped = false;
     let isDupe;
 
-    function suggestPosition() {
-      const newColumn = ship.positions.column + 1 + i;
-      const newRow = ship.positions.row + 1 + i;
-      if(ship.direction === 'horizontal') {
-        return { row: ship.positions.row, column: newColumn }
-      } else if(ship.direction === 'vertical') {
-        return { row: newRow, column: ship.positions.column }
-      }
-    }
     function popAllPositions() {
+      const rowPos = ship.positions.row;
+      const colPos = ship.positions.column;
       for(let i = 0; i < ship.size - 1; i++) {
-        const newPosition = suggestPosition();
-        newPositions.push(newPosition);
+        let newColumn = colPos + 1 + i;
+        let newRow = rowPos + 1 + i;
+        let newPosition;
+        if(ship.direction === 'horizontal') {
+          newPosition = { row: rowPos, column: newColumn }
+        } else if(ship.direction === 'vertical') {
+          newPosition = { row: newRow, column: colPos }
+        }
+        checkIfOnBoard(newPosition);
+        newPositions.push(newPosition); 
       }
     }
-    function checkOverlap() {
-      const dupeCheckArr = positionsArr.concat(newPositions);
-      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
-    }
+    // function checkOverlap() {
+    //   const dupeCheckArr = positionsArr.concat(newPositions);
+    //   isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+    // }
     popAllPositions();
-    checkOverlap();
+    const dupeCheckArr = positionsArr.concat(newPositions);
+    isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
+    // checkOverlap();
     if(isDupe === true && hasFlipped === false) {
       flipDirection(ship);
       hasFlipped = true;
       newPositions = [ ship.positions ];
       popAllPositions();
-      checkOverlap();
+      // checkOverlap();
+      const dupeCheckArr = positionsArr.concat(newPositions);
+      isDupe = checkForDupes(dupeCheckArr, 'row', 'column');
       if(isDupe === true) {
         throw 'flipping ship did not help';
       }

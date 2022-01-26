@@ -23,14 +23,6 @@ const shipFactory = (player, size) => {
     return direction;
   }
   
-  // const flip = () => {
-  //   if(direction === 'horizontal') {
-  //     direction = 'vertical';
-  //   } 
-  //   else if(direction === 'vertical') {
-  //     direction = 'horizontal';
-  //   }
-  // }
   function pickFirstSpace() {
     let rowIndex;
     let columnIndex;
@@ -71,7 +63,7 @@ const shipFactory = (player, size) => {
   function getDirection() { return direction };
   function getPositions() { return positions };
 
-  return { player, size, positions, direction, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
+  return { player, size, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
 
 }
 export {

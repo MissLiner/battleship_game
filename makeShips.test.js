@@ -44,18 +44,15 @@ describe('makeShips tests', () => {
     test('horizontal ship has diff column positions', () => {
       expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[3].column);
     })
+    test('position is stable', () => {
+      expect(testShip.getPositions()).toEqual(testShip.getPositions());
+    })
     test('changes position', () => {
       const oldPositions = testShip.getPositions();
       testShip.positionShip();
       expect(testShip.getPositions()).not.toEqual(oldPositions);
     })
   })
-
-  // test.only('ship flips direction', () => {
-  //   testShip.flip();
-  //   expect(testShip.getDirection()).toBe('vertical');
-  // })
-
   test('ship checks for duplicate positions', () => {
 
   })

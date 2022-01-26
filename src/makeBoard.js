@@ -17,10 +17,10 @@ const boardFactory = (height, width) => {
   })()
 
 
-  function checkForDupes(arr, key1, key2) {
+  function checkForDupes(arr) {
     for(let item of arr) {
-      const dupes1 = arr.filter(newItem1 => newItem1[key1] === item[key1]);
-      const dupes2 = dupes1.filter(newItem2 => newItem2[key2] === item[key2]);
+      const dupes1 = arr.filter(newItem1 => newItem1.row === item.row);
+      const dupes2 = dupes1.filter(newItem2 => newItem2.column === item.column);
       if(dupes2.length > 1) { return true }
     }
     return false;
@@ -40,16 +40,16 @@ const boardFactory = (height, width) => {
     const shipLengths = [2, 3, 3, 4, 5];
     let allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
-      const position = assignPosition(shipLengths[i], direction, allPositions);
-      const newShip = shipFactory(player, shipLengths[i], position, direction);
-      newShip.positions = addPositions(newShip, allPositions);
-      allPositions = allPositions.concat(newShip.positions);
+      const newShip = shipFactory(player, shipLengths[i]);
+      const dupeCheckArr = allPositions.concat(newShip.getPositions());
+      isDupe = checkForDupes(dupeCheckArr);
+      while(isDupe === true) {
+        newShip.positionShip();
+        const dupeCheckArr = allPositions.concat(newShip.getPositions());
+        isDupe = checkForDupes(dupeCheckArr);
+      }
+      allPositions.push(newShip.getPositions())
       armadaArr.push(newShip);
-    }
-    // should be a new separate function??
-    const isDupe = checkForDupes(allPositions, 'row', 'column');
-    if(isDupe === true) { 
-      throw 'Ship positions are overlapping!'
     }
     console.log(armadaArr);
     console.log(allPositions);
@@ -62,13 +62,6 @@ const boardFactory = (height, width) => {
       throw 'ship fell off the right side!';
     }
   }
-  // keep track of all positions
-  // check if new position overlaps existing position
-  // if it does, undo previous moves
-  // flip direction
-  // restart adding positions
-
-
   // function addPositions(ship, positionsArr) {
   //   let newPositions = [ ship.positions ];
   //   let isDupe;

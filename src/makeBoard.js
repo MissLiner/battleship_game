@@ -1,7 +1,6 @@
 import { shipFactory } from './makeShips';
 
 const boardFactory = (height, width) => {
-  // throw error if either is too big
   const rows = [];
   (function popBoard() {
     for (let i=0; i < height; i++) {
@@ -10,11 +9,20 @@ const boardFactory = (height, width) => {
     }
     for (let row of rows) {
       for (let i = 0; i < width; i++) {
-        const newColumn = 'o';
+        const newColumn = 'open';
         row.push(newColumn);
       }
     }
   })()
+  function receiveAttack(coordinates) {
+    const attackSpace = rows[coordinates.row][coordinates.column];
+    switch(attackSpace) {
+      case 'open': attackSpace = 'miss';
+        break;
+      case 'ship': attackSpace = 'hit';
+        break;
+    }
+  }
 
   function checkForDupes(arr) {
     for(let item of arr) {
@@ -43,7 +51,6 @@ const boardFactory = (height, width) => {
     console.log(allPositions);
   }
 
-
   function placeShip(ship, board) {
   }
   function placeArmada(armada, board) {
@@ -51,8 +58,8 @@ const boardFactory = (height, width) => {
       placeShip(ship, board);
     }
   }
-  
-  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes }
+
+  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes, receiveAttack }
 }
 
 export { boardFactory } 

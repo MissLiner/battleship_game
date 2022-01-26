@@ -16,8 +16,6 @@ const boardFactory = (height, width) => {
     }
   })()
 
-
-
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;
@@ -55,7 +53,6 @@ const boardFactory = (height, width) => {
     const shipLengths = [2, 3, 3, 4, 5];
     let allPositions = [];
     for (let i = 0; i < shipLengths.length; i++) {
-      const direction = assignDirection();
       const position = assignPosition(shipLengths[i], direction, allPositions);
       const newShip = shipFactory(player, shipLengths[i], position, direction);
       newShip.positions = addPositions(newShip, allPositions);

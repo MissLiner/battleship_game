@@ -1,5 +1,6 @@
 
 const makeShips = require('./src/makeShips');
+import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, [4, 2], 'horizontal')
@@ -17,8 +18,18 @@ describe('makeShips tests', () => {
   test('ship position is two numbers', () => {
     expect(testShip.positions).toEqual([expect.any(Number), expect.any(Number)]);
   })
-  test.only('ship flips direction', () => {
+  test.only('assigns initial direction', () => {
+    mockRandom([0.1]);
+    expect(testShip.direction).toBe('horizontal');
+  })
+  test('ship flips direction', () => {
     testShip.flip();
     expect(testShip.getDirection()).toBe('vertical');
+  })
+  test('ship populates positions', () => {
+
+  })
+  test('ship checks for duplicate positions', () => {
+    
   })
 })

@@ -16,19 +16,8 @@ const boardFactory = (height, width) => {
     }
   })()
 
-  function getRandomInt(maxNum) {
-    return Math.floor(Math.random() * (maxNum + 1));
-  }
-  function assignDirection() {
-    const directNum = getRandomInt(1);
-    let direction;
-    if (directNum === 1) {
-      direction = 'horizontal';
-    } else {
-      direction = 'vertical';
-    }
-    return direction;
-  }
+
+
   function positionShip(size, direction) {
     let rowIndex;
     let columnIndex;

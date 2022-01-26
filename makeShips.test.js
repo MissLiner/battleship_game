@@ -22,7 +22,7 @@ describe('makeShips tests', () => {
   describe.only('position tests', () => {
     mockRandom(0.6, 0.4, 0.5); // horizontal, row: 4, column: 5
     testShip.positionShip();
-    //resetMockRandom();
+    resetMockRandom();
 
     test('getRandomInt works', () => {
       mockRandom(0.6);
@@ -40,6 +40,14 @@ describe('makeShips tests', () => {
     })
     test('horizontal ship has same row positions', () => {
       expect(testShip.getPositions()[1].row).toEqual(testShip.getPositions()[3].row);
+    })
+    test('horizontal ship has diff column positions', () => {
+      expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[3].column);
+    })
+    test('changes position', () => {
+      const oldPositions = testShip.getPositions();
+      testShip.positionShip();
+      expect(testShip.getPositions()).not.toEqual(oldPositions);
     })
   })
 

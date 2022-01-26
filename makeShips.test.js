@@ -20,9 +20,15 @@ describe('makeShips tests', () => {
     expect(testShip.getStatus()).toBe('sunk');
   })
   describe.only('position tests', () => {
-    mockRandom(0.1, 0.4, 0.5); // horizontal, row: 4, column: 5
+    mockRandom(0.6, 0.4, 0.5); // horizontal, row: 4, column: 5
     testShip.positionShip();
+    //resetMockRandom();
 
+    test('getRandomInt works', () => {
+      mockRandom(0.6);
+      expect(testShip.getRandomInt(2)).toBe(1);
+      resetMockRandom();
+    })
     test('assigns initial direction', () => {
       expect(testShip.getDirection()).toBe('horizontal');
     })

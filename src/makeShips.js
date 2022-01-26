@@ -10,10 +10,10 @@ const shipFactory = (player, size) => {
     }
   }
   function getRandomInt(maxNum) {
-    return Math.floor(Math.random() * (maxNum));
+    return Math.floor(Math.random() * (maxNum + 1));
   }
   function pickDirection() {
-    const directNum = getRandomInt(2);
+    const directNum = getRandomInt(1);
     let direction;
     if (directNum === 1) {
       direction = 'horizontal';
@@ -71,7 +71,7 @@ const shipFactory = (player, size) => {
   function getDirection() { return direction };
   function getPositions() { return positions };
 
-  return { player, size, positions, direction, getDirection, hit, getHits, getStatus, positionShip, getPositions }
+  return { player, size, positions, direction, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
 
 }
 export {

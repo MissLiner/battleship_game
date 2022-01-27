@@ -1,7 +1,11 @@
 import { shipFactory } from './makeShips';
-
+// refactor position ship to allow players to do it manually
 const boardFactory = (height, width) => {
   const rows = [];
+  let hitCounter = 0;
+  let armadaStatus = 'afloat';
+  
+
   (function popBoard() {
     for (let i=0; i < height; i++) {
       let newRow = [];
@@ -14,6 +18,14 @@ const boardFactory = (height, width) => {
       }
     }
   })()
+  function checkIfAllSunk(lengthsArr, counter) {
+    const shipSpaceTotal = lengthsArr.reduce(function(a, b) {
+        return(a + b); 
+      }, 0);
+    if(shipSpaceTotal === counter) {
+      return 'sunk';
+    }
+  }
   function getAllShipPositions(armadaArr) {
     const allPositions = [];
     for(let i = 0; i < armadaArr.length; i++) {
@@ -30,16 +42,18 @@ const boardFactory = (height, width) => {
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === coordinates.row && positionArray[x].column === coordinates.column) {
           armadaArr[i].hit();
+          hitCounter++;
         }
       }
     }
   }
-  function receiveAttack(coordinates) {
+  function receiveAttack(coordinates, armadaArr, counter) {
     // can I use a shorter version of the attackSpace??
     switch(rows[coordinates.row][coordinates.column]) {
       case 'open': rows[coordinates.row][coordinates.column] = 'miss';
         break;
       case 'ship': rows[coordinates.row][coordinates.column] = 'hit';
+        hitShip(coordinates, armadaArr);
         break;
     }
   }
@@ -71,15 +85,20 @@ const boardFactory = (height, width) => {
     }
   }
 
-  function placeShip(ship, board) {
+  function placeShip(shipPositions) {
+    for(let i = 0; i < shipPositions.length; i++) {
+      const rowPos = shipPositions[i].row;
+      const colPos = shipPositions[i].column;
+      rows[rowPos][colPos] = 'ship';
+    }
   }
-  function placeArmada(armada, board) {
+  function placeArmada(armada) {
     for (let ship in armada) {
-      placeShip(ship, board);
+      placeShip(ship.getPositions());
     }
   }
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, getAllShipPositions, hitShip }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, getAllShipPositions, hitShip, checkIfAllSunk }
 }
 
 export { boardFactory } 

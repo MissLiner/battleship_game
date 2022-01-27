@@ -15,12 +15,6 @@ describe('makeBoard tests', () => {
     expect(testBoard.rows[1][2]).toBe('miss');
   })
 
-  // test('places horizontal ship on board', () => {
-  //   const testShip = makeShips.shipFactory('caroline', 2, [3, 3], 'horizontal');
-  //   testBoard.placeShip(testShip, testBoard);
-  //   expect(testBoard.rows[3]).toStrictEqual(['o', 'o', 'o', 's', 's', 'o', 'o', 'o', 'o', 'o']);
-  // })
-
   describe('armada tests', () => {  
     const testArmada = [];
     testBoard.buildArmada('testPlayer', testArmada);
@@ -38,9 +32,25 @@ describe('makeBoard tests', () => {
       testArmada[1].hit();
       expect(testArmada[1].getHits()).toBe(1);
     })
-    test('gameBoard sends hit to ship',() => {
+    test('board sends hit to ship',() => {
       testBoard.hitShip(testArmada[2].getPositions()[0], testArmada);
       expect(testArmada[2].getHits()).toBe(1);
+    })
+    test('ship doesn\'t sink on first hit',() => {
+      testBoard.hitShip(testArmada[2].getPositions()[0], testArmada);
+      expect(testArmada[2].getStatus()).toBe('afloat');
+    })
+    test('board sinks ship', () => {
+      testBoard.hitShip(testArmada[0].getPositions()[0], testArmada);
+      testBoard.hitShip(testArmada[0].getPositions()[1], testArmada);
+      expect(testArmada[0].getStatus()).toBe('sunk');
+    })
+    test('armada sinks', () => {
+      let testStatus = 'afloat';
+      const testLengthArray = [ 1, 2, 3, 4 ];
+      let testCounter = 10;
+      testBoard.checkIfAllSunk(testLengthArray, testCounter, testStatus);
+      expect(testStatus).toBe('sunk');
     })
     test('dupe check - with dupes', () => {
       const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
@@ -54,6 +64,7 @@ describe('makeBoard tests', () => {
       expect(testArmada[1].getPositions()[1].row).not.toBeNaN();
       expect(testArmada[1].getPositions()[1].column).not.toBeNaN();
     })
+
     describe('ship placement tests', () => {
       test('ship has as many positions as length', () => {
         expect(testArmada[1].getPositions().length).toStrictEqual(testArmada[1].size);
@@ -61,8 +72,11 @@ describe('makeBoard tests', () => {
       test('adds', () => {
   
       })
+      test.only('places horizontal ship on board', () => {
+      const testShipPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
+      testBoard.placeShip(testShipPositions);
+      expect(testBoard.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
+      })
     })
   })
 })
-
-

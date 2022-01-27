@@ -75,11 +75,15 @@ const boardFactory = (height, width) => {
     for (let i = 0; i < shipLengths.length; i++) {
       let isDupe = false;
       const newShip = shipFactory(player, shipLengths[i]);
+      let dupeCounter = 0;
+      let dupeCheckArr;
       do {
+        dupeCounter++;
         newShip.positionShip();
-        const dupeCheckArr = allShipPositions.concat(newShip.getPositions());
-        // isDupe = checkForDupes(dupeCheckArr);
-      } while(isDupe === true);
+        dupeCheckArr = allShipPositions.concat(newShip.getPositions());
+        isDupe = checkForDupes(dupeCheckArr);
+      } while(isDupe === true && dupeCounter < 10);
+      if(isDupe === true) { throw dupeCheckArr };
       for(let position of newShip.getPositions()) {
         allShipPositions.push(position);
       }
@@ -94,10 +98,24 @@ const boardFactory = (height, width) => {
       rows[rowPos][colPos] = 'ship';
     }
   }
+  function checkIfShipOffBoard() {
+    const allSpaces = [];
+    for(let i = 0; i < allShipPositions.length; i++) {
+      allSpaces.push(allShipPositions[i].row);
+      allSpaces.push(allShipPositions[i].column);
+    }
+    const offBoard = allSpaces.filter(value => value > 9);
+    if(offBoard.length > 0) {
+      throw 'ship is off board' + offBoard.length;
+    }
+    return allSpaces;
+  }
   function placeArmada(armada) {
     for (let ship in armada) {
       placeShip(ship.getPositions());
     }
+    let spaces = checkIfShipOffBoard();
+    return spaces;
   }
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };

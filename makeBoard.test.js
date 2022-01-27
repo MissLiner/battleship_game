@@ -17,7 +17,6 @@ describe('makeBoard tests', () => {
 
   describe('armada tests', () => {  
     testBoard.buildArmada('testPlayer');
-
     test('armada is an array of objects', () => {
       expect(testBoard.getArmada()[2]).toStrictEqual(expect.any(Object));
     })
@@ -70,6 +69,9 @@ describe('makeBoard tests', () => {
       const testShipPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
       testBoard.placeShip(testShipPositions);
       expect(testBoard.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
+      })
+      test.only('checks if ship off board', () => {
+        expect(testBoard.placeArmada()).toThrow();
       })
     })
   })

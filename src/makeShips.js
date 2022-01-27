@@ -26,13 +26,13 @@ const shipFactory = (player, size) => {
   function pickFirstSpace() {
     let rowIndex;
     let columnIndex;
-    let adjustedMax = 10 - size;
+    let adjustedMax = 9 - size;
     if (direction === 'horizontal') {
-      rowIndex = getRandomInt(10);
+      rowIndex = getRandomInt(9);
       columnIndex = getRandomInt(adjustedMax);
     } else {
       rowIndex = getRandomInt(adjustedMax);
-      columnIndex = getRandomInt(10);
+      columnIndex = getRandomInt(9);
     }
     const position = { row: rowIndex, column: columnIndex };
     return position;

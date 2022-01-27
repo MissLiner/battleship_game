@@ -2,12 +2,9 @@
 const makeShips = require('./src/makeShips');
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
-describe.skip('makeShips tests', () => {
+describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5);
   
-  test('ship has no initial position', () => {
-    expect(testShip.getPositions()).not.toBeDefined();
-  })
   test('ship has size', () => {
     expect(testShip.size).toBe(5);
   }) 
@@ -19,7 +16,7 @@ describe.skip('makeShips tests', () => {
     for (let i = 0; i < 4; i++) { testShip.hit(); }
     expect(testShip.getStatus()).toBe('sunk');
   })
-  describe.only('position tests', () => {
+  describe('position tests', () => {
     mockRandom(0.6, 0.4, 0.5); // horizontal, row: 4, column: 5
     testShip.positionShip();
     resetMockRandom();

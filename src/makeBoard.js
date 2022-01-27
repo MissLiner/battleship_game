@@ -25,14 +25,13 @@ const boardFactory = (height, width) => {
     return allPositions;
   }
   function hitShip(coordinates, armadaArr) {
-    for(let i = 0; i < armadaArr; i++) {
+    for(let i = 0; i < armadaArr.length; i++) {
       const positionArray = armadaArr[i].getPositions();
-      if(i === 2) { return positionArray };
-      // for(let space in positionArray) {
-      //   if(space === coordinates) {
-      //     armadaArr[i].hit();
-      //   }
-      // }
+      for(let x = 0; x < positionArray.length; x++) {
+        if(positionArray[x].row === coordinates.row && positionArray[x].column === coordinates.column) {
+          armadaArr[i].hit();
+        }
+      }
     }
   }
   function receiveAttack(coordinates) {

@@ -1,8 +1,6 @@
 const makeBoard = require ('./src/makeBoard');
 const makeShips = require('./src/makeShips');
 
-import { mockRandom, resetMockRandom } from 'jest-mock-random';
-
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory(10, 10);
 
@@ -33,15 +31,17 @@ describe('makeBoard tests', () => {
     test('armada array.length is 5', () => {
       expect(testArmada.length).toBe(5);
     })
-    test('getAllPositions works', () => {
+    test('armada has 17 positions', () => {
       expect(testBoard.getAllShipPositions(testArmada).length).toBe(17);
     })
-    test.skip('sends hit to ship',() => {
-      const testPositionArr = testArmada[2].getPositions();
-      // expect(testArmada[2].getPositions()).toBeUndefined();
-      expect(testBoard.hitShip(testPositionArr[1], testArmada)).toThrow();
+    test('armada ship hit() works', () => {
+      testArmada[1].hit();
+      expect(testArmada[1].getHits()).toBe(1);
     })
-
+    test('gameBoard sends hit to ship',() => {
+      testBoard.hitShip(testArmada[2].getPositions()[0], testArmada);
+      expect(testArmada[2].getHits()).toBe(1);
+    })
     test('dupe check - with dupes', () => {
       const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
         expect(testBoard.checkForDupes(testArr)).toBe(true);

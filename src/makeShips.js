@@ -4,7 +4,7 @@ const shipFactory = (player, size) => {
   let hits = 0;
 
   function hit() {
-    hits += 1;
+    hits++;
     if (hits === size) {
       status = 'sunk';
     }

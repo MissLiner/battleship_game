@@ -14,6 +14,19 @@ const boardFactory = (height, width) => {
       }
     }
   })()
+  function getAllShipPositions(armadaArr) {
+    const allPositions = [];
+    for(let i = 0; i < armadaArr.length; i++) {
+      const shipPositions = armadaArr[i].getPositions();
+      for(const space in shipPositions) {
+        allPositions.push(space);
+      }
+    }
+    return allPositions;
+  }
+  function checkForShip(coordinates, armadaArr) {
+
+  }
   function receiveAttack(coordinates) {
     // can I use a shorter version of the attackSpace??
     switch(rows[coordinates.row][coordinates.column]) {
@@ -59,7 +72,7 @@ const boardFactory = (height, width) => {
     }
   }
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, getAllShipPositions }
 }
 
 export { boardFactory } 

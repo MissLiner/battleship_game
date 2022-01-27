@@ -12,7 +12,7 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test.only('marks misses on board', () => {
+  test('marks misses on board', () => {
     testBoard.receiveAttack( { row: 1, column: 2 } );
     expect(testBoard.rows[1][2]).toBe('miss');
   })
@@ -32,6 +32,9 @@ describe('makeBoard tests', () => {
     })
     test('armada array.length is 5', () => {
       expect(testArmada.length).toBe(5);
+    })
+    test.only('getAllPositions works', () => {
+      expect(testBoard.getAllShipPositions(testArmada).length).toBe(17);
     })
     test('dupe check - with dupes', () => {
       const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];

@@ -25,31 +25,29 @@ describe('makeBoard tests', () => {
       expect(testBoard.getArmada().length).toBe(5);
     })
     test('armada has 17 positions', () => {
-      expect(testBoard.getAllShipPositions(testArmada).length).toBe(17);
+      expect(testBoard.getAllShipPositions(testBoard.getArmada()).length).toBe(17);
     })
     test('armada ship hit() works', () => {
-      testArmada[1].hit();
+      testBoard.getArmada()[1].hit();
       expect(testBoard.getArmada()[1].getHits()).toBe(1);
     })
     test('board sends hit to ship',() => {
-      testBoard.hitShip(testArmada[2].getPositions()[0], testArmada);
+      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0], testArmada);
       expect(testBoard.getArmada()[2].getHits()).toBe(1);
     })
     test('ship doesn\'t sink on first hit',() => {
-      testBoard.hitShip(testArmada[2].getPositions()[0], testArmada);
+      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0], testArmada);
       expect(testBoard.getArmada()[2].getStatus()).toBe('afloat');
     })
-    test('board sinks ship', () => {
-      testBoard.hitShip(testArmada[0].getPositions()[0], testArmada);
-      testBoard.hitShip(testArmada[0].getPositions()[1], testArmada);
+    test.only('board sinks ship', () => {
+      testBoard.hitShip(testBoard.getArmada()[0].getPositions()[0]);
+      testBoard.hitShip(testBoard.getArmada()[0].getPositions()[1]);
       expect(testBoard.getArmada()[0].getStatus()).toBe('sunk');
     })
-    test('armada sinks', () => {
-      let testStatus = 'afloat';
+    test.only('armada sinks', () => {
       const testLengthArray = [ 1, 2, 3, 4 ];
       let testCounter = 10;
-      testBoard.checkIfAllSunk(testLengthArray, testCounter, testStatus);
-      expect(testStatus).toBe('sunk');
+      expect(testBoard.checkIfAllSunk(testLengthArray, testCounter)).toBe('sunk');
     })
     test('dupe check - with dupes', () => {
       const testArr = [{ "row": 1, "column": 2 }, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];

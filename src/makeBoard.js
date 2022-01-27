@@ -8,8 +8,6 @@ const boardFactory = (height, width) => {
   const armadaArr = [];
   const allShipPositions = [];
 
-  
-
   (function popBoard() {
     for (let i=0; i < height; i++) {
       let newRow = [];
@@ -80,7 +78,6 @@ const boardFactory = (height, width) => {
       do {
         newShip.positionShip();
         const dupeCheckArr = allShipPositions.concat(newShip.getPositions());
-        return dupeCheckArr;
         // isDupe = checkForDupes(dupeCheckArr);
       } while(isDupe === true);
 
@@ -101,8 +98,9 @@ const boardFactory = (height, width) => {
       placeShip(ship.getPositions());
     }
   }
+  function getArmada() { return armadaArr };
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada }
 }
 
 export { boardFactory } 

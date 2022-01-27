@@ -2,7 +2,7 @@
 const makeShips = require('./src/makeShips');
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
-describe.skip('makeShips tests', () => {
+describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5);
   
   test('ship has no initial position', () => {

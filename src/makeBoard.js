@@ -4,22 +4,22 @@ const boardFactory = (height, width) => {
   const rows = [];
   (function popBoard() {
     for (let i=0; i < height; i++) {
-      const newRow = [];
+      let newRow = [];
       rows.push(newRow);
     }
     for (let row of rows) {
       for (let i = 0; i < width; i++) {
-        const newColumn = 'open';
+        let newColumn = 'open';
         row.push(newColumn);
       }
     }
   })()
   function receiveAttack(coordinates) {
-    const attackSpace = rows[coordinates.row][coordinates.column];
-    switch(attackSpace) {
-      case 'open': attackSpace = 'miss';
+    // can I use a shorter version of the attackSpace??
+    switch(rows[coordinates.row][coordinates.column]) {
+      case 'open': rows[coordinates.row][coordinates.column] = 'miss';
         break;
-      case 'ship': attackSpace = 'hit';
+      case 'ship': rows[coordinates.row][coordinates.column] = 'hit';
         break;
     }
   }
@@ -35,20 +35,20 @@ const boardFactory = (height, width) => {
   function buildArmada(player, armadaArr) {
     const shipLengths = [2, 3, 3, 4, 5];
     let allPositions = [];
+
     for (let i = 0; i < shipLengths.length; i++) {
       const newShip = shipFactory(player, shipLengths[i]);
+      newShip.positionShip();
       const dupeCheckArr = allPositions.concat(newShip.getPositions());
-      isDupe = checkForDupes(dupeCheckArr);
-      while(isDupe === true) {
-        newShip.positionShip();
-        const dupeCheckArr = allPositions.concat(newShip.getPositions());
-        isDupe = checkForDupes(dupeCheckArr);
-      }
+      let isDupe = checkForDupes(dupeCheckArr);
+      // while(isDupe === true) {
+      //   newShip.positionShip();
+      //   const dupeCheckArr2 = allPositions.concat(newShip.getPositions());
+      //   isDupe = checkForDupes(dupeCheckArr2);
+      // }
       allPositions.push(newShip.getPositions())
       armadaArr.push(newShip);
     }
-    console.log(armadaArr);
-    console.log(allPositions);
   }
 
   function placeShip(ship, board) {
@@ -59,7 +59,7 @@ const boardFactory = (height, width) => {
     }
   }
 
-  return { positionShip, getRandomInt, rows, buildArmada, placeShip, placeArmada, checkIfOnBoard, checkForDupes, receiveAttack }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack }
 }
 
 export { boardFactory } 

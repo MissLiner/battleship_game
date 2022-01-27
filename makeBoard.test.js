@@ -32,19 +32,19 @@ describe('makeBoard tests', () => {
       expect(testBoard.getArmada()[1].getHits()).toBe(1);
     })
     test('board sends hit to ship',() => {
-      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0], testArmada);
+      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0]);
       expect(testBoard.getArmada()[2].getHits()).toBe(1);
     })
     test('ship doesn\'t sink on first hit',() => {
-      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0], testArmada);
+      testBoard.hitShip(testBoard.getArmada()[2].getPositions()[0]);
       expect(testBoard.getArmada()[2].getStatus()).toBe('afloat');
     })
-    test.only('board sinks ship', () => {
+    test('board sinks ship', () => {
       testBoard.hitShip(testBoard.getArmada()[0].getPositions()[0]);
       testBoard.hitShip(testBoard.getArmada()[0].getPositions()[1]);
       expect(testBoard.getArmada()[0].getStatus()).toBe('sunk');
     })
-    test.only('armada sinks', () => {
+    test('armada sinks', () => {
       const testLengthArray = [ 1, 2, 3, 4 ];
       let testCounter = 10;
       expect(testBoard.checkIfAllSunk(testLengthArray, testCounter)).toBe('sunk');

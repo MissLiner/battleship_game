@@ -80,8 +80,9 @@ const boardFactory = (height, width) => {
         const dupeCheckArr = allShipPositions.concat(newShip.getPositions());
         // isDupe = checkForDupes(dupeCheckArr);
       } while(isDupe === true);
-
-      allShipPositions.push(newShip.getPositions())
+      for(let position of newShip.getPositions()) {
+        allShipPositions.push(position);
+      }
       armadaArr.push(newShip);
     }
   }
@@ -99,8 +100,9 @@ const boardFactory = (height, width) => {
     }
   }
   function getArmada() { return armadaArr };
+  function getAllShipPositions() { return allShipPositions };
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada, getAllShipPositions }
 }
 
 export { boardFactory } 

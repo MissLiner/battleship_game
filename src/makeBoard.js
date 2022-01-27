@@ -9,12 +9,12 @@ const boardFactory = (height, width) => {
   const allShipPositions = [];
 
   (function popBoard() {
-    for (let i=0; i < height; i++) {
+    for (let i=0; i < 10; i++) {
       let newRow = [];
       rows.push(newRow);
     }
     for (let row of rows) {
-      for (let i = 0; i < width; i++) {
+      for (let i = 0; i < 10; i++) {
         let newColumn = 'open';
         row.push(newColumn);
       }
@@ -28,16 +28,6 @@ const boardFactory = (height, width) => {
       return 'sunk';
     }
   }
-  // function getAllShipPositions() {
-  //   const allPositions = [];
-  //   for(let i = 0; i < armadaArr.length; i++) {
-  //     const shipPositions = armadaArr[i].getPositions();
-  //     for(const space in shipPositions) {
-  //       allPositions.push(space);
-  //     }
-  //   }
-  //   return allPositions;
-  // }
   function hitShip(coordinates) {
     for(let i = 0; i < armadaArr.length; i++) {
       const positionArray = armadaArr[i].getPositions();
@@ -71,10 +61,10 @@ const boardFactory = (height, width) => {
     }
     return false;
   }
-  function buildArmada(player) {
+  function buildArmada() {
     for (let i = 0; i < shipLengths.length; i++) {
       let isDupe = false;
-      const newShip = shipFactory(player, shipLengths[i]);
+      const newShip = shipFactory(shipLengths[i]);
       let dupeCounter = 0;
       let dupeCheckArr;
       do {
@@ -108,7 +98,6 @@ const boardFactory = (height, width) => {
     if(offBoard.length > 0) {
       throw 'ship is off board' + offBoard.length;
     }
-    return allSpaces;
   }
   function placeArmada(armada) {
     for (let ship in armada) {

@@ -1,5 +1,5 @@
 
-const shipFactory = (player, size) => {
+const shipFactory = (size) => {
   let status = 'afloat';
   let hits = 0;
 
@@ -63,7 +63,7 @@ const shipFactory = (player, size) => {
   function getDirection() { return direction };
   function getPositions() { return positions };
 
-  return { player, size, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
+  return { size, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
 
 }
 export {

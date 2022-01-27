@@ -4,6 +4,10 @@ const boardFactory = (height, width) => {
   const rows = [];
   let hitCounter = 0;
   let armadaStatus = 'afloat';
+  const shipLengths = [2, 3, 3, 4, 5];
+  const armadaArr = [];
+  const allShipPositions = [];
+
   
 
   (function popBoard() {
@@ -26,17 +30,17 @@ const boardFactory = (height, width) => {
       return 'sunk';
     }
   }
-  function getAllShipPositions(armadaArr) {
-    const allPositions = [];
-    for(let i = 0; i < armadaArr.length; i++) {
-      const shipPositions = armadaArr[i].getPositions();
-      for(const space in shipPositions) {
-        allPositions.push(space);
-      }
-    }
-    return allPositions;
-  }
-  function hitShip(coordinates, armadaArr) {
+  // function getAllShipPositions() {
+  //   const allPositions = [];
+  //   for(let i = 0; i < armadaArr.length; i++) {
+  //     const shipPositions = armadaArr[i].getPositions();
+  //     for(const space in shipPositions) {
+  //       allPositions.push(space);
+  //     }
+  //   }
+  //   return allPositions;
+  // }
+  function hitShip(coordinates) {
     for(let i = 0; i < armadaArr.length; i++) {
       const positionArray = armadaArr[i].getPositions();
       for(let x = 0; x < positionArray.length; x++) {
@@ -47,13 +51,16 @@ const boardFactory = (height, width) => {
       }
     }
   }
-  function receiveAttack(coordinates, armadaArr, counter) {
+  function receiveAttack(coordinates) {
     // can I use a shorter version of the attackSpace??
-    switch(rows[coordinates.row][coordinates.column]) {
-      case 'open': rows[coordinates.row][coordinates.column] = 'miss';
+    const row = coordinates.row;
+    const column = coordinates.column;
+
+    switch(rows[row][column]) {
+      case 'open': rows[row][column] = 'miss';
         break;
-      case 'ship': rows[coordinates.row][coordinates.column] = 'hit';
-        hitShip(coordinates, armadaArr);
+      case 'ship': rows[row][column] = 'hit';
+        hitShip(coordinates);
         break;
     }
   }
@@ -62,25 +69,22 @@ const boardFactory = (height, width) => {
     for(let item of arr) {
       const dupes1 = arr.filter(newItem1 => newItem1.row === item.row);
       const dupes2 = dupes1.filter(newItem2 => newItem2.column === item.column);
-      if(dupes2.length > 1) { return true }
+      if(dupes2.length > 1) { return true };
     }
     return false;
   }
-  function buildArmada(player, armadaArr) {
-    const shipLengths = [2, 3, 3, 4, 5];
-    let allPositions = [];
-
+  function buildArmada(player) {
     for (let i = 0; i < shipLengths.length; i++) {
+      let isDupe = false;
       const newShip = shipFactory(player, shipLengths[i]);
-      newShip.positionShip();
-      const dupeCheckArr = allPositions.concat(newShip.getPositions());
-      let isDupe = checkForDupes(dupeCheckArr);
-      // while(isDupe === true) {
-      //   newShip.positionShip();
-      //   const dupeCheckArr2 = allPositions.concat(newShip.getPositions());
-      //   isDupe = checkForDupes(dupeCheckArr2);
-      // }
-      allPositions.push(newShip.getPositions())
+      do {
+        newShip.positionShip();
+        const dupeCheckArr = allShipPositions.concat(newShip.getPositions());
+        return dupeCheckArr;
+        // isDupe = checkForDupes(dupeCheckArr);
+      } while(isDupe === true);
+
+      allShipPositions.push(newShip.getPositions())
       armadaArr.push(newShip);
     }
   }
@@ -98,7 +102,7 @@ const boardFactory = (height, width) => {
     }
   }
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, getAllShipPositions, hitShip, checkIfAllSunk }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk }
 }
 
 export { boardFactory } 

@@ -4,3 +4,17 @@
   margin: auto;
   text-align: center;
 }
+#board-container {
+  background-color: white;
+  display: grid;
+  height: 400px;
+  width: 400px;
+}
+.row {
+  display: grid;
+}
+.space {
+  border: solid;
+  border-color: white;
+  background-color: mediumblue;
+}

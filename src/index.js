@@ -1,8 +1,15 @@
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
+import { playerFactory } from './modules/makePlayer';
+import { displayGame } from './modules/gameDisplay';
 // import { shipFactory } from './makeShips';
 
-const testBoard = boardFactory(10, 10);
-const armada1 = [];
-testBoard.buildArmada('player1', armada1);
+const player1 = playerFactory(true, 1);
+const player2 = playerFactory(true, 2);
+
+const board1 = boardFactory();
+const board2 = boardFactory();
+
+displayGame(board1);
+
    

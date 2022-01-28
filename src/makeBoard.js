@@ -1,6 +1,6 @@
 import { shipFactory } from './makeShips';
 // refactor position ship to allow players to do it manually
-const boardFactory = (height, width) => {
+const boardFactory = () => {
   const rows = [];
   let hitCounter = 0;
   let armadaStatus = 'afloat';
@@ -20,6 +20,21 @@ const boardFactory = (height, width) => {
       }
     }
   })()
+  function throwErr() {
+    throw 'gotcha!';
+  }
+  const findOpenSpaces = () => {
+    const allOpenSpaces = [];
+    for(let i = 0; i < 10; i++) {
+      for(let x = 0; x < 10; x++) {
+        if(rows[i][x] === 'open') {
+          let position = { row: i, column: x };
+          allOpenSpaces.push(position);
+        }
+      }
+    }
+    return allOpenSpaces;
+  }
   function checkIfAllSunk(lengthsArr, counter) {
     const shipSpaceTotal = lengthsArr.reduce(function(a, b) {
         return(a + b); 
@@ -61,7 +76,7 @@ const boardFactory = (height, width) => {
     }
     return false;
   }
-  function buildArmada() {
+  const buildArmada = () => {
     for (let i = 0; i < shipLengths.length; i++) {
       let isDupe = false;
       const newShip = shipFactory(shipLengths[i]);
@@ -99,8 +114,8 @@ const boardFactory = (height, width) => {
       throw 'ship is off board' + offBoard.length;
     }
   }
-  function placeArmada(armada) {
-    for (let ship in armada) {
+  const placeArmada = () => {
+    for (let ship of armadaArr) {
       placeShip(ship.getPositions());
     }
     let spaces = checkIfShipOffBoard();
@@ -109,7 +124,7 @@ const boardFactory = (height, width) => {
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada, getAllShipPositions }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada, getAllShipPositions, findOpenSpaces, throwErr }
 }
 
 export { boardFactory } 

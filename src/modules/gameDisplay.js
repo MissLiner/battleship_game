@@ -9,18 +9,18 @@ function displayGame(board) {
   function addSpaces(row) {
     for(let i = 0; i < 10; i++) {
       const space = document.createElement('div');
-      space.class = 'space';
+      space.classList.add('space');
       row.appendChild(space);
     }
   }
   function buildBoard(board) {
     const gameBoard = document.createElement('div');
-    gameBoard.class = 'gameboard';
+    gameBoard.classList.add('gameboard');
     board.id = board;
     boardContainer.appendChild(gameBoard);
     for(let i = 0; i < 10; i++) {
       const row = document.createElement('div');
-      row.class = 'row';
+      row.classList.add('row');
       addSpaces(row);
       gameBoard.appendChild(row);
     }

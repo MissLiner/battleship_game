@@ -5,16 +5,28 @@
   text-align: center;
 }
 #board-container {
+  height: 400px;
+  width: 400px;
+}
+
+.gameboard {
   background-color: white;
   display: grid;
+  grid-template-rows: repeat(10, 1fr);
   height: 400px;
   width: 400px;
 }
 .row {
   display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  height: 40px;
+  width: 400px;
 }
 .space {
   border: solid;
   border-color: white;
+  border-width: 1px;
   background-color: mediumblue;
+  height: 40px;
+  width: 40px;
 }

@@ -21,10 +21,7 @@ const boardFactory = (isComputer) => {
     }
   })()
 
-  if(isComputer === true) {
-    buildArmada();
-    placeArmada();
-  }
+
 
   const findOpenSpaces = () => {
     const allOpenSpaces = [];
@@ -123,6 +120,10 @@ const boardFactory = (isComputer) => {
     }
     let spaces = checkIfShipOffBoard();
     return spaces;
+  }
+  if(isComputer === true) {
+    buildArmada();
+    placeArmada();
   }
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };

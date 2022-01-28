@@ -7,8 +7,8 @@ import { displayGame } from './modules/gameDisplay';
 const player1 = playerFactory(true, 1);
 const player2 = playerFactory(true, 2);
 
-const board1 = boardFactory();
-const board2 = boardFactory();
+const board1 = boardFactory(true);
+const board2 = boardFactory(true);
 
 const turnBtn = document.getElementById('turn-btn');
 turnBtn.addEventListener('click', () => takeTurn());
@@ -31,7 +31,7 @@ function takeTurn() {
   }
   displayGame(board, board.rows, 'public');
   setTimeout(() => {  player.makeGuess(board); }, 2000);
-  setTimeout(() => {  displayGame(board, board.rows, 'public'); }, 2500);
+  setTimeout(() => {  displayGame(board, board.rows, 'private'); }, 2500);
   
   if(turn === 1) { turn = 2; } else { turn = 1; };
   console.log(turn);

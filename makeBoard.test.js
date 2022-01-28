@@ -21,9 +21,10 @@ describe('makeBoard tests', () => {
 
 describe('ship placement tests', () => {
   const testBoard3 = makeBoard.boardFactory();
-  test('places horizontal ship on board', () => {
-  const testShipPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
-  testBoard3.placeShip(testShipPositions);
+
+  test('places ship on board', () => {
+  const testHorPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
+  testBoard3.placeShip(testHorPositions);
   expect(testBoard3.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
   })
 })
@@ -75,11 +76,4 @@ describe('armada tests', () => {
     const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(testBoard2.checkForDupes(testArr)).toBe(false);
   })
-  test('ship positions are two numbers', () => {
-    expect(testBoard2.getArmada()[1].getPositions()[1].row).not.toBeNaN();
-    expect(testBoard2.getArmada()[1].getPositions()[1].column).not.toBeNaN();
-  })
-  test('ship has as many positions as length', () => {
-    expect(testBoard2.getArmada()[1].getPositions().length).toStrictEqual(testBoard2.getArmada()[1].size);
-  }) 
 })

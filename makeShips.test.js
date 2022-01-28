@@ -2,8 +2,8 @@
 const makeShips = require('./src/makeShips');
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
-describe.skip('makeShips tests', () => {
-  const testShip = makeShips.shipFactory('testPlayer', 5);
+describe('makeShips tests', () => {
+  const testShip = makeShips.shipFactory(5);
   
   test('ship has size', () => {
     expect(testShip.size).toBe(5);
@@ -29,8 +29,11 @@ describe.skip('makeShips tests', () => {
     test('assigns initial direction', () => {
       expect(testShip.getDirection()).toBe('horizontal');
     })
-    test('ship position is two numbers', () => {
-    expect(testShip.getPositions()[0].row).toEqual(expect.any(Number));
+    test('row is number', () => {
+      expect(testShip.getPositions()[0].row).not.toBeNaN();
+    })
+    test('each space has two coordinates', () => {
+      expect(Object.keys(testShip.getPositions()[0]).length).toBe(2);
     })
     test('creates correct # of positions', () => {
       expect(testShip.getPositions().length).toBe(5);
@@ -39,7 +42,7 @@ describe.skip('makeShips tests', () => {
       expect(testShip.getPositions()[1].row).toEqual(testShip.getPositions()[3].row);
     })
     test('horizontal ship has diff column positions', () => {
-      expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[3].column);
+      expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[2].column);
     })
     test('position is stable', () => {
       expect(testShip.getPositions()).toEqual(testShip.getPositions());

@@ -10,12 +10,21 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test.only('reports all spaces open before armada placement', () => {
+  test('reports all spaces open before armada placement', () => {
     expect(testBoard.findOpenSpaces().length).toBe(100);
   })
   test('marks misses on board', () => {
     testBoard.receiveAttack( { row: 1, column: 2 } );
     expect(testBoard.rows[1][2]).toBe('miss');
+  })
+})
+
+describe('ship placement tests', () => {
+  const testBoard3 = makeBoard.boardFactory();
+  test('places horizontal ship on board', () => {
+  const testShipPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
+  testBoard3.placeShip(testShipPositions);
+  expect(testBoard3.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
   })
 })
 
@@ -31,9 +40,9 @@ describe('armada tests', () => {
     expect(testBoard2.getArmada().length).toBe(5);
   })
   test('armada has 17 positions', () => {
-    expect(testBoard2.getAllShipPositions(testBoard.getArmada()).length).toBe(17);
+    expect(testBoard2.getAllShipPositions(testBoard2.getArmada()).length).toBe(17);
   })
-  test.only('reports 83 open spaces after armada placement', () => {
+  test('reports 83 open spaces after armada placement', () => {
     expect(testBoard2.findOpenSpaces().length).toBe(83);
   })
   test('armada ship hit() works', () => {
@@ -70,14 +79,7 @@ describe('armada tests', () => {
     expect(testBoard2.getArmada()[1].getPositions()[1].row).not.toBeNaN();
     expect(testBoard2.getArmada()[1].getPositions()[1].column).not.toBeNaN();
   })
-  describe('ship placement tests', () => {
-    test('ship has as many positions as length', () => {
-      expect(testBoard2.getArmada()[1].getPositions().length).toStrictEqual(testBoard2.getArmada()[1].size);
-    }) 
-    test('places horizontal ship on board', () => {
-    const testShipPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
-    testBoard2.placeShip(testShipPositions);
-    expect(testBoard2.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
-    })
-  })
+  test('ship has as many positions as length', () => {
+    expect(testBoard2.getArmada()[1].getPositions().length).toStrictEqual(testBoard2.getArmada()[1].size);
+  }) 
 })

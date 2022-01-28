@@ -8,8 +8,10 @@ const player1 = playerFactory(true, 1);
 const player2 = playerFactory(true, 2);
 
 const board1 = boardFactory();
+board1.buildArmada();
+board1.placeArmada();
 const board2 = boardFactory();
 
-displayGame('player1-board', board1.rows);
+displayGame('player1-board', board1.rows, 'private');
 
    

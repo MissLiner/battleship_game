@@ -4,8 +4,12 @@
   margin: auto;
   text-align: center;
 }
+#title {
+  margin-top: 20px;
+}
 #board-container {
   height: 400px;
+  margin-top: 40px;
   width: 400px;
 }
 
@@ -16,17 +20,25 @@
   height: 400px;
   width: 400px;
 }
+.space {
+  border: solid;
+  border-color: white;
+  border-width: 1px;
+  height: 40px;
+  width: 40px;
+}
 .row {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   height: 40px;
   width: 400px;
 }
-.space {
-  border: solid;
-  border-color: white;
-  border-width: 1px;
+.open {
   background-color: mediumblue;
-  height: 40px;
-  width: 40px;
+}
+.missed {
+  background-color: black;
+}
+.hit {
+  background-color: orange;
 }

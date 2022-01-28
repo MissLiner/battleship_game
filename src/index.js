@@ -10,6 +10,6 @@ const player2 = playerFactory(true, 2);
 const board1 = boardFactory();
 const board2 = boardFactory();
 
-displayGame(board1);
+displayGame('player1-board', board1.rows);
 
    

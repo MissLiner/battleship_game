@@ -36,8 +36,8 @@
 .open {
   background-color: mediumblue;
 }
-.missed {
-  background-color: black;
+.miss {
+  background-color: lightseagreen;
 }
 .hit {
   background-color: orange;

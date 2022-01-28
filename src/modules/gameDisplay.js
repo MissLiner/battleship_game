@@ -25,7 +25,7 @@ function displayGame(boardName, boardRows, audience) {
           div.classList.add('ship'); 
         }
         break;
-      case 'missed': div.classList.add('missed');
+      case 'miss': div.classList.add('miss');
         break;
       case 'hit': div.classList.add('hit');
         break;

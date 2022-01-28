@@ -10,7 +10,7 @@ const playerFactory = (isComputer, turn) => {
   }
 
   function makeGuess(board) {
-    const allOpenSpaces = findOpenSpaces(board);
+    const allOpenSpaces = board.findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
     board.receiveAttack(allOpenSpaces[guess]);

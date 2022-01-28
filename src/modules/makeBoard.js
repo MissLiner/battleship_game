@@ -27,7 +27,7 @@ const boardFactory = () => {
     const allOpenSpaces = [];
     for(let i = 0; i < 10; i++) {
       for(let x = 0; x < 10; x++) {
-        if(rows[i][x] === 'open') {
+        if(rows[i][x] === 'open' || rows[i][x] === 'ship') {
           let position = { row: i, column: x };
           allOpenSpaces.push(position);
         }

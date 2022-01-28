@@ -1,4 +1,5 @@
 import { boardFactory } from "./makeBoard"
+
 const playerFactory = (isComputer, turn) => {
   let playerBoard = boardFactory();
   if(isComputer === true) {
@@ -15,6 +16,6 @@ const playerFactory = (isComputer, turn) => {
     board.receiveAttack(allOpenSpaces[guess]);
   }
 
-  return { playerBoard, turn };
+  return { playerBoard, turn, makeGuess };
 }
 export { playerFactory };

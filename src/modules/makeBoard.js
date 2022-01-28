@@ -1,4 +1,4 @@
-import { shipFactory } from './makeShips';
+import { shipFactory } from '../makeShips';
 // refactor position ship to allow players to do it manually
 const boardFactory = () => {
   const rows = [];

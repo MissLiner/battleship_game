@@ -1,5 +1,5 @@
 import './style.css';
-import { boardFactory } from './makeBoard';
+import { boardFactory } from './modules/makeBoard';
 // import { shipFactory } from './makeShips';
 
 const testBoard = boardFactory(10, 10);

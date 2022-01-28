@@ -1,5 +1,5 @@
-const makeBoard = require ('./src/makeBoard');
-const makeShips = require('./src/makeShips');
+const makeBoard = require ('../modules/makeBoard');
+const makeShips = require('../makeShips');
 
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory();

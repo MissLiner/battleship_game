@@ -1,5 +1,5 @@
 
-const makeShips = require('./src/makeShips');
+const makeShips = require('../makeShips');
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeShips tests', () => {

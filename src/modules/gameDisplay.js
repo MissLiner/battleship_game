@@ -1,19 +1,15 @@
 import { boardFactory } from "./makeBoard";
 import { playerFactory } from "./makePlayer";
 import { shipFactory } from "../makeShips";
+import { takeTurn } from "../index";
 
-function displayGame(boardName, boardRows, audience) {
+function displayGame(board, boardRows, audience) {
 
   const boardContainer = document.getElementById('board-container');
-
-  function addSpaces(row, rowNumber) {
-    for(let x = 0; x < 10; x++) {
-      const space = document.createElement('div');
-      space.classList.add('space');
-      row.appendChild(space);
-      displayStatus(space, rowNumber, x)
-    }
+  if(boardContainer.firstChild) {
+    boardContainer.removeChild(boardContainer.firstChild);
   }
+
   function displayStatus(div, row, column) {
     const spaceStatus = boardRows[row][column];
     switch(spaceStatus) {
@@ -31,10 +27,18 @@ function displayGame(boardName, boardRows, audience) {
         break;
     }
   }
+  function addSpaces(row, rowNumber) {
+    for(let x = 0; x < 10; x++) {
+      const space = document.createElement('div');
+      space.classList.add('space');
+      row.appendChild(space);
+      displayStatus(space, rowNumber, x)
+    }
+  }
   function buildBoard() {
     const gameBoard = document.createElement('div');
     gameBoard.classList.add('gameboard');
-    gameBoard.id = boardName;
+    // gameBoard.id = boardName;
     boardContainer.appendChild(gameBoard);
     for(let i = 0; i < 10; i++) {
       const row = document.createElement('div');
@@ -43,8 +47,7 @@ function displayGame(boardName, boardRows, audience) {
       addSpaces(row, i);
       gameBoard.appendChild(row);
     }
-  } // add 'ship' spaces to openspaces for guess
-
-  buildBoard(boardName);
+  }
+  buildBoard(board);
 }
 export { displayGame };

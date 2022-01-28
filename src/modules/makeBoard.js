@@ -1,6 +1,6 @@
 import { shipFactory } from '../makeShips';
 // refactor position ship to allow players to do it manually
-const boardFactory = () => {
+const boardFactory = (isComputer) => {
   const rows = [];
   let hitCounter = 0;
   let armadaStatus = 'afloat';
@@ -8,7 +8,7 @@ const boardFactory = () => {
   const armadaArr = [];
   const allShipPositions = [];
 
-  (function popBoard() {
+  (function popBoard() { 
     for (let i=0; i < 10; i++) {
       let newRow = [];
       rows.push(newRow);
@@ -20,9 +20,12 @@ const boardFactory = () => {
       }
     }
   })()
-  function throwErr() {
-    throw 'gotcha!';
+
+  if(isComputer === true) {
+    buildArmada();
+    placeArmada();
   }
+
   const findOpenSpaces = () => {
     const allOpenSpaces = [];
     for(let i = 0; i < 10; i++) {
@@ -124,7 +127,7 @@ const boardFactory = () => {
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
 
-  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada, getAllShipPositions, findOpenSpaces, throwErr }
+  return { rows, buildArmada, placeShip, placeArmada, checkForDupes, receiveAttack, hitShip, checkIfAllSunk, getArmada, getAllShipPositions, findOpenSpaces }
 }
 
 export { boardFactory } 

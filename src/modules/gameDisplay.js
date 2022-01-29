@@ -29,17 +29,11 @@ function displayGame(board, boardRows, audience) {
   }
   function addSpace(row, rowNumber) {
     for(let x = 0; x < 10; x++) {
-      // if(x === 0) {
-      //   const numberSpace = document.createElement('div');
-      //   numberSpace.textContent = rowNumber;
-      //   numberSpace.classList.add('label-space');
-      //   row.appendChild(numberSpace);
-      // }
       const space = document.createElement('div');
       space.classList.add('space');
-
+      space.dataset.rowCoord = rowNumber;
+      space.dataset.columnCoord = x;
       row.appendChild(space);
-      //const columnNumber = x + 1;
       displayStatus(space, rowNumber, x);
     }
   }

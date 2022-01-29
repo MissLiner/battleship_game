@@ -1,7 +1,8 @@
 
-const shipFactory = (size) => {
+const shipFactory = (name, size, firstPosition, direction) => {
   let status = 'afloat';
   let hits = 0;
+  let positions;
 
   function hit() {
     hits++;
@@ -9,39 +10,8 @@ const shipFactory = (size) => {
       status = 'sunk';
     }
   }
-  function getRandomInt(maxNum) {
-    return Math.floor(Math.random() * (maxNum + 1));
-  }
-  function pickDirection() {
-    const directNum = getRandomInt(1);
-    let direction;
-    if (directNum === 1) {
-      direction = 'horizontal';
-    } else {
-      direction = 'vertical';
-    }
-    return direction;
-  }
-  
-  function pickFirstSpace() {
-    let rowIndex;
-    let columnIndex;
-    let adjustedMax = 9 - size;
-    if (direction === 'horizontal') {
-      rowIndex = getRandomInt(9);
-      columnIndex = getRandomInt(adjustedMax);
-    } else {
-      rowIndex = getRandomInt(adjustedMax);
-      columnIndex = getRandomInt(9);
-    }
-    const position = { row: rowIndex, column: columnIndex };
-    return position;
-  }
-  let positions;
-  let direction;
+
   const positionShip = () => {
-    direction = pickDirection();
-    const firstPosition = pickFirstSpace();
     positions = [ firstPosition ];
     let rowPos = firstPosition.row;
     let colPos = firstPosition.column;
@@ -63,7 +33,7 @@ const shipFactory = (size) => {
   function getDirection() { return direction };
   function getPositions() { return positions };
 
-  return { size, getDirection, hit, getHits, getStatus, positionShip, getPositions, getRandomInt }
+  return { name, size, getDirection, hit, getHits, getStatus, positionShip, getPositions }
 
 }
 export {

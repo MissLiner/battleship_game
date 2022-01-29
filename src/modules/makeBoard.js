@@ -22,19 +22,6 @@ const boardFactory = (isComputer) => {
   })()
 
 
-
-  const findOpenSpaces = () => {
-    const allOpenSpaces = [];
-    for(let i = 0; i < 10; i++) {
-      for(let x = 0; x < 10; x++) {
-        if(rows[i][x] === 'open' || rows[i][x] === 'ship') {
-          let position = { row: i, column: x };
-          allOpenSpaces.push(position);
-        }
-      }
-    }
-    return allOpenSpaces;
-  }
   function checkIfAllSunk(lengthsArr, counter) {
     const shipSpaceTotal = lengthsArr.reduce(function(a, b) {
         return(a + b); 
@@ -76,25 +63,7 @@ const boardFactory = (isComputer) => {
     }
     return false;
   }
-  const buildArmada = () => {
-    for (let i = 0; i < shipLengths.length; i++) {
-      let isDupe = false;
-      const newShip = shipFactory(shipLengths[i]);
-      let dupeCounter = 0;
-      let dupeCheckArr;
-      do {
-        dupeCounter++;
-        newShip.positionShip();
-        dupeCheckArr = allShipPositions.concat(newShip.getPositions());
-        isDupe = checkForDupes(dupeCheckArr);
-      } while(isDupe === true && dupeCounter < 10);
-      if(isDupe === true) { throw dupeCheckArr };
-      for(let position of newShip.getPositions()) {
-        allShipPositions.push(position);
-      }
-      armadaArr.push(newShip);
-    }
-  }
+  
 
   function placeShip(shipPositions) {
     for(let i = 0; i < shipPositions.length; i++) {

@@ -10,11 +10,24 @@ const player2 = playerFactory(true, 2);
 const board1 = boardFactory(true);
 const board2 = boardFactory(true);
 
+let turn = 1;
+let phase = 'setup';
+
 const turnBtn = document.getElementById('turn-btn');
 turnBtn.addEventListener('click', () => takeTurn());
 
+const gameBoardContainer = document.getElementById('gameboard-container');
+gameBoardContainer.addEventListener('click', (e) => {
+  const row = e.target.dataset.rowCoord;
+  const column = e.target.dataset.columnCoord;
+  if(phase === 'setup') {
+    
+  }
+
+})
+
 displayGame(board2, board2.rows, 'public');
-let turn = 1;
+
 
 
 function takeTurn() {

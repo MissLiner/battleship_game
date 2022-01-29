@@ -27,12 +27,20 @@ function displayGame(board, boardRows, audience) {
         break;
     }
   }
-  function addSpaces(row, rowNumber) {
+  function addSpace(row, rowNumber) {
     for(let x = 0; x < 10; x++) {
+      // if(x === 0) {
+      //   const numberSpace = document.createElement('div');
+      //   numberSpace.textContent = rowNumber;
+      //   numberSpace.classList.add('label-space');
+      //   row.appendChild(numberSpace);
+      // }
       const space = document.createElement('div');
       space.classList.add('space');
+
       row.appendChild(space);
-      displayStatus(space, rowNumber, x)
+      //const columnNumber = x + 1;
+      displayStatus(space, rowNumber, x);
     }
   }
   function buildBoard() {
@@ -44,7 +52,8 @@ function displayGame(board, boardRows, audience) {
       const row = document.createElement('div');
       row.classList.add('row');
       row.id = `board-${i}`;
-      addSpaces(row, i);
+
+      addSpace(row, i);
       gameBoard.appendChild(row);
     }
   }

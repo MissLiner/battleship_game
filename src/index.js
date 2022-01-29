@@ -38,4 +38,16 @@ function takeTurn() {
 }
 export { takeTurn };
 
+// TO DO
+// -Allow manual ship placement
+// -Set up game over
+// -Show your own board while hitting other
+// -Show whose turn it is
+
+// -Make ships looks better
+// -Change colors as ships sink / are sunk
+// -Have AI guess near spaces to hit
+// -Create ship classes
+// -Add numbers and letters to board
+
    

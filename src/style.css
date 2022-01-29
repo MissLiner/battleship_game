@@ -8,22 +8,62 @@
   margin-top: 20px;
 }
 #board-container {
-  height: 400px;
+  display: grid;
+  grid-template-columns: repeat(11, 40px);
+  grid-template-rows: repeat(11, 40px);
+  height: 440px;
   margin-top: 40px;
-  width: 400px;
+  width: 440px;
+} 
+#row-number-container { 
+  border: none;
+  background-color: transparent;
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  grid-template-columns:  1fr;
+  grid-template-rows: repeat(11, 1fr);
+  height: 440px;
+  width: 40px;
+}
+.number-space {
+  border: none;
+  background: transparent;
+  display: grid;
+  height: 40px;
+  width: 40px;
+}
+#column-number-container {
+  border: none;
+  background-color: transparent;
+  display: grid;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-template-columns:  repeat(10, 1fr);
+  grid-template-rows: 1fr;
+  height: 40px;
+  width: 440px;
 }
 
 .gameboard {
-  background-color: white;
+  background-color: transparent;
   display: grid;
+  grid-column-start: 2;
+  grid-row-start: 2;
   grid-template-rows: repeat(10, 1fr);
   height: 400px;
-  width: 400px;
+  width: 440px;
 }
 .space {
   border: solid;
   border-color: white;
   border-width: 1px;
+  height: 40px;
+  width: 40px;
+}
+.number-space {
+  border: none;
+  background-color: transparent;
   height: 40px;
   width: 40px;
 }

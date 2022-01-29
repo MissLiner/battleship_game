@@ -4,7 +4,7 @@ const shipFactory = (name, size, firstPosition, direction) => {
   let hits = 0;
   let positions;
 
-  function hit() {
+  const hit = () => {
     hits++;
     if (hits === size) {
       status = 'sunk';

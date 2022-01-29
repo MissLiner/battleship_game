@@ -1,7 +1,8 @@
 import { boardFactory } from "./makeBoard"
 
-const playerFactory = (turn, isComputer, playerBoard) => {
+const playerFactory = (name, isComputer, oppBoard) => {
   const armadaArr = [];
+  const allShipPositions = [];
   const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
 
   function getRandomInt(maxNum) {
@@ -59,7 +60,7 @@ const playerFactory = (turn, isComputer, playerBoard) => {
     const allOpenSpaces = [];
     for(let i = 0; i < 10; i++) {
       for(let x = 0; x < 10; x++) {
-        if(rows[i][x] === 'open' || rows[i][x] === 'ship') {
+        if(oppBoard.rows[i][x] === 'open' || oppBoard.rows[i][x] === 'ship') {
           let position = { row: i, column: x };
           allOpenSpaces.push(position);
         }
@@ -68,13 +69,13 @@ const playerFactory = (turn, isComputer, playerBoard) => {
     return allOpenSpaces;
   }
 
-  function makeGuess(board) {
-    const allOpenSpaces = board.findOpenSpaces();
+  const makeGuess = () => {
+    const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
-    board.receiveAttack(allOpenSpaces[guess]);
+    oppBoard.receiveAttack(allOpenSpaces[guess]);
   }
 
-  return { playerBoard, turn, makeGuess };
+  return { name, armadaArr, makeGuess };
 }
 export { playerFactory };

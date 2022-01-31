@@ -1,7 +1,7 @@
 const makePlayer = require('../modules/makePlayer');
 const makeBoard = require('../modules/makeBoard')
 
-describe('armada tests', () => { 
+describe.skip('armada tests', () => { 
   const oppBoard = makeBoard.boardFactory();
   const testBoard = makeBoard.boardFactory();
   const testAIPlayer = makePlayer.playerFactory('Hal', true, oppBoard);
@@ -48,18 +48,9 @@ describe('armada tests', () => {
     test('assigns initial direction', () => {
       expect(testAIPlayer.getArmada()[2].getDirection()).toBe('horizontal' || 'vertical');
     })
-    // test('row is number', () => {
-    //   expect(testShip.getPositions()[0].row).not.toBeNaN();
-    // })
-    // test('each space has two coordinates', () => {
-    //   expect(Object.keys(testShip.getPositions()[0]).length).toBe(2);
-    // })
-    // test('creates correct # of positions', () => {
-    //   expect(testShip.getPositions().length).toBe(5);
-    // })
-    // test('position is stable', () => {
-    //   expect(testShip.getPositions()).toEqual(testShip.getPositions());
-    // })
+
+
+
     // test('changes position', () => {
     //   const oldPositions = testShip.getPositions();
     //   testShip.positionShip();

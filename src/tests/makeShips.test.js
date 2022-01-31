@@ -6,9 +6,8 @@ const makeBoard = require('../modules/makeBoard')
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeShips tests', () => {
-  const oppBoard = makeBoard.boardFactory();
-  const testPlayer = makePlayer.playerFactory('testPlayer', false, oppBoard);
   const testShip = makeShips.shipFactory('testPlayer', 5, { row: 1, column: 3 }, 'horizontal');
+  testShip.positionShip();
   
   test('ship has size', () => {
     expect(testShip.size).toBe(5);
@@ -20,5 +19,17 @@ describe('makeShips tests', () => {
   test('ship sinks', () => {
     for (let i = 0; i < 4; i++) { testShip.hit(); }
     expect(testShip.getStatus()).toBe('sunk');
+  })
+  test('row is number', () => {
+   expect(testShip.getPositions()[0].row).not.toBeNaN();
+  })
+  test('each space has two coordinates', () => {
+    expect(Object.keys(testShip.getPositions()[0]).length).toBe(2);
+  })
+  test('creates correct # of positions', () => {
+    expect(testShip.getPositions().length).toBe(5);
+  })
+  test('position is stable', () => {
+    expect(testShip.getPositions()).toEqual(testShip.getPositions());
   })
 })

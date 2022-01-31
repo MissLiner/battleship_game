@@ -69,11 +69,9 @@ const playerFactory = (name, isComputer, oppBoard) => {
       do {
         dupeCheckArr = allShipPositions.concat(newShip.getPositions());
         isDupe = checkForDupes(dupeCheckArr);
-        if (isDupe === false) {
-          return;
-        } else {
+        if(isDupe === true) {
           dupeCounter++;
-          newShip = autoPlaceShip();
+          newShip = autoPlaceShip(ships[i]);
         }
       } while(isDupe === true && dupeCounter < 40);
       if(isDupe === true) { throw 'DUPES' + dupeCounter };

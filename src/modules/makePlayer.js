@@ -1,5 +1,5 @@
 import { boardFactory } from "./makeBoard"
-import { shipFactory } from "../makeShips";
+import { shipFactory } from "./makeShips";
 
 const playerFactory = (name, isComputer, oppBoard) => {
   const armadaArr = [];
@@ -7,7 +7,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
   const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
 
   // HUMAN FUNCTIONS
-
+  
 
 
   // AI FUNCTIONS

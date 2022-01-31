@@ -16,13 +16,53 @@ const nameInput = document.getElementById('name-input');
 const nameInputBtn = document.getElementById('name-input-btn');
 
 let player1;
-
+const player2 = playerFactory('Hal', true, board1);
+// should i make value of name a promise, and create player when it is fulfilled?
 nameInputBtn.addEventListener('click', () => {
   const playerName = nameInput.value;
   player1 = playerFactory(playerName, false, board2);
   nameForm.classList.add('hidden');
   gameMessages.textContent = `Hi, ${playerName}, time to place your ships!`
 })
+// take turn
+const gameBoardContainer = document.getElementById('board-container');
+let attacker = player1;
+let defender = player2;
+let currentBoard = board2;
+
+function switchTurn() {
+  if(attacker = player1) { 
+    attacker = player2;
+    defender = player1;
+    currentBoard = board1;
+  }
+  else if(attacker = player2) {  
+    attacker = player1;
+    defender = player2;
+    currentBoard = board2;
+   };
+}
+
+gameBoardContainer.addEventListener('click', (e) => {
+  const row = e.target.dataset.rowCoord;
+  const column = e.target.dataset.columnCoord;
+  const attackCoord = { row: row, column: column};
+  if(phase === 'setup') {
+    return;
+  } else if(phase === 'gameplay') {
+    playGame(currentBoard, attackCoord);
+    player2.makeGuess();
+    switchTurn();
+  }
+
+})
+
+function playGame(board, space) {
+  board.receiveAttack(space);
+  switchTurn();
+  displayGame(currentBoard, currentBoard.rows, 'private');
+}
+
 
 // USE TO RUN THROUGH AUTOMATED GAME
 
@@ -40,15 +80,7 @@ nameInputBtn.addEventListener('click', () => {
 
 
 
-// const gameBoardContainer = document.getElementById('board-container');
-// gameBoardContainer.addEventListener('click', (e) => {
-//   const row = e.target.dataset.rowCoord;
-//   const column = e.target.dataset.columnCoord;
-//   if(phase === 'setup') {
 
-//   }
-
-// })
 
 // function takeTurn() {
 //   console.log(turn);

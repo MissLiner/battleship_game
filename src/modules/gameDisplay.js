@@ -1,6 +1,6 @@
 import { boardFactory } from "./makeBoard";
 import { playerFactory } from "./makePlayer";
-import { shipFactory } from "../makeShips";
+import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
 function displayGame(board, boardRows, audience) {

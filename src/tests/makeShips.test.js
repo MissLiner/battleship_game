@@ -1,5 +1,5 @@
 
-const makeShips = require('../makeShips');
+const makeShips = require('../modules/makeShips');
 const makePlayer = require('../modules/makePlayer');
 const makeBoard = require('../modules/makeBoard')
 

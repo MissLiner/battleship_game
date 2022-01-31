@@ -27,12 +27,12 @@ describe('armada tests', () => {
     expect(testAIPlayer.getArmada()[2].getHits()).toBe(1);
   })
   test('ship doesn\'t sink on first hit',() => {
-    oppBoard.hitShip(testAIPlayer.getArmada()[2].getPositions()[0]);
+    oppBoard.hitShip(testAIPlayer.getArmada()[2].getPositions()[0], testAIPlayer);
     expect(testAIPlayer.getArmada()[2].getStatus()).toBe('afloat');
   })
   test('board sinks ship', () => {
-    oppBoard.hitShip(testAIPlayer.getArmada()[0].getPositions()[0]);
-    oppBoard.hitShip(testAIPlayer.getArmada()[0].getPositions()[1]);
+    oppBoard.hitShip(testAIPlayer.getArmada()[0].getPositions()[0], testAIPlayer);
+    oppBoard.hitShip(testAIPlayer.getArmada()[0].getPositions()[1], testAIPlayer);
     expect(testAIPlayer.getArmada()[0].getStatus()).toBe('sunk');
   })
 
@@ -46,7 +46,7 @@ describe('armada tests', () => {
   })
     //ADD BACK AS AI PLAYER TESTS
     test('assigns initial direction', () => {
-      expect(testAIPlayer.getArmada()[2].direction).toBe('horizontal' || 'vertical');
+      expect(testAIPlayer.getArmada()[2].getDirection()).toBe('horizontal' || 'vertical');
     })
     // test('row is number', () => {
     //   expect(testShip.getPositions()[0].row).not.toBeNaN();

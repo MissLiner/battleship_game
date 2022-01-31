@@ -6,8 +6,9 @@ import { takeTurn } from "../index";
 function displayGame(board, boardRows, audience) {
 
   const boardContainer = document.getElementById('board-container');
-  if(boardContainer.firstChild) {
-    boardContainer.removeChild(boardContainer.firstChild);
+  
+  if(boardContainer.childElementCount === 3) {
+    boardContainer.removeChild(boardContainer.lastChild);
   }
 
   function displayStatus(div, row, column) {
@@ -38,9 +39,9 @@ function displayGame(board, boardRows, audience) {
     }
   }
   function buildBoard() {
+    
     const gameBoard = document.createElement('div');
     gameBoard.classList.add('gameboard');
-    // gameBoard.id = boardName;
     boardContainer.appendChild(gameBoard);
     for(let i = 0; i < 10; i++) {
       const row = document.createElement('div');

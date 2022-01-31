@@ -10,15 +10,18 @@ const board2 = boardFactory();
 const player1 = playerFactory('name', true, board2);
 const player2 = playerFactory('other name', true, board1);
 
+board1.placeArmada(player1.getArmada());
+board2.placeArmada(player2.getArmada());
+
 let turn = 1;
 let phase = 'setup';
 
 const turnBtn = document.getElementById('turn-btn');
 turnBtn.addEventListener('click', () => takeTurn());
 
-displayGame(board2, board2.rows, 'public');
+displayGame(board2, board2.rows, 'private');
 
-const gameBoardContainer = document.getElementById('gameboard-container');
+const gameBoardContainer = document.getElementById('board-container');
 gameBoardContainer.addEventListener('click', (e) => {
   const row = e.target.dataset.rowCoord;
   const column = e.target.dataset.columnCoord;

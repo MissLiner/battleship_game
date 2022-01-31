@@ -4,8 +4,8 @@ const makeBoard = require('../modules/makeBoard')
 describe('armada tests', () => { 
   const oppBoard = makeBoard.boardFactory();
   const testBoard = makeBoard.boardFactory();
-  const testAIPlayer = makePlayer.playerFactory('Hal', true, oppBoard, testBoard);
-  const testAIPlayer2 = makePlayer.playerFactory('Nemsis', true, testBoard, oppBoard);
+  const testAIPlayer = makePlayer.playerFactory('Hal', true, oppBoard);
+  const testAIPlayer2 = makePlayer.playerFactory('Nemesis', true, testBoard);
   testBoard.placeArmada(testAIPlayer.getArmada());
   oppBoard.placeArmada(testAIPlayer2.getArmada());
 
@@ -18,15 +18,12 @@ describe('armada tests', () => {
   test('armada has 17 positions', () => {
     expect(testAIPlayer.getAllShipPositions().length).toBe(17);
   })
-  test('reports 83 open spaces after armada placement', () => {
-    expect(testAIPlayer.findOpenSpaces().length).toBe(83);
-  })
   test('armada ship hit() works', () => {
     testAIPlayer.getArmada()[1].hit();
     expect(testAIPlayer.getArmada()[1].getHits()).toBe(1);
   })
   test('board sends hit to ship',() => {
-    oppBoard.hitShip(testAIPlayer.getArmada()[2].getPositions()[0]);
+    oppBoard.hitShip(testAIPlayer.getArmada()[2].getPositions()[0], testAIPlayer);
     expect(testAIPlayer.getArmada()[2].getHits()).toBe(1);
   })
   test('ship doesn\'t sink on first hit',() => {

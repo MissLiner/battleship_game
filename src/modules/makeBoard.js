@@ -31,12 +31,12 @@ const boardFactory = () => {
     }
   }
 
-  function hitShip(coordinates) {
-    for(let i = 0; i < armadaArr.length; i++) {
-      const positionArray = armadaArr[i].getPositions();
+  function hitShip(coordinates, player) {
+    for(let i = 0; i < player.getArmada().length; i++) {
+      const positionArray = player.getArmada()[i].getPositions();
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === coordinates.row && positionArray[x].column === coordinates.column) {
-          armadaArr[i].hit();
+          player.getArmada()[i].hit();
         }
       }
     }
@@ -63,7 +63,7 @@ const boardFactory = () => {
     }
   }
   
-  return { rows, placeShip, placeArmada, receiveAttack, checkIfAllSunk }
+  return { rows, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
 }
 
 export { boardFactory } 

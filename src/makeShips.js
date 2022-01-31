@@ -2,7 +2,7 @@
 const shipFactory = (name, size, firstPosition, direction) => {
   let status = 'afloat';
   let hits = 0;
-  let positions;
+  const positions = [ firstPosition ];
 
   const hit = () => {
     hits++;
@@ -12,7 +12,6 @@ const shipFactory = (name, size, firstPosition, direction) => {
   }
 
   const positionShip = () => {
-    positions = [ firstPosition ];
     let rowPos = firstPosition.row;
     let colPos = firstPosition.column;
       
@@ -33,7 +32,7 @@ const shipFactory = (name, size, firstPosition, direction) => {
   function getDirection() { return direction };
   function getPositions() { return positions };
 
-  return { name, size, getDirection, hit, getHits, getStatus, positionShip, getPositions }
+  return { name, size, positions, getDirection, hit, getHits, getStatus, positionShip, getPositions }
 
 }
 export {

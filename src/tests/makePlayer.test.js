@@ -3,7 +3,11 @@ const makeBoard = require('../modules/makeBoard')
 
 describe('armada tests', () => { 
   const oppBoard = makeBoard.boardFactory();
-  const testAIPlayer = makePlayer.playerFactory('Hal', true, oppBoard);
+  const testBoard = makeBoard.boardFactory();
+  const testAIPlayer = makePlayer.playerFactory('Hal', true, oppBoard, testBoard);
+  const testAIPlayer2 = makePlayer.playerFactory('Nemsis', true, testBoard, oppBoard);
+  testBoard.placeArmada(testAIPlayer.getArmada());
+  oppBoard.placeArmada(testAIPlayer2.getArmada());
 
   test('armada is an array of objects', () => {
     expect(testAIPlayer.getArmada()[2]).toStrictEqual(expect.any(Object));
@@ -12,7 +16,7 @@ describe('armada tests', () => {
     expect(testAIPlayer.getArmada().length).toBe(5);
   })
   test('armada has 17 positions', () => {
-    expect(testAIPlayer.getAllShipPositions(testAIPlayer.getArmada()).length).toBe(17);
+    expect(testAIPlayer.getAllShipPositions().length).toBe(17);
   })
   test('reports 83 open spaces after armada placement', () => {
     expect(testAIPlayer.findOpenSpaces().length).toBe(83);
@@ -43,3 +47,4 @@ describe('armada tests', () => {
     const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(testAIPlayer.checkForDupes(testArr)).toBe(false);
   })
+})

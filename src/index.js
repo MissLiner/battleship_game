@@ -4,11 +4,11 @@ import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
 // import { shipFactory } from './makeShips';
 
-const player1 = playerFactory(true, 1);
-const player2 = playerFactory(true, 2);
+const board1 = boardFactory();
+const board2 = boardFactory();
 
-const board1 = boardFactory(true);
-const board2 = boardFactory(true);
+const player1 = playerFactory('name', true, board2);
+const player2 = playerFactory('other name', true, board1);
 
 let turn = 1;
 let phase = 'setup';
@@ -16,19 +16,17 @@ let phase = 'setup';
 const turnBtn = document.getElementById('turn-btn');
 turnBtn.addEventListener('click', () => takeTurn());
 
+displayGame(board2, board2.rows, 'public');
+
 const gameBoardContainer = document.getElementById('gameboard-container');
 gameBoardContainer.addEventListener('click', (e) => {
   const row = e.target.dataset.rowCoord;
   const column = e.target.dataset.columnCoord;
   if(phase === 'setup') {
-    
+
   }
 
 })
-
-displayGame(board2, board2.rows, 'public');
-
-
 
 function takeTurn() {
   console.log(turn);

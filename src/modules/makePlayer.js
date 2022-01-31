@@ -1,7 +1,7 @@
 import { boardFactory } from "./makeBoard"
 import { shipFactory } from "../makeShips";
 
-const playerFactory = (name, isComputer, oppBoard, playerBoard) => {
+const playerFactory = (name, isComputer, oppBoard) => {
   const armadaArr = [];
   const allShipPositions = [];
   const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
@@ -64,8 +64,8 @@ const playerFactory = (name, isComputer, oppBoard, playerBoard) => {
         newShip.positionShip();
         dupeCheckArr = allShipPositions.concat(newShip.getPositions());
         isDupe = checkForDupes(dupeCheckArr);
-      } while(isDupe === true && dupeCounter < 10);
-      if(isDupe === true) { throw dupeCheckArr };
+      } while(isDupe === true && dupeCounter < 40);
+      if(isDupe === true) { throw 'DUPES' + dupeCounter };
 
       for(let position of newShip.getPositions()) {
         allShipPositions.push(position);

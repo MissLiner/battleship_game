@@ -24,10 +24,5 @@ describe('ship placement tests', () => {
   testBoard2.placeShip(testHorPositions);
   expect(testBoard2.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'ship', 'ship', 'open', 'open']);
   })
-  test('armada sinks', () => {
-    const testLengthArray = [ 1, 2, 3, 4 ];
-    let testCounter = 10;
-    expect(testBoard2.checkIfAllSunk(testLengthArray, testCounter)).toBe('sunk');
-  })
 })
 

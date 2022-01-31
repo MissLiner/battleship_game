@@ -47,4 +47,31 @@ describe('armada tests', () => {
     const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(testAIPlayer.checkForDupes(testArr)).toBe(false);
   })
+    //ADD BACK AS AI PLAYER TESTS
+    test('assigns initial direction', () => {
+      expect(testAIPlayer.getArmada()[2].direction).toBe('horizontal' || 'vertical');
+    })
+    // test('row is number', () => {
+    //   expect(testShip.getPositions()[0].row).not.toBeNaN();
+    // })
+    // test('each space has two coordinates', () => {
+    //   expect(Object.keys(testShip.getPositions()[0]).length).toBe(2);
+    // })
+    // test('creates correct # of positions', () => {
+    //   expect(testShip.getPositions().length).toBe(5);
+    // })
+    // test('position is stable', () => {
+    //   expect(testShip.getPositions()).toEqual(testShip.getPositions());
+    // })
+    // test('changes position', () => {
+    //   const oldPositions = testShip.getPositions();
+    //   testShip.positionShip();
+    //   expect(testShip.getPositions()).not.toEqual(oldPositions);
+    // })
+    // test('horizontal ship has same row positions', () => {
+    //   expect(testShip.getPositions()[1].row).toEqual(testShip.getPositions()[3].row);
+    // })
+    // test('horizontal ship has diff column positions', () => {
+    //   expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[2].column);
+    // })
 })

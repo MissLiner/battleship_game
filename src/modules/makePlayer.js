@@ -42,6 +42,14 @@ const playerFactory = (name, isComputer, oppBoard) => {
     return position;
   }
 
+  function autoPlaceShip(ship) {
+    const direction = pickDirection();
+    const firstSpace = pickFirstSpace(ship.size, direction);
+    const newShip = shipFactory(ship.name, ship.size, firstSpace, direction);
+    newShip.positionShip();
+    return newShip;
+  }
+
   function checkForDupes(arr) {
     for(let item of arr) {
       const dupes1 = arr.filter(newItem1 => newItem1.row === item.row);
@@ -53,17 +61,20 @@ const playerFactory = (name, isComputer, oppBoard) => {
  
   const autoBuildArmada = () => {
     for (let i = 0; i < ships.length; i++) {
-      let isDupe = false;
-      const direction = pickDirection();
-      const firstSpace = pickFirstSpace(ships[i].size, direction);
-      const newShip = shipFactory(ships[i].name, ships[i].size, firstSpace, direction);
       let dupeCounter = 0;
-      let dupeCheckArr;
+      let dupeCheckArr = [];
+      let isDupe = false;
+      let newShip = autoPlaceShip(ships[i]);
+
       do {
-        dupeCounter++;
-        newShip.positionShip();
         dupeCheckArr = allShipPositions.concat(newShip.getPositions());
         isDupe = checkForDupes(dupeCheckArr);
+        if (isDupe === false) {
+          return;
+        } else {
+          dupeCounter++;
+          newShip = autoPlaceShip();
+        }
       } while(isDupe === true && dupeCounter < 40);
       if(isDupe === true) { throw 'DUPES' + dupeCounter };
 

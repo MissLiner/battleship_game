@@ -1,8 +1,11 @@
 * {
-  background-color:slategrey;
+
   font-family: helvetica, arial, sans-serif;
   margin: auto;
   text-align: center;
+}
+body {
+  background-color:slategrey;
 }
 #title {
   margin-top: 20px;
@@ -55,6 +58,9 @@
   grid-template-rows: repeat(10, 1fr);
   height: 400px;
   width: 400px;
+}
+.hidden {
+  display: none;
 }
 .space {
   border: solid;

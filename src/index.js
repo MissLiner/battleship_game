@@ -6,51 +6,56 @@ import { displayGame } from './modules/gameDisplay';
 
 const board1 = boardFactory();
 const board2 = boardFactory();
+displayGame(board1, board1.rows, 'public');
 
-const player1 = playerFactory('name', true, board2);
-const player2 = playerFactory('other name', true, board1);
 
-board1.placeArmada(player1.getArmada());
-board2.placeArmada(player2.getArmada());
 
-let turn = 1;
-let phase = 'setup';
+// USE TO RUN THROUGH AUTOMATED GAME
 
-const turnBtn = document.getElementById('turn-btn');
-turnBtn.addEventListener('click', () => takeTurn());
+// const player1 = playerFactory('name', true, board2);
+// const player2 = playerFactory('other name', true, board1);
 
-displayGame(board2, board2.rows, 'private');
+// board1.placeArmada(player1.getArmada());
+// board2.placeArmada(player2.getArmada());
 
-const gameBoardContainer = document.getElementById('board-container');
-gameBoardContainer.addEventListener('click', (e) => {
-  const row = e.target.dataset.rowCoord;
-  const column = e.target.dataset.columnCoord;
-  if(phase === 'setup') {
+// const turnBtn = document.getElementById('turn-btn');
+// turnBtn.addEventListener('click', () => takeTurn());
 
-  }
+// let turn = 1;
+// let phase = 'setup';
 
-})
 
-function takeTurn() {
-  console.log(turn);
-  let player;
-  let board;
 
-  if(turn === 1) {
-    player = player1;
-    board = board2;
-  } else {
-    player = player2;
-    board = board1;
-  }
-  displayGame(board, board.rows, 'public');
-  setTimeout(() => {  player.makeGuess(board); }, 2000);
-  setTimeout(() => {  displayGame(board, board.rows, 'private'); }, 2500);
+// const gameBoardContainer = document.getElementById('board-container');
+// gameBoardContainer.addEventListener('click', (e) => {
+//   const row = e.target.dataset.rowCoord;
+//   const column = e.target.dataset.columnCoord;
+//   if(phase === 'setup') {
+
+//   }
+
+// })
+
+// function takeTurn() {
+//   console.log(turn);
+//   let player;
+//   let board;
+
+//   if(turn === 1) {
+//     player = player1;
+//     board = board2;
+//   } else {
+//     player = player2;
+//     board = board1;
+//   }
+//   displayGame(board, board.rows, 'public');
+//   setTimeout(() => {  player.makeGuess(board); }, 2000);
+//   setTimeout(() => {  displayGame(board, board.rows, 'private'); }, 2500);
   
-  if(turn === 1) { turn = 2; } else { turn = 1; };
-  console.log(turn);
-}
-export { takeTurn };
+//   if(turn === 1) { turn = 2; } else { turn = 1; };
+//   console.log(turn);
+// }
+// export { takeTurn };
 
 // TO DO
 // -Allow manual ship placement

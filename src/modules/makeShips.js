@@ -16,8 +16,8 @@ const shipFactory = (name, size, firstPosition, direction) => {
     let colPos = firstPosition.column;
       
     for(let i = 0; i < size - 1; i++) {
-      let newColumn = colPos + 1 + i;
-      let newRow = rowPos + 1 + i;
+      let newColumn = Number(colPos) + 1 + i;
+      let newRow = Number(rowPos) + 1 + i;
       let newPosition;
       if(direction === 'horizontal') {
         newPosition = { row: rowPos, column: newColumn }

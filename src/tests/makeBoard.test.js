@@ -1,7 +1,7 @@
 const makeBoard = require ('../modules/makeBoard');
 const makeShips = require('../modules/makeShips');
 
-describe.skip('makeBoard tests', () => {
+describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory();
 
   test('draws correct number of rows', () => {
@@ -16,7 +16,7 @@ describe.skip('makeBoard tests', () => {
   })
 })
 
-describe.skip('ship placement tests', () => {
+describe('ship placement tests', () => {
   const testBoard2 = makeBoard.boardFactory();
 
   test('places ship on board', () => {

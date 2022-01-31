@@ -5,9 +5,17 @@ const playerFactory = (name, isComputer, oppBoard) => {
   const armadaArr = [];
   const allShipPositions = [];
   const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
+  let shipCounter = 0;
 
   // HUMAN FUNCTIONS
-  
+  function placeShip(firstSpace, direction, counter) {
+    console.log(firstSpace);
+    const newShip = shipFactory(ships[counter].name, ships[counter].size, firstSpace, direction);
+    console.log(newShip);
+    newShip.positionShip();
+    armadaArr.push(newShip);
+    console.log(armadaArr);
+  }
 
 
   // AI FUNCTIONS
@@ -111,6 +119,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
 
-  return { name, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions };
+  return { name, ships, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions };
 }
 export { playerFactory };

@@ -4,6 +4,7 @@ import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
 // import { shipFactory } from './makeShips';
 
+const gameMessages = document.getElementById('game-messages');
 const board1 = boardFactory();
 const board2 = boardFactory();
 
@@ -20,6 +21,7 @@ nameInputBtn.addEventListener('click', () => {
   const playerName = nameInput.value;
   player1 = playerFactory(playerName, false, board2);
   nameForm.classList.add('hidden');
+  gameMessages.textContent = `Hi, ${playerName}, time to place your ships!`
 })
 
 // USE TO RUN THROUGH AUTOMATED GAME

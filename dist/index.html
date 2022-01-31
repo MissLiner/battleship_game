@@ -9,9 +9,13 @@
 
 <body>
   <h1 id="title">Battleship</h1>
-  <div id="game-console">
-    <label id="name-request">Are you ready to play? Just tell me your name:
-      <input type="text" name="name"></label>
+  <div id="game-dialog">
+    <form id="name-form">
+    <label>Are you ready to play? Just tell me your name:
+      <input id="name-input" type="text" name="name" placeholder="Enter name">
+    </label>
+    <input type="button" id="name-input-btn" value="Submit"></button>
+    </form>
   </div>
   <div id="board-container">
     <div id="column-number-container">

@@ -6,9 +6,21 @@ import { displayGame } from './modules/gameDisplay';
 
 const board1 = boardFactory();
 const board2 = boardFactory();
+
 displayGame(board1, board1.rows, 'public');
 
+// create human player
+const nameForm = document.getElementById('name-form');
+const nameInput = document.getElementById('name-input');
+const nameInputBtn = document.getElementById('name-input-btn');
 
+let player1;
+
+nameInputBtn.addEventListener('click', () => {
+  const playerName = nameInput.value;
+  player1 = playerFactory(playerName, false, board2);
+  nameForm.classList.add('hidden');
+})
 
 // USE TO RUN THROUGH AUTOMATED GAME
 

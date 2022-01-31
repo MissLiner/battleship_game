@@ -7,17 +7,17 @@
 body {
   background-color:slategrey;
 }
-#title {
-  margin-top: 20px;
-}
 #board-container {
   display: grid;
   grid-template-columns: repeat(11, 40px);
   grid-template-rows: repeat(11, 40px);
   height: 440px;
-  margin-top: 40px;
+  margin-top: 20px;
   width: 440px;
 } 
+#game-dialog {
+  margin-top: 20px;
+}
 #row-number-container { 
   border: none;
   background-color: transparent;
@@ -29,6 +29,9 @@ body {
   height: 440px;
   line-height: 40px;
   width: 40px;
+}
+#title {
+  margin-top: 20px;
 }
 .number-space {
   border: none;

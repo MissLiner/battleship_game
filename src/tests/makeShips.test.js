@@ -32,4 +32,10 @@ describe('makeShips tests', () => {
   test('position is stable', () => {
     expect(testShip.getPositions()).toEqual(testShip.getPositions());
   })
+  test('horizontal ship has same row positions', () => {
+    expect(testShip.getPositions()[1].row).toEqual(testShip.getPositions()[3].row);
+  })
+  test('horizontal ship has diff column positions', () => {
+    expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[2].column);
+  })
 })

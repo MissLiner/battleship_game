@@ -51,15 +51,5 @@ describe.skip('armada tests', () => {
 
 
 
-    // test('changes position', () => {
-    //   const oldPositions = testShip.getPositions();
-    //   testShip.positionShip();
-    //   expect(testShip.getPositions()).not.toEqual(oldPositions);
-    // })
-    // test('horizontal ship has same row positions', () => {
-    //   expect(testShip.getPositions()[1].row).toEqual(testShip.getPositions()[3].row);
-    // })
-    // test('horizontal ship has diff column positions', () => {
-    //   expect(testShip.getPositions()[1].column).not.toEqual(testShip.getPositions()[2].column);
-    // })
+
 })

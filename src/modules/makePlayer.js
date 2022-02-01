@@ -17,9 +17,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     console.log(armadaArr);
   }
 
-
   // AI FUNCTIONS
-
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
   }

@@ -93,3 +93,9 @@ body {
 .hit {
   background-color: orange;
 }
+.ship {
+  background-color: violet;
+}
+.active {
+  background-color: yellowgreen !important;
+}

@@ -42,33 +42,38 @@ let phase = 'none';
 let activeSpace;
 
 gameBoardContainer.addEventListener('click', (e) => {
-  const row = e.target.dataset.rowCoord;
-  const column = e.target.dataset.columnCoord;
-  activeSpace = { row: Number(row), column: Number(column)};
-
+  if(activeSpace) {
+    activeSpace.classList.remove('active');
+  }
+  activeSpace = e.target;
+  activeSpace.classList.add('active');
 })
+
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
-
       return directionInputs[i].value;
     }
   }
 }
+
 let shipCounter = 0;
 submitShipBtn.addEventListener('click', () => {
   const direction = radioValue();
   if(activeSpace) {
-    console.log(activeSpace);
-    console.log(direction);
-    console.log(shipCounter);
-    player1.placeShip(activeSpace, direction, shipCounter);
+    const row = activeSpace.dataset.rowCoord;
+    const column = activeSpace.dataset.columnCoord;
+    const coord = { row: Number(row), column: Number(column)};
+    player1.placeShip(coord, direction, shipCounter);
     shipCounter++;
+    activeSpace.classList.remove('active');
   }
-  if(shipCounter > 3) {
+  if(shipCounter > 4) {
     phase = 'gameplay';
+    shipMessages.classList.add('hidden');
     positionForm.classList.add('hidden');
     shipCounter = 0;
+    gameMessages.textContent = `${attacker.name}, time for a battle at sea! Choose your first target.`;
   }
   board1.placeArmada(player1.getArmada());
   displayGame(board1, board1.rows, 'private');

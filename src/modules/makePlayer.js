@@ -99,7 +99,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const allOpenSpaces = [];
     for(let i = 0; i < 10; i++) {
       for(let x = 0; x < 10; x++) {
-        if(oppBoard.rows[i][x] === 'open' || oppBoard.rows[i][x] === 'ship') {
+        if(oppBoard.rows[i][x] !== 'miss') {
           let position = { row: i, column: x };
           allOpenSpaces.push(position);
         }

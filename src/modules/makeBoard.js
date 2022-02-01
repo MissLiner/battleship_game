@@ -17,17 +17,17 @@ const boardFactory = () => {
     }
   })()
 
-  function placeShip(shipPositions) {
+  function placeShip(shipPositions, name) {
     for(let i = 0; i < shipPositions.length; i++) {
       const rowPos = shipPositions[i].row;
       const colPos = shipPositions[i].column;
-      rows[rowPos][colPos] = 'ship';
+      rows[rowPos][colPos] = name;
     }
   }
 
   const placeArmada = (armadaArr) => {
     for (let ship of armadaArr) {
-      placeShip(ship.getPositions());
+      placeShip(ship.getPositions(), ship.name);
     }
   }
 

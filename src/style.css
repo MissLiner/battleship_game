@@ -93,9 +93,21 @@ body {
 .hit {
   background-color: orange;
 }
-.ship {
-  background-color: violet;
-}
 .active {
   background-color: yellowgreen !important;
+}
+.Destroyer {
+  background-color: violet;
+}
+.Submarine {
+  background-color:mediumseagreen;
+}
+.Cruiser {
+  background-color:mediumslateblue;
+}
+.Battleship {
+  background-color:lightsalmon;
+}
+.Carrier {
+  background-color:darkcyan;
 }

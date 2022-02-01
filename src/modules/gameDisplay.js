@@ -13,21 +13,30 @@ function displayGame(board, boardRows, audience) {
 
   function displayStatus(div, row, column) {
     const spaceStatus = boardRows[row][column];
-    switch(spaceStatus) {
-      case 'open': div.classList.add('open');
-        break;
-      case 'ship': if(audience === 'public') {
-          div.classList.add('open'); 
-        } else if(audience === 'private') {
-          div.classList.add('ship'); 
-        }
-        break;
-      case 'miss': div.classList.add('miss');
-        break;
-      case 'hit': div.classList.add('hit');
-        break;
+    if(audience === 'private') {
+      div.classList.add(spaceStatus);
+    } else {
+      if(spaceStatus === 'open' || spaceStatus === 'miss' || spaceStatus === 'hit') {
+        div.classList.add(spaceStatus);
+      } else {
+        div.classList.add('open');
+      }
     }
-  }
+    
+    // switch(spaceStatus) {
+    //   case 'open': div.classList.add('open');
+    //     break;
+    //   case 'miss': div.classList.add('miss');
+    //     break;
+    //   case 'hit': div.classList.add('hit');
+    //     break;
+    //   case 'ship': if(audience === 'public') {
+    //     div.classList.add('open'); 
+    //   } else if(audience === 'private') {
+    //     div.classList.add('ship'); 
+    //   }
+    //   break;
+    }
   function addSpace(row, rowNumber) {
     for(let x = 0; x < 10; x++) {
       const space = document.createElement('div');

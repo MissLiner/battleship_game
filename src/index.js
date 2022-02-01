@@ -22,10 +22,8 @@ const player2 = playerFactory('Hal', true, board1);
 const gameBoardContainer = document.getElementById('board-container');
 
 
-//place ships
+// CREATE PLAYER 1
 const positionForm = document.getElementById('position-form');
-const submitShipBtn = document.getElementById('submit-ship-btn');
-const directionInputs = document.getElementsByName('direction');
 
 nameInputBtn.addEventListener('click', () => {
   const playerName = nameInput.value;
@@ -35,11 +33,17 @@ nameInputBtn.addEventListener('click', () => {
   shipMessages.textContent = `This ship is a ${player1.ships[0].name}, and it's ${player1.ships[0].size} spaces long. Pick a direction and the first space.`
   positionForm.classList.remove('hidden');
 })
+
+// PLACE PLAYER 1 SHIPS
 let attacker = player1;
 let defender = player2;
 let currentBoard = board2;
 let phase = 'none';
 let activeSpace;
+
+board1.placeArmada(player1.getArmada());
+displayGame(board1, board1.rows, 'private');
+shipMessages.textContent = `This ship is a ${player1.ships[shipCounter].name}, and it's ${player1.ships[shipCounter].size} spaces long. Pick a direction and the first space.`
 
 gameBoardContainer.addEventListener('click', (e) => {
   if(activeSpace) {
@@ -49,6 +53,7 @@ gameBoardContainer.addEventListener('click', (e) => {
   activeSpace.classList.add('active');
 })
 
+const directionInputs = document.getElementsByName('direction');
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
@@ -57,6 +62,7 @@ function radioValue() {
   }
 }
 
+const submitShipBtn = document.getElementById('submit-ship-btn');
 let shipCounter = 0;
 submitShipBtn.addEventListener('click', () => {
   const direction = radioValue();
@@ -75,12 +81,9 @@ submitShipBtn.addEventListener('click', () => {
     shipCounter = 0;
     gameMessages.textContent = `${attacker.name}, time for a battle at sea! Choose your first target.`;
   }
-  board1.placeArmada(player1.getArmada());
-  displayGame(board1, board1.rows, 'private');
-  shipMessages.textContent = `This ship is a ${player1.ships[shipCounter].name}, and it's ${player1.ships[shipCounter].size} spaces long. Pick a direction and the first space.`
 })
 
-// take turn
+// TAKE TURN
 
 function switchTurn() {
   if(attacker = player1) { 

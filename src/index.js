@@ -1,3 +1,5 @@
+//fix attacker / playername issue so it reads the correct objects
+
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
@@ -19,33 +21,35 @@ const nameInputBtn = document.getElementById('name-input-btn');
 let player1;
 const player2 = playerFactory('Hal', true, board1);
 
-let attacker = player1;
-let defender = player2;
-let currentBoard = board1;
+let player1turn = true;
 let phase = 'none';
 let activeSpace;
 
 // should i make value of name a promise, and create player when it is fulfilled?
 const gameBoardContainer = document.getElementById('board-container');
 
-
 // CREATE PLAYER 1
 const positionForm = document.getElementById('position-form');
 
+function showPlacementDialog(player, shipNumber) {
+  gameMessages.textContent = `Hi, ${player.name}, time to place your ships!`;
+  shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
+}
+
 nameInputBtn.addEventListener('click', () => {
-  const playerName = nameInput.value;
-  if(attacker === player1) {
-    player1 = playerFactory(playerName, false, board2);
-    attacker = player1;
-  }
-  if(playerName !== null) {
-    gameMessages.textContent = `Hi, ${playerName}, time to place your ships!`;
-    shipMessages.textContent = `This ship is a ${attacker.ships[0].name}, and it's ${attacker.ships[0].size} spaces long. Pick a direction and the first space.`
-    positionForm.classList.remove('hidden');
-    nameForm.classList.add('hidden');
-  } else {
+  if(nameInput.value === null) {
     gameMessages.textContent = 'Please tell me, what should I call you?';
+    return;
   }
+  else if(player1turn = true) {
+    player1 = playerFactory(nameInput.value, false, board2);
+    showPlacementDialog(player1, 0);
+  } else {
+    player2 = playerFactory(nameInput.value, false, board1);
+    showPlacementDialog(player2, 0);
+  }
+  positionForm.classList.remove('hidden');
+  nameForm.classList.add('hidden');
 })
 
 // PLACE PLAYER 1 SHIPS
@@ -68,50 +72,62 @@ gameBoardContainer.addEventListener('click', (e) => {
 })
 
 const submitBtn = document.getElementById('submit-btn');
-let shipCounter = 0;
+let shipCounter = 1;
 
 submitBtn.addEventListener('click', () => {
   const row = activeSpace.dataset.rowCoord;
   const column = activeSpace.dataset.columnCoord;
   const coord = { row: Number(row), column: Number(column)};
 
+  let currentPlayer;
+  if(player1turn === true) {
+    currentPlayer = player1;
+  } else {
+    currentPlayer = player2;
+  }
+
+  let myBoard;
+  let yourBoard;
+  
+  if(player1turn === true) {
+    myBoard = board1;
+    yourBoard = board2;
+  } else {
+    myBoard = board2;
+    yourBoard = board2;
+  }
   if(phase = 'setup') {
     const direction = radioValue();
     if(activeSpace) {
-      attacker.placeShip(coord, direction, shipCounter);
       shipCounter++;
+      currentPlayer.placeShip(coord, direction, shipCounter);
       activeSpace.classList.remove('active');
-      shipMessages.textContent = `This ship is a ${attacker.ships[shipCounter].name}, and it's ${attacker.ships[shipCounter].size} spaces long. Pick a direction and the first space.`;
-      displayGame(currentBoard, currentBoard.rows, 'private');
+      showPlacementDialog(currentPlayer, shipCounter);
+      displayGame(myBoard, myBoard.rows, 'private');
     }
     if(shipCounter > 4) {
+      shipCounter = 1;
       phase = 'gameplay';
       shipMessages.classList.add('hidden');
       positionForm.classList.add('hidden');
-      shipCounter = 0;
-      gameMessages.textContent = `${attacker.name}, time for a battle at sea! Choose your first target.`;
-      if(currentBoard === board1) {
-        currentBoard = board2;
-      } 
-      else if(currentBoard === board2) {
-        currentBoard = board1;
-      }
-      displayGame(currentBoard, currentBoard.rows, 'public');
+      gameMessages.textContent = `${currentPlayer.name}, time for a battle at sea! Choose your first target.`;
+      displayGame(yourBoard, yourBoard.rows, 'public');
     }
   } 
   // TAKE TURN
   else if(phase === 'gameplay') {
-    currentBoard.receiveAttack(activeSpace);
+    yourBoard.receiveAttack(activeSpace);
+    displayGame(yourBoard, yourBoard.rows, 'public');
     switchTurn();
-    checkIfAITurn();
+    checkIfAITurn(currentPlayer);
   }
 })
 
-function checkIfAITurn() {
+function checkIfAITurn(otherPlayer) {
   if(attacker.isComputer === true) {
     gameMessages.textContent = 'It\'s Hal\'s turn!'
     takeAITurn()
-    .then(gameMessages.textContent = `Back to you, ${attacker.name}, choose wisely!`);
+    .then(gameMessages.textContent = `Back to you, ${otherPlayer.name}, choose wisely!`);
   } else {
     return;
   }
@@ -123,18 +139,16 @@ function takeAITurn() {
   setTimeout(() => { switchTurn(); }, 6000);
 }
 
+let turnCounter1 = 0;
+let turnCounter2 = 0;
 function switchTurn() {
-  if(attacker = player1) { 
-    attacker = player2;
-    defender = player1;
-    currentBoard = board1;
+  if(player1turn === true) { 
+    player1turn = false;
+    turnCounter1++;
+  } else {  
+    player1turn = true;
+    turnCounter2++;
   }
-  else if(attacker = player2) {  
-    attacker = player1;
-    defender = player2;
-    currentBoard = board2;
-  }
-  displayGame(currentBoard, currentBoard.rows, 'public');
 }
 
 // USE TO RUN THROUGH AUTOMATED GAME

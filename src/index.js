@@ -1,9 +1,18 @@
 //fix gameplay so the right board and previous attacks are showing, and AI takes the right amount of time and shows its work
+// should i make value of name a promise, and create player when it is fulfilled?
+// TO DO
+// -Set up game over
+// -Show your own board while hitting other
+// -Show whose turn it is
+
+// -Change colors as ships sink / are sunk
+// -Have AI guess near spaces to hit
 
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
+
 //DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
 const shipMessages = document.getElementById('ship-messages');
@@ -14,6 +23,7 @@ const gameBoardContainer = document.getElementById('board-container');
 const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
+
 //GAMEPLAY VARIABLES
 let board1 = boardFactory();
 let board2 = boardFactory();
@@ -25,6 +35,7 @@ let activeSpace;
 let shipCounter = 0;
 let turnCounter1 = 0;
 let turnCounter2 = 0;
+
 //BASIC FUNCTIONS
 function hide(elem) {
   elem.classList.add('hidden');
@@ -55,7 +66,6 @@ function switchTurn() {
     turnCounter2++;
   }
 }
-
 function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
     gameMessages.textContent = `It\'s ${player.name}\'s turn!`
@@ -65,15 +75,6 @@ function checkIfAITurn(player, opponent) {
     return;
   }
 }
-// = playerFactory('Hal', true, board1);
-// board2.placeArmada(player2.getArmada());
-
-displayGame(board1, board1.rows, 'public');
-
-// should i make value of name a promise, and create player when it is fulfilled?
-
-
-// CREATE PLAYER 1
 function showPlacementDialog(player, shipNumber) {
   let order;
   switch(shipNumber) {
@@ -92,6 +93,15 @@ function showPlacementDialog(player, shipNumber) {
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
 }
 
+//CREATE COMPUTER PLAYER2
+player2 = playerFactory('Hal', true, board1);
+board2.placeArmada(player2.getArmada());
+
+displayGame(board1, board1.rows, 'public');
+
+// CREATE HUMAN PLAYER1
+
+
 nameInputBtn.addEventListener('click', () => {
   if(nameInput.value === null) {
     gameMessages.textContent = 'Please tell me, what should I call you?';
@@ -108,8 +118,7 @@ nameInputBtn.addEventListener('click', () => {
   hide(nameForm);
 })
 
-// PLACE PLAYER 1 SHIPS
-
+// PLACE PLAYER1 SHIPS
 gameBoardContainer.addEventListener('click', (e) => {
   toggleActive(e.target);
 })
@@ -173,23 +182,3 @@ submitBtn.addEventListener('click', () => {
     definePlayers();
   }
 })
-
-
-
-
-
-
-
-// TO DO
-// -Allow manual ship placement
-// -Set up game over
-// -Show your own board while hitting other
-// -Show whose turn it is
-
-// -Make ships looks better
-// -Change colors as ships sink / are sunk
-// -Have AI guess near spaces to hit
-// -Create ship classes
-// -Add numbers and letters to board
-
-   

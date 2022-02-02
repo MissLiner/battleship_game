@@ -82,22 +82,25 @@ submitBtn.addEventListener('click', () => {
   const coord = { row: Number(row), column: Number(column)};
 
   let currentPlayer;
-  if(player1turn === true) {
-    currentPlayer = player1;
-  } else {
-    currentPlayer = player2;
-  }
-
+  let otherPlayer;
   let myBoard;
   let yourBoard;
-  
-  if(player1turn === true) {
-    myBoard = board1;
-    yourBoard = board2;
-  } else {
-    myBoard = board2;
-    yourBoard = board2;
+
+  function definePlayers() {
+    if (player1turn === true) {
+      currentPlayer = player1;
+      otherPlayer = player2;
+      myBoard = board1;
+      yourBoard = board2;
+    } else {
+      currentPlayer = player2;
+      otherPlayer = player1;
+      myBoard = board2;
+      yourBoard = board2;
+    }
   }
+  definePlayers();
+  
   if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();
     if(activeSpace) {
@@ -126,24 +129,27 @@ submitBtn.addEventListener('click', () => {
     yourBoard.receiveAttack(activeSpace);
     displayGame(yourBoard, yourBoard.rows, 'public');
     switchTurn();
-    checkIfAITurn(currentPlayer);
-    gameMessages.textContent = `${currentPlayer}, your turn!`
+    definePlayers();
+    displayGame(yourBoard, yourBoard.rows, 'public');
+    checkIfAITurn(currentPlayer, otherPlayer);
+    definePlayers();
   }
 })
 
-function checkIfAITurn(otherPlayer) {
-  if(attacker.isComputer === true) {
+function checkIfAITurn(player, opponent) {
+  if(player.isComputer === true) {
     gameMessages.textContent = 'It\'s Hal\'s turn!'
-    takeAITurn()
-    .then(gameMessages.textContent = `Back to you, ${otherPlayer.name}, choose wisely!`);
+    const turnPromise = new Promise(takeAITurn(player));
+    turnPromise
+      .then(() => gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`)
+      .then(() => switchTurn())
   } else {
     return;
   }
 }
-
-function takeAITurn() {
-  setTimeout(() => {  attacker.makeGuess(); }, 2000);
-  setTimeout(() => {  displayGame(currentBoard, currentBoard.rows, 'private'); }, 4000);
+function takeAITurn(player) {
+  setTimeout(() => {  player.makeGuess(); }, 2000);
+  setTimeout(() => {  displayGame(player.oppBoard, player.oppBoard.rows, 'private'); }, 4000);
   setTimeout(() => { switchTurn(); }, 6000);
 }
 

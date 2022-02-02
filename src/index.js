@@ -24,18 +24,39 @@ const gameDisplayBox = document.getElementById('game-display-box');
 const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
+const armadaBtn = document.getElementById('armada-btn');
 
 //GAMEPLAY VARIABLES
 let board1 = boardFactory();
 let board2 = boardFactory();
 let player1;
 let player2;
-let player1turn = true;
+
 let phase = 'setup';
 let activeSpace;
 let shipCounter = 0;
+let player1turn = true;
 let turnCounter1 = 0;
 let turnCounter2 = 0;
+
+let currentPlayer;
+let otherPlayer;
+let myBoard;
+let yourBoard;
+
+function definePlayers() {
+  if (player1turn === true) {
+    currentPlayer = player1;
+    otherPlayer = player2;
+    myBoard = board1;
+    yourBoard = board2;
+  } else {
+    currentPlayer = player2;
+    otherPlayer = player1;
+    myBoard = board2;
+    yourBoard = board2;
+  }
+}
 
 //BASIC FUNCTIONS
 function hide(elem) {
@@ -83,6 +104,7 @@ function showPlacementDialog(player, shipNumber) {
     case 0: order = 'first';
     break;
     case 1: order = 'second';
+      hide(armadaBtn);
     break;
     case 2: order = 'third';
     break;
@@ -102,8 +124,6 @@ board2.placeArmada(player2.getArmada());
 displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
-
-
 nameInputBtn.addEventListener('click', () => {
   if(nameInput.value === null) {
     gameMessages.textContent = 'Please tell me, what should I call you?';
@@ -116,11 +136,18 @@ nameInputBtn.addEventListener('click', () => {
     player2 = playerFactory(nameInput.value, false, board1);
     showPlacementDialog(player2, 0);
   }
+  definePlayers();
   show(positionForm);
   hide(nameForm);
 })
 
 // PLACE PLAYER1 SHIPS
+armadaBtn.addEventListener('click', () => {
+  currentPlayer.autoBuildArmada();
+  myBoard.placeArmada(currentPlayer.getArmada());
+  displayGame(board1, board2);
+})
+
 gameDisplayBox.addEventListener('click', (e) => {
   if(e.target.classList.contains('space')) {
     if(!e.target.classList.contains('miss')) {
@@ -137,26 +164,6 @@ submitBtn.addEventListener('click', () => {
   let column = activeSpace.dataset.columnCoord;
   column = Number(column);
   const coord = { row: row, column: column};
-
-  let currentPlayer;
-  let otherPlayer;
-  let myBoard;
-  let yourBoard;
-
-  function definePlayers() {
-    if (player1turn === true) {
-      currentPlayer = player1;
-      otherPlayer = player2;
-      myBoard = board1;
-      yourBoard = board2;
-    } else {
-      currentPlayer = player2;
-      otherPlayer = player1;
-      myBoard = board2;
-      yourBoard = board2;
-    }
-  }
-  definePlayers();
 
   if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();

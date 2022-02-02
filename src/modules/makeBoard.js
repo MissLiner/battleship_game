@@ -42,10 +42,11 @@ const boardFactory = () => {
     }
   }
 
-  const receiveAttack = (coordinates) => {
-    const row = coordinates.row;
-    const column = coordinates.column;
-
+  const receiveAttack = (space) => {
+    const row = space.dataset.rowCoord;
+    const column = space.dataset.columnCoord;
+    console.log(row);
+    console.log(column);
     switch(rows[row][column]) {
       case 'open': rows[row][column] = 'miss';
         break;

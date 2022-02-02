@@ -11,6 +11,7 @@ const shipMessages = document.getElementById('ship-messages');
 let board1 = boardFactory();
 let board2 = boardFactory();
 
+
 displayGame(board1, board1.rows, 'public');
 
 // create human player
@@ -20,9 +21,10 @@ const nameInputBtn = document.getElementById('name-input-btn');
 
 let player1;
 const player2 = playerFactory('Hal', true, board1);
+board2.placeArmada(player2.getArmada());
 
 let player1turn = true;
-let phase = 'none';
+let phase = 'setup';
 let activeSpace;
 
 // should i make value of name a promise, and create player when it is fulfilled?
@@ -72,7 +74,7 @@ gameBoardContainer.addEventListener('click', (e) => {
 })
 
 const submitBtn = document.getElementById('submit-btn');
-let shipCounter = 1;
+let shipCounter = 0;
 
 submitBtn.addEventListener('click', () => {
   const row = activeSpace.dataset.rowCoord;
@@ -96,32 +98,36 @@ submitBtn.addEventListener('click', () => {
     myBoard = board2;
     yourBoard = board2;
   }
-  if(phase = 'setup') {
+  if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();
     if(activeSpace) {
-      shipCounter++;
       const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
-      console.log(myBoard.rows);
       activeSpace.classList.remove('active');
-      showPlacementDialog(currentPlayer, shipCounter);
       displayGame(myBoard, myBoard.rows, 'private');
+      shipCounter++;
+      if(shipCounter < 5) {
+        showPlacementDialog(currentPlayer, shipCounter);
+      } else {
+        shipMessages.classList.add('hidden');
+        positionForm.classList.add('hidden');
+        gameMessages.textContent = 'Are you ready to play? Click Submit to lock in your choices.';
+      }
     }
-    if(shipCounter > 4) {
-      shipCounter = 1;
-      phase = 'gameplay';
-      shipMessages.classList.add('hidden');
-      positionForm.classList.add('hidden');
-      gameMessages.textContent = `${currentPlayer.name}, time for a battle at sea! Choose your first target.`;
-      displayGame(yourBoard, yourBoard.rows, 'public');
-    }
-  } 
+  }
+  else if(phase === 'setup' && shipCounter > 4) {
+    shipCounter = 0;
+    phase = 'gameplay';
+    gameMessages.textContent = `${currentPlayer.name}, time for a battle at sea! Choose your first target.`;
+    displayGame(yourBoard, yourBoard.rows, 'public');
+  }
   // TAKE TURN
   else if(phase === 'gameplay') {
     yourBoard.receiveAttack(activeSpace);
     displayGame(yourBoard, yourBoard.rows, 'public');
     switchTurn();
     checkIfAITurn(currentPlayer);
+    gameMessages.textContent = `${currentPlayer}, your turn!`
   }
 })
 

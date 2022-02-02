@@ -9,12 +9,12 @@ const playerFactory = (name, isComputer, oppBoard) => {
 
   // HUMAN FUNCTIONS
   function placeShip(firstSpace, direction, counter) {
-    console.log(firstSpace);
+    // console.log(firstSpace);
     const newShip = shipFactory(ships[counter].name, ships[counter].size, firstSpace, direction);
-    console.log(newShip);
+    // console.log(newShip);
     newShip.positionShip();
     armadaArr.push(newShip);
-    console.log(armadaArr);
+    return newShip;
   }
 
   // AI FUNCTIONS

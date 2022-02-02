@@ -100,7 +100,9 @@ submitBtn.addEventListener('click', () => {
     const direction = radioValue();
     if(activeSpace) {
       shipCounter++;
-      currentPlayer.placeShip(coord, direction, shipCounter);
+      const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
+      myBoard.drawShip(newShip.getPositions(), newShip.name);
+      console.log(myBoard.rows);
       activeSpace.classList.remove('active');
       showPlacementDialog(currentPlayer, shipCounter);
       displayGame(myBoard, myBoard.rows, 'private');

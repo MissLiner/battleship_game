@@ -17,7 +17,7 @@ const boardFactory = () => {
     }
   })()
 
-  function placeShip(shipPositions, name) {
+  function drawShip(shipPositions, name) {
     for(let i = 0; i < shipPositions.length; i++) {
       const rowPos = shipPositions[i].row;
       const colPos = shipPositions[i].column;
@@ -27,7 +27,7 @@ const boardFactory = () => {
 
   const placeArmada = (armadaArr) => {
     for (let ship of armadaArr) {
-      placeShip(ship.getPositions(), ship.name);
+      drawShip(ship.getPositions(), ship.name);
     }
   }
 
@@ -63,7 +63,7 @@ const boardFactory = () => {
     }
   }
   
-  return { rows, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
+  return { rows, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
 }
 
 export { boardFactory } 

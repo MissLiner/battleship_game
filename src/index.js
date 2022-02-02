@@ -92,6 +92,7 @@ function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
     gameMessages.textContent = `It\'s ${player.name}\'s turn!`
     player.takeAITurn(opponent);
+    switchTurn();
     displayGame(board1, board2);
     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
@@ -169,7 +170,7 @@ submitBtn.addEventListener('click', () => {
   let row;
   let column;
   let coord;
-  
+
   if(activeSpace) {
     row = activeSpace.dataset.rowCoord;
     row = Number(row);

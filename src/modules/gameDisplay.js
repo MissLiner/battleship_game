@@ -4,12 +4,12 @@ import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
 function displayGame(board1, board2) {
-  console.log(board1.rows);
+  //console.log(board1.rows);
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
   
   function displayBoard(board, boardBox, audience) {
-    console.log(board.rows);
+    //console.log(board.rows);
     if(boardBox.childElementCount === 3) {
       boardBox.removeChild(boardBox.lastChild);
     }

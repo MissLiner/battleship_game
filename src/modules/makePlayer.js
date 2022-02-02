@@ -95,7 +95,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const allOpenSpaces = [];
     for(let i = 0; i < 10; i++) {
       for(let x = 0; x < 10; x++) {
-        if(oppBoard.rows[i][x] !== 'miss') {
+        if(oppBoard.rows[i][x] !== 'miss' && oppBoard.rows[i][x] !== 'hit') {
           let position = { row: i, column: x };
           allOpenSpaces.push(position);
         }
@@ -108,6 +108,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
+    console.log(allOpenSpaces[guess]);
     oppBoard.receiveAttack(allOpenSpaces[guess], oppPlayer);
   }
   const takeAITurn = (oppPlayer) => {

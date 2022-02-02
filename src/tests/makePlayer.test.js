@@ -1,6 +1,8 @@
 const makePlayer = require('../modules/makePlayer');
 const makeBoard = require('../modules/makeBoard')
 
+import { mockRandom, resetMockRandom } from 'jest-mock-random';
+
 describe('armada tests', () => { 
   const oppBoard = makeBoard.boardFactory();
   const testBoard = makeBoard.boardFactory();
@@ -44,9 +46,10 @@ describe('armada tests', () => {
     const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(testAIPlayer.checkForDupes(testArr)).toBe(false);
   })
-    //ADD BACK AS AI PLAYER TESTS
     test('assigns initial direction', () => {
-      expect(testAIPlayer.getArmada()[2].getDirection()).toBe('horizontal' || 'vertical');
+      mockRandom(0.1);
+      expect(testAIPlayer.getArmada()[2].getDirection()).toBe();
+      resetMockRandom();
     })
 
 

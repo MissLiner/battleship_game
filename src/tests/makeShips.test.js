@@ -3,7 +3,6 @@ const makeShips = require('../modules/makeShips');
 const makePlayer = require('../modules/makePlayer');
 const makeBoard = require('../modules/makeBoard')
 
-import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, { row: 1, column: 3 }, 'horizontal');

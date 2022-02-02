@@ -110,12 +110,17 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const guess = getRandomInt(maxNum);
     oppBoard.receiveAttack(allOpenSpaces[guess]);
   }
+  const takeAITurn = () => {
+    setTimeout(() => {  makeGuess(); }, 2000);
+    // setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
+    // setTimeout(() => { switchTurn(); }, 6000);
+  }
 
   //GETTERS
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
 
-  return { name, getShips, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer };
+  return { name, getShips, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeAITurn };
 }
 export { playerFactory };

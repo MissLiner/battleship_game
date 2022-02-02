@@ -4,8 +4,7 @@ import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
-// import { shipFactory } from './makeShips';
-
+//DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
 const shipMessages = document.getElementById('ship-messages');
 const nameForm = document.getElementById('name-form');
@@ -15,7 +14,7 @@ const gameBoardContainer = document.getElementById('board-container');
 const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
-
+//GAMEPLAY VARIABLES
 let board1 = boardFactory();
 let board2 = boardFactory();
 let player1;
@@ -26,7 +25,7 @@ let activeSpace;
 let shipCounter = 0;
 let turnCounter1 = 0;
 let turnCounter2 = 0;
-
+//BASIC FUNCTIONS
 function hide(elem) {
   elem.classList.add('hidden');
 }
@@ -56,15 +55,11 @@ function switchTurn() {
     turnCounter2++;
   }
 }
-function takeAITurn(player, oppBoard) {
-  setTimeout(() => {  player.makeGuess(); }, 2000);
-  setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
-  setTimeout(() => { switchTurn(); }, 6000);
-}
-function checkIfAITurn(player, opponent, oppBoard) {
+
+function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
-    gameMessages.textContent = 'It\'s Hal\'s turn!'
-    takeAITurn(player, oppBoard);
+    gameMessages.textContent = `It\'s ${player.name}\'s turn!`
+    takeAITurn();
     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
     return;
@@ -174,7 +169,7 @@ submitBtn.addEventListener('click', () => {
     switchTurn();
     definePlayers();
     displayGame(yourBoard, yourBoard.rows, 'public');
-    checkIfAITurn(currentPlayer, otherPlayer, yourBoard);
+    checkIfAITurn(currentPlayer, otherPlayer);
     definePlayers();
   }
 })

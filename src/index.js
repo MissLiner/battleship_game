@@ -47,7 +47,20 @@ displayGame(board1, board1.rows, 'public');
 
 // CREATE PLAYER 1
 function showPlacementDialog(player, shipNumber) {
-  gameMessages.textContent = `Hi, ${player.name}, time to place your ships!`;
+  let order;
+  switch(shipNumber) {
+    case '0': order = 'first';
+    break;
+    case '1': order = 'second';
+    break;
+    case '2': order = 'third';
+    break;
+    case '3': order = 'fourth';
+    break;
+    case '4': order = 'fifth and final';
+    break;
+  }
+  gameMessages.textContent = `${player.name}, please place your ${order} ship.`;
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
 }
 

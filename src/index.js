@@ -27,6 +27,26 @@ let shipCounter = 0;
 let turnCounter1 = 0;
 let turnCounter2 = 0;
 
+function hide(elem) {
+  elem.classList.add('hidden');
+}
+function show(elem) {
+  elem.classList.remove('hidden');
+}
+function toggleActive(newSpace) {
+  if(activeSpace) {
+    activeSpace.classList.remove('active');
+  }
+  activeSpace = newSpace;
+  activeSpace.classList.add('active');
+}
+function radioValue() {
+  for(let i = 0; i < directionInputs.length; i++) {
+    if(directionInputs[i].checked) {
+      return directionInputs[i].value;
+    }
+  }
+} 
 function switchTurn() {
   if(player1turn === true) { 
     player1turn = false;
@@ -36,14 +56,20 @@ function switchTurn() {
     turnCounter2++;
   }
 }
-
-function hide(elem) {
-  elem.classList.add('hidden');
+function takeAITurn(player, oppBoard) {
+  setTimeout(() => {  player.makeGuess(); }, 2000);
+  setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
+  setTimeout(() => { switchTurn(); }, 6000);
 }
-function show(elem) {
-  elem.classList.remove('hidden');
+function checkIfAITurn(player, opponent, oppBoard) {
+  if(player.isComputer === true) {
+    gameMessages.textContent = 'It\'s Hal\'s turn!'
+    takeAITurn(player, oppBoard);
+    gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
+  } else {
+    return;
+  }
 }
-
 // = playerFactory('Hal', true, board1);
 // board2.placeArmada(player2.getArmada());
 
@@ -88,20 +114,9 @@ nameInputBtn.addEventListener('click', () => {
 })
 
 // PLACE PLAYER 1 SHIPS
-function radioValue() {
-  for(let i = 0; i < directionInputs.length; i++) {
-    if(directionInputs[i].checked) {
-      return directionInputs[i].value;
-    }
-  }
-} 
 
 gameBoardContainer.addEventListener('click', (e) => {
-  if(activeSpace) {
-    activeSpace.classList.remove('active');
-  }
-  activeSpace = e.target;
-  activeSpace.classList.add('active');
+  toggleActive(e.target);
 })
 
 submitBtn.addEventListener('click', () => {
@@ -164,20 +179,8 @@ submitBtn.addEventListener('click', () => {
   }
 })
 
-function checkIfAITurn(player, opponent, oppBoard) {
-  if(player.isComputer === true) {
-    gameMessages.textContent = 'It\'s Hal\'s turn!'
-    takeAITurn(player, oppBoard);
-    gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
-  } else {
-    return;
-  }
-}
-function takeAITurn(player, oppBoard) {
-  setTimeout(() => {  player.makeGuess(); }, 2000);
-  setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
-  setTimeout(() => { switchTurn(); }, 6000);
-}
+
+
 
 
 

@@ -27,8 +27,8 @@ const submitBtn = document.getElementById('submit-btn');
 const armadaBtn = document.getElementById('armada-btn');
 
 //GAMEPLAY VARIABLES
-let board1 = boardFactory();
-let board2 = boardFactory();
+let board1 = boardFactory('board1');
+let board2 = boardFactory('board2');
 let player1;
 let player2;
 
@@ -82,7 +82,7 @@ function radioValue() {
 function switchTurn() {
   const gameOver = currentBoard.checkIfAllSunk();
   if(gameOver === true) {
-    alert(`GAME OVER: ${currentPlayer.name} won!`)
+    alert(`GAME OVER: ${currentPlayer.name} won!`);
   } else {
     if(player1turn === true) { 
       player1turn = false;
@@ -92,6 +92,8 @@ function switchTurn() {
       turnCounter2++;
     }
   }
+  board1.updateStatus(currentBoard);
+  board2.updateStatus(currentBoard);
 }
 function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {

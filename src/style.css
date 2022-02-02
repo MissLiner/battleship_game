@@ -23,7 +23,10 @@ body {
 #title {
   margin-top: 20px;
 }
-
+.active {
+  border: solid;
+  border-color: limegreen;
+}
 .board-box {
   display: grid;
   grid-template-columns: repeat(11, 1fr);

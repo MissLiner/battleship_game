@@ -1,6 +1,6 @@
 
 // refactor position ship to allow players to do it manually
-const boardFactory = () => {
+const boardFactory = (name) => {
   const rows = [];
   let hitCounter = 0;
   let status;
@@ -17,6 +17,13 @@ const boardFactory = () => {
       }
     }
   })()
+  function updateStatus(currentBoard) {
+    if(currentBoard.name === name) {
+      status = 'active';
+    } else {
+      status = 'inactive';
+    }
+  }
 
   function drawShip(shipPositions, name) {
     for(let i = 0; i < shipPositions.length; i++) {
@@ -74,7 +81,7 @@ const boardFactory = () => {
     }
   }
   
-  return { rows, status, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
+  return { rows, status, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus }
 }
 
 export { boardFactory } 

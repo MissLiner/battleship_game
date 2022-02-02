@@ -4,7 +4,6 @@ import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
 function displayGame(board1, boardRows, audience, board2) {
-  const gameDisplayBox = document.getElementById('game-display-box');
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
   
@@ -36,20 +35,19 @@ function displayGame(board1, boardRows, audience, board2) {
       }
     }
     function buildBoard() {
-      
       const gameBoard = document.createElement('div');
       gameBoard.classList.add('gameboard');
       boardBox.appendChild(gameBoard);
       for(let i = 0; i < 10; i++) {
         const row = document.createElement('div');
         row.classList.add('row');
-        row.id = `board-${i}`;
-
+        // row.id = `board-${i}`;
         addSpace(row, i);
         gameBoard.appendChild(row);
       }
     }
-    buildBoard(board);
   }
+  buildBoard(board1, boardBox1);
+  buildBoard(board2, boardBox2);
 }
 export { displayGame };

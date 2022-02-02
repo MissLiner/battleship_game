@@ -7,6 +7,7 @@
 
 // -Change colors as ships sink / are sunk
 // -Have AI guess near spaces to hit
+// -display both boards
 
 import './style.css';
 import { boardFactory } from './modules/makeBoard';

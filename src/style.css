@@ -13,7 +13,7 @@ body {
 #game-display-box {
   display: flex;
   height: auto;
-  width: auto;
+  width: 920px;
 }
 #submit-btn {
   display: grid;

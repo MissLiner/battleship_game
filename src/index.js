@@ -80,12 +80,17 @@ function radioValue() {
   }
 } 
 function switchTurn() {
-  if(player1turn === true) { 
-    player1turn = false;
-    turnCounter1++;
-  } else {  
-    player1turn = true;
-    turnCounter2++;
+  const gameOver = currentBoard.checkIfAllSunk();
+  if(gameOver === true) {
+    alert(`GAME OVER: ${currentPlayer.name} won!`)
+  } else {
+    if(player1turn === true) { 
+      player1turn = false;
+      turnCounter1++;
+    } else {  
+      player1turn = true;
+      turnCounter2++;
+    }
   }
 }
 function checkIfAITurn(player, opponent) {
@@ -158,7 +163,7 @@ armadaBtn.addEventListener('click', () => {
 
 gameDisplayBox.addEventListener('click', (e) => {
   if(e.target.classList.contains('space')) {
-    if(!e.target.classList.contains('miss')) {
+    if(!e.target.classList.contains('miss') && !e.target.classList.contains('hit')) {
       toggleActive(e.target);
     } else {
       gameMessages.textContent = 'No need to attack there, you already did! Please choose another space.'

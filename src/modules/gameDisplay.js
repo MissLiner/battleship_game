@@ -3,7 +3,7 @@ import { playerFactory } from "./makePlayer";
 import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
-function displayGame(board1, board2) {
+function displayGame(board1, board2, turn1) {
   //console.log(board1.rows);
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');

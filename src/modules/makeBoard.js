@@ -3,6 +3,7 @@
 const boardFactory = () => {
   const rows = [];
   let hitCounter = 0;
+  let status;
 
   (function popBoard() { 
     for (let i=0; i < 10; i++) {
@@ -68,11 +69,12 @@ const boardFactory = () => {
   const checkIfAllSunk= () => {
     const shipSpaceTotal = 17;
     if(shipSpaceTotal === hitCounter) {
-      return 'sunk';
+      status = 'sunk';
+      return true;
     }
   }
   
-  return { rows, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
+  return { rows, status, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
 }
 
 export { boardFactory } 

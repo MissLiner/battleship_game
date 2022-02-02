@@ -4,9 +4,8 @@
   text-align: center;
 }
 body {
-  background-color:slategrey;
+  background-color:rgb(169, 203, 233);
 }
-
 
 #game-dialog {
   margin-top: 20px;
@@ -17,7 +16,9 @@ body {
   width: auto;
 }
 #submit-btn {
-  margin-top: 40px;
+  display: grid;
+  grid-row-start: 12;
+  grid-column-start: 2;
 }
 #title {
   margin-top: 20px;
@@ -26,8 +27,8 @@ body {
 .board-box {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(11, 1fr);
-  height: 440px;
+  grid-template-rows: repeat(12, 1fr);
+  height: 480px;
   margin-top: 20px;
   width: 440px;
 } 
@@ -100,7 +101,7 @@ body {
   width: 400px;
 }
 .open {
-  background-color: mediumblue;
+  background-color: rgb(6, 66, 177);
 }
 .miss {
   background-color: lightseagreen;

@@ -37,6 +37,13 @@ function switchTurn() {
   }
 }
 
+function hide(elem) {
+  elem.classList.add('hidden');
+}
+function show(elem) {
+  elem.classList.remove('hidden');
+}
+
 // = playerFactory('Hal', true, board1);
 // board2.placeArmada(player2.getArmada());
 
@@ -76,8 +83,8 @@ nameInputBtn.addEventListener('click', () => {
     player2 = playerFactory(nameInput.value, false, board1);
     showPlacementDialog(player2, 0);
   }
-  positionForm.classList.remove('hidden');
-  nameForm.classList.add('hidden');
+  hide(positionForm);
+  hide(nameForm);
 })
 
 // PLACE PLAYER 1 SHIPS
@@ -133,9 +140,9 @@ submitBtn.addEventListener('click', () => {
       if(shipCounter < 5) {
         showPlacementDialog(currentPlayer, shipCounter);
       } else {
-        shipMessages.classList.add('hidden');
-        positionForm.classList.add('hidden');
         gameMessages.textContent = 'Are you ready to play? Click Submit to lock in your choices.';
+        hide(shipMessages);
+        hide(positionForm);
       }
     }
   }

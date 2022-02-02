@@ -7,7 +7,7 @@ function displayGame(board1, board2) {
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
   
-  function displayBoard(board, boardBox) {
+  function displayBoard(board, boardBox, audience) {
     if(boardBox.childElementCount === 3) {
       boardBox.removeChild(boardBox.lastChild);
     }
@@ -23,7 +23,7 @@ function displayGame(board1, board2) {
           div.classList.add('open');
         }
       }
-    }
+    } 
     function addSpace(row, rowNumber) {
       for(let x = 0; x < 10; x++) {
         const space = document.createElement('div');
@@ -47,7 +47,7 @@ function displayGame(board1, board2) {
     }
     buildBoard();
   }
-  displayBoard(board1, boardBox1);
-  displayBoard(board2, boardBox2);
+  displayBoard(board1, boardBox1, 'private');
+  displayBoard(board2, boardBox2, 'public');
 }
 export { displayGame };

@@ -3,9 +3,10 @@ import { playerFactory } from "./makePlayer";
 import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
-function displayGame(board, boardRows, audience) {
-
-  const boardContainer = document.getElementById('board-container');
+function displayGame(board1, boardRows, audience, board2) {
+  const gameDisplayBox = document.getElementById('game-display-box');
+  const boardBox1 = document.getElementById('board-box-1');
+  const boardBox2 = document.getElementById('board-box-2');
   
   if(boardContainer.childElementCount === 3) {
     boardContainer.removeChild(boardContainer.lastChild);
@@ -22,21 +23,7 @@ function displayGame(board, boardRows, audience) {
         div.classList.add('open');
       }
     }
-    
-    // switch(spaceStatus) {
-    //   case 'open': div.classList.add('open');
-    //     break;
-    //   case 'miss': div.classList.add('miss');
-    //     break;
-    //   case 'hit': div.classList.add('hit');
-    //     break;
-    //   case 'ship': if(audience === 'public') {
-    //     div.classList.add('open'); 
-    //   } else if(audience === 'private') {
-    //     div.classList.add('ship'); 
-    //   }
-    //   break;
-    }
+  }
   function addSpace(row, rowNumber) {
     for(let x = 0; x < 10; x++) {
       const space = document.createElement('div');

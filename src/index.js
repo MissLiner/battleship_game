@@ -20,7 +20,7 @@ const shipMessages = document.getElementById('ship-messages');
 const nameForm = document.getElementById('name-form');
 const nameInput = document.getElementById('name-input');
 const nameInputBtn = document.getElementById('name-input-btn');
-const gameBoardContainer = document.getElementById('board-container');
+const gameBoardBox = document.getElementById('board-box');
 const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
@@ -120,7 +120,7 @@ nameInputBtn.addEventListener('click', () => {
 })
 
 // PLACE PLAYER1 SHIPS
-gameBoardContainer.addEventListener('click', (e) => {
+gameBoardBox.addEventListener('click', (e) => {
   toggleActive(e.target);
 })
 

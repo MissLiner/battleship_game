@@ -7,7 +7,7 @@ body {
   background-color:slategrey;
 }
 
-#board-container {
+#board-box {
   display: grid;
   grid-template-columns: repeat(11, 40px);
   grid-template-rows: repeat(11, 40px);
@@ -19,7 +19,7 @@ body {
 #game-dialog {
   margin-top: 20px;
 }
-#game-display-container {
+#game-display-box {
   display:inline-block;
   height: 220px;
   width: 440px;
@@ -28,7 +28,7 @@ body {
 #title {
   margin-top: 20px;
 }
-.col-number-container {
+.col-number-box {
   border: none;
   background-color: transparent;
   display: grid;
@@ -40,7 +40,7 @@ body {
   line-height: 20px;
   width: 200px;
 }
-.row-number-container { 
+.row-number-box { 
   border: none;
   background-color: transparent;
   display: grid;

@@ -131,23 +131,23 @@ submitBtn.addEventListener('click', () => {
     switchTurn();
     definePlayers();
     displayGame(yourBoard, yourBoard.rows, 'public');
-    checkIfAITurn(currentPlayer, otherPlayer);
+    checkIfAITurn(currentPlayer, otherPlayer, yourBoard);
     definePlayers();
   }
 })
 
-function checkIfAITurn(player, opponent) {
+function checkIfAITurn(player, opponent, oppBoard) {
   if(player.isComputer === true) {
     gameMessages.textContent = 'It\'s Hal\'s turn!'
-    takeAITurn(player);
+    takeAITurn(player, oppBoard);
     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
     return;
   }
 }
-function takeAITurn(player) {
+function takeAITurn(player, oppBoard) {
   setTimeout(() => {  player.makeGuess(); }, 2000);
-  setTimeout(() => {  displayGame(player.oppBoard, player.oppBoard.rows, 'private'); }, 4000);
+  setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
   setTimeout(() => { switchTurn(); }, 6000);
 }
 

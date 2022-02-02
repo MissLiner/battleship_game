@@ -71,6 +71,7 @@ const boardFactory = () => {
       return 'sunk';
     }
   }
+  function getRows() { return rows };
   
   return { rows, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip }
 }

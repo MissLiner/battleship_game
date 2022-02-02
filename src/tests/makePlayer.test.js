@@ -46,13 +46,9 @@ describe('armada tests', () => {
     const testArr = [{ "row": 4, "column": 2}, { "row": 2, "column": 3}, { "row": 1, "column": 2 }];
       expect(testAIPlayer.checkForDupes(testArr)).toBe(false);
   })
-    test('assigns initial direction', () => {
-      mockRandom(0.1);
-      expect(testAIPlayer.getArmada()[2].getDirection()).toBe();
-      resetMockRandom();
-    })
-
-
-
-
+  test('assigns initial direction', () => {
+    mockRandom([0.1]);
+    expect(testAIPlayer.pickDirection()).toBe('vertical');
+    resetMockRandom();
+  })
 })

@@ -9,9 +9,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
 
   // HUMAN FUNCTIONS
   function placeShip(firstSpace, direction, counter) {
-    // console.log(firstSpace);
     const newShip = shipFactory(ships[counter].name, ships[counter].size, firstSpace, direction);
-    // console.log(newShip);
     newShip.positionShip();
     armadaArr.push(newShip);
     return newShip;
@@ -118,6 +116,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
 
-  return { name, getShips, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions };
+  return { name, getShips, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection };
 }
 export { playerFactory };

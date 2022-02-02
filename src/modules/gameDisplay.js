@@ -3,7 +3,7 @@ import { playerFactory } from "./makePlayer";
 import { shipFactory } from "./makeShips";
 import { takeTurn } from "../index";
 
-function displayGame(board1, boardRows, audience, board2) {
+function displayGame(board1, board2) {
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
   
@@ -13,7 +13,7 @@ function displayGame(board1, boardRows, audience, board2) {
     }
 
     function displayStatus(div, row, column) {
-      const spaceStatus = boardRows[row][column];
+      const spaceStatus = board.rows[row][column];
       if(audience === 'private') {
         div.classList.add(spaceStatus);
       } else {
@@ -41,13 +41,13 @@ function displayGame(board1, boardRows, audience, board2) {
       for(let i = 0; i < 10; i++) {
         const row = document.createElement('div');
         row.classList.add('row');
-        // row.id = `board-${i}`;
         addSpace(row, i);
         gameBoard.appendChild(row);
       }
     }
+    buildBoard();
   }
-  buildBoard(board1, boardBox1);
-  buildBoard(board2, boardBox2);
+  displayBoard(board1, boardBox1);
+  displayBoard(board2, boardBox2);
 }
 export { displayGame };

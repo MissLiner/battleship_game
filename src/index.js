@@ -98,7 +98,7 @@ function showPlacementDialog(player, shipNumber) {
 player2 = playerFactory('Hal', true, board1);
 board2.placeArmada(player2.getArmada());
 
-displayGame(board1, board1.rows, 'public');
+displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
 
@@ -155,7 +155,7 @@ submitBtn.addEventListener('click', () => {
       const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
       activeSpace.classList.remove('active');
-      displayGame(myBoard, myBoard.rows, 'private');
+      displayGame(board1, board2);
       shipCounter++;
       if(shipCounter < 5) {
         showPlacementDialog(currentPlayer, shipCounter);
@@ -170,15 +170,15 @@ submitBtn.addEventListener('click', () => {
     shipCounter = 0;
     phase = 'gameplay';
     gameMessages.textContent = `${currentPlayer.name}, time for a battle at sea! Choose your first target.`;
-    displayGame(yourBoard, yourBoard.rows, 'public');
+    displayGame(board1, board2);
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
     yourBoard.receiveAttack(activeSpace);
-    displayGame(yourBoard, yourBoard.rows, 'public');
+    displayGame(board1, board2);
     switchTurn();
     definePlayers();
-    displayGame(yourBoard, yourBoard.rows, 'public');
+    displayGame(board1, board2);
     checkIfAITurn(currentPlayer, otherPlayer);
     definePlayers();
   }

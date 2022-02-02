@@ -13,8 +13,11 @@ body {
 }
 #game-display-box {
   display: flex;
-  height: 440px;
+  height: auto;
   width: auto;
+}
+#submit-btn {
+  margin-top: 40px;
 }
 #title {
   margin-top: 20px;
@@ -40,11 +43,16 @@ body {
   line-height: 40px;
   width: 400px;
 }
+#row-number-box-1 {
+  grid-column-start: 1;
+}
+#row-number-box-2 {
+  grid-column-start: 11;
+}
 .row-number-box { 
   border: none;
   background-color: transparent;
   display: grid;
-  grid-column-start: 1;
   grid-row-start: 2;
   grid-template-columns:  1fr;
   grid-template-rows: repeat(10, 1fr);

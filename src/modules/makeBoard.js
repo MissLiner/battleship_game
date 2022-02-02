@@ -43,8 +43,16 @@ const boardFactory = () => {
   }
 
   const receiveAttack = (space) => {
-    const row = space.dataset.rowCoord;
-    const column = space.dataset.columnCoord;
+    let row;
+    let column;
+    if(space.dataset) {
+      row = space.dataset.rowCoord;
+      column = space.dataset.columnCoord;
+    } else {
+      row = space.row;
+      column = space.column;
+    }
+
     console.log(row);
     console.log(column);
     switch(rows[row][column]) {

@@ -100,7 +100,7 @@ submitBtn.addEventListener('click', () => {
     }
   }
   definePlayers();
-  
+
   if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();
     if(activeSpace) {
@@ -139,10 +139,8 @@ submitBtn.addEventListener('click', () => {
 function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
     gameMessages.textContent = 'It\'s Hal\'s turn!'
-    const turnPromise = new Promise(takeAITurn(player));
-    turnPromise
-      .then(() => gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`)
-      .then(() => switchTurn())
+    takeAITurn(player);
+    gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
     return;
   }
@@ -164,42 +162,6 @@ function switchTurn() {
     turnCounter2++;
   }
 }
-
-// USE TO RUN THROUGH AUTOMATED GAME
-
-// const player1 = playerFactory('name', true, board2);
-// const player2 = playerFactory('other name', true, board1);
-
-// board1.placeArmada(player1.getArmada());
-// board2.placeArmada(player2.getArmada());
-
-// const turnBtn = document.getElementById('turn-btn');
-// turnBtn.addEventListener('click', () => takeTurn());
-
-// let turn = 1;
-// let phase = 'setup';
-
-
-// function takeTurn() {
-//   console.log(turn);
-//   let player;
-//   let board;
-
-//   if(turn === 1) {
-//     player = player1;
-//     board = board2;
-//   } else {
-//     player = player2;
-//     board = board1;
-//   }
-//   displayGame(board, board.rows, 'public');
-//   setTimeout(() => {  player.makeGuess(board); }, 2000);
-//   setTimeout(() => {  displayGame(board, board.rows, 'private'); }, 2500);
-  
-//   if(turn === 1) { turn = 2; } else { turn = 1; };
-//   console.log(turn);
-// }
-// export { takeTurn };
 
 // TO DO
 // -Allow manual ship placement

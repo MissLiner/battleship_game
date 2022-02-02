@@ -1,4 +1,4 @@
-//fix attacker / playername issue so it reads the correct objects
+//fix gameplay so the right board and previous attacks are showing, and AI takes the right amount of time and shows its work
 
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
@@ -8,6 +8,14 @@ import { displayGame } from './modules/gameDisplay';
 
 const gameMessages = document.getElementById('game-messages');
 const shipMessages = document.getElementById('ship-messages');
+const nameForm = document.getElementById('name-form');
+const nameInput = document.getElementById('name-input');
+const nameInputBtn = document.getElementById('name-input-btn');
+const gameBoardContainer = document.getElementById('board-container');
+const positionForm = document.getElementById('position-form');
+const directionInputs = document.getElementsByName('direction');
+const submitBtn = document.getElementById('submit-btn');
+
 let board1 = boardFactory();
 let board2 = boardFactory();
 
@@ -15,9 +23,7 @@ let board2 = boardFactory();
 displayGame(board1, board1.rows, 'public');
 
 // create human player
-const nameForm = document.getElementById('name-form');
-const nameInput = document.getElementById('name-input');
-const nameInputBtn = document.getElementById('name-input-btn');
+
 
 let player1;
 const player2 = playerFactory('Hal', true, board1);
@@ -28,11 +34,9 @@ let phase = 'setup';
 let activeSpace;
 
 // should i make value of name a promise, and create player when it is fulfilled?
-const gameBoardContainer = document.getElementById('board-container');
+
 
 // CREATE PLAYER 1
-const positionForm = document.getElementById('position-form');
-
 function showPlacementDialog(player, shipNumber) {
   gameMessages.textContent = `Hi, ${player.name}, time to place your ships!`;
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
@@ -56,7 +60,7 @@ nameInputBtn.addEventListener('click', () => {
 
 // PLACE PLAYER 1 SHIPS
 
-const directionInputs = document.getElementsByName('direction');
+
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
@@ -73,7 +77,7 @@ gameBoardContainer.addEventListener('click', (e) => {
   activeSpace.classList.add('active');
 })
 
-const submitBtn = document.getElementById('submit-btn');
+
 let shipCounter = 0;
 
 submitBtn.addEventListener('click', () => {

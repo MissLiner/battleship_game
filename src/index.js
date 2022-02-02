@@ -70,7 +70,7 @@ function switchTurn() {
 function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
     gameMessages.textContent = `It\'s ${player.name}\'s turn!`
-    takeAITurn();
+    player.takeAITurn();
     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
     return;
@@ -79,15 +79,15 @@ function checkIfAITurn(player, opponent) {
 function showPlacementDialog(player, shipNumber) {
   let order;
   switch(shipNumber) {
-    case '0': order = 'first';
+    case 0: order = 'first';
     break;
-    case '1': order = 'second';
+    case 1: order = 'second';
     break;
-    case '2': order = 'third';
+    case 2: order = 'third';
     break;
-    case '3': order = 'fourth';
+    case 3: order = 'fourth';
     break;
-    case '4': order = 'fifth and final';
+    case 4: order = 'fifth and final';
     break;
   }
   gameMessages.textContent = `${player.name}, please place your ${order} ship.`;
@@ -115,19 +115,23 @@ nameInputBtn.addEventListener('click', () => {
     player2 = playerFactory(nameInput.value, false, board1);
     showPlacementDialog(player2, 0);
   }
-  hide(positionForm);
+  show(positionForm);
   hide(nameForm);
 })
 
 // PLACE PLAYER1 SHIPS
 gameDisplayBox.addEventListener('click', (e) => {
-  toggleActive(e.target);
+  if(e.target.classList.contains('space')) {
+    toggleActive(e.target);
+  }
 })
 
 submitBtn.addEventListener('click', () => {
-  const row = activeSpace.dataset.rowCoord;
-  const column = activeSpace.dataset.columnCoord;
-  const coord = { row: Number(row), column: Number(column)};
+  let row = activeSpace.dataset.rowCoord;
+  row = Number(row);
+  let column = activeSpace.dataset.columnCoord;
+  column = Number(column);
+  const coord = { row: row, column: column};
 
   let currentPlayer;
   let otherPlayer;

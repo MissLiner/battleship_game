@@ -116,6 +116,11 @@ function showPlacementDialog(player, shipNumber) {
   gameMessages.textContent = `${player.name}, please place your ${order} ship.`;
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
 }
+function startGame() {
+  gameMessages.textContent = 'Are you ready to play? Click Submit to lock in your choices.';
+  hide(shipMessages);
+  hide(positionForm);
+}
 
 //CREATE COMPUTER PLAYER2
 player2 = playerFactory('Hal', true, board1);
@@ -145,7 +150,9 @@ nameInputBtn.addEventListener('click', () => {
 armadaBtn.addEventListener('click', () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
+  shipCounter = 5;
   displayGame(board1, board2);
+  startGame();
 })
 
 gameDisplayBox.addEventListener('click', (e) => {
@@ -159,11 +166,17 @@ gameDisplayBox.addEventListener('click', (e) => {
 })
 
 submitBtn.addEventListener('click', () => {
-  let row = activeSpace.dataset.rowCoord;
-  row = Number(row);
-  let column = activeSpace.dataset.columnCoord;
-  column = Number(column);
-  const coord = { row: row, column: column};
+  let row;
+  let column;
+  let coord;
+  
+  if(activeSpace) {
+    row = activeSpace.dataset.rowCoord;
+    row = Number(row);
+    column = activeSpace.dataset.columnCoord;
+    column = Number(column);
+    coord = { row: row, column: column};
+  }
 
   if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();
@@ -176,9 +189,7 @@ submitBtn.addEventListener('click', () => {
       if(shipCounter < 5) {
         showPlacementDialog(currentPlayer, shipCounter);
       } else {
-        gameMessages.textContent = 'Are you ready to play? Click Submit to lock in your choices.';
-        hide(shipMessages);
-        hide(positionForm);
+        startGame();
       }
     }
   }

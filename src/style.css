@@ -104,10 +104,10 @@ body {
   background-color: rgb(6, 66, 177);
 }
 .miss {
-  background-color: lightseagreen;
+  background-color: gray;
 }
 .hit {
-  background-color: orange;
+  background-color: red;
 }
 .active {
   background-color: yellowgreen !important;

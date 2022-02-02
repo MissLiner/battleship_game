@@ -122,7 +122,11 @@ nameInputBtn.addEventListener('click', () => {
 // PLACE PLAYER1 SHIPS
 gameDisplayBox.addEventListener('click', (e) => {
   if(e.target.classList.contains('space')) {
-    toggleActive(e.target);
+    if(!e.target.classList.contains('miss')) {
+      toggleActive(e.target);
+    } else {
+      gameMessages.textContent = 'No need to attack there, you already did! Please choose another space.'
+    }
   }
 })
 
@@ -178,7 +182,7 @@ submitBtn.addEventListener('click', () => {
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
-    yourBoard.receiveAttack(activeSpace);
+    yourBoard.receiveAttack(activeSpace, otherPlayer);
     displayGame(board1, board2);
     switchTurn();
     definePlayers();

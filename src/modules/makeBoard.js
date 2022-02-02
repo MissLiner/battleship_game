@@ -42,7 +42,7 @@ const boardFactory = () => {
     }
   }
 
-  const receiveAttack = (space) => {
+  const receiveAttack = (space, player) => {
     let row;
     let column;
     if(space.dataset) {
@@ -52,16 +52,12 @@ const boardFactory = () => {
       row = space.row;
       column = space.column;
     }
-
-    console.log(row);
-    console.log(column);
-    switch(rows[row][column]) {
-      case 'open': rows[row][column] = 'miss';
-        break;
-      case 'ship': rows[row][column] = 'hit';
-        hitShip(coordinates);
-        hitCounter++;
-        break;
+    const coordinates = { row: row, column: column }
+    console.log(row, column);
+    if(rows[row][column] !== 'open') {
+      rows[row][column] = 'hit';
+      hitShip(coordinates, player);
+      hitCounter++;
     }
   }
 

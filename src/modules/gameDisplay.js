@@ -14,15 +14,16 @@ function displayGame(board1, board2) {
 
     function displayStatus(div, row, column) {
       const spaceStatus = board.rows[row][column];
-      if(audience === 'private') {
-        div.classList.add(spaceStatus);
-      } else {
-        if(spaceStatus === 'open' || spaceStatus === 'miss' || spaceStatus === 'hit') {
-          div.classList.add(spaceStatus);
-        } else {
-          div.classList.add('open');
-        }
-      }
+      div.classList.add(spaceStatus);
+      // if(audience === 'private') {
+      //   div.classList.add(spaceStatus);
+      // } else {
+      //   if(spaceStatus === 'open' || spaceStatus === 'miss' || spaceStatus === 'hit') {
+      //     div.classList.add(spaceStatus);
+      //   } else {
+      //     div.classList.add('open');
+      //   }
+      // }
     } 
     function addSpace(row, rowNumber) {
       for(let x = 0; x < 10; x++) {

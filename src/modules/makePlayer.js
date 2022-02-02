@@ -104,14 +104,15 @@ const playerFactory = (name, isComputer, oppBoard) => {
     return allOpenSpaces;
   }
 
-  const makeGuess = () => {
+  const makeGuess = (oppPlayer) => {
     const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
-    oppBoard.receiveAttack(allOpenSpaces[guess]);
+    oppBoard.receiveAttack(allOpenSpaces[guess], oppPlayer);
   }
-  const takeAITurn = () => {
-    setTimeout(() => {  makeGuess(); }, 2000);
+  const takeAITurn = (oppPlayer) => {
+    makeGuess(oppPlayer);
+    //setTimeout(() => {  makeGuess(oppPlayer); }, 2000);
     // setTimeout(() => {  displayGame(oppBoard, oppBoard.rows, 'private'); }, 4000);
     // setTimeout(() => { switchTurn(); }, 6000);
   }

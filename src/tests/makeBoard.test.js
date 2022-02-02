@@ -1,8 +1,10 @@
 const makeBoard = require ('../modules/makeBoard');
+const makePlayer = require('../modules/makePlayer');
 const makeShips = require('../modules/makeShips');
 
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory();
+  const testPlayer = makePlayer.playerFactory('Hal', true, testBoard);
 
   test('draws correct number of rows', () => {
     expect(testBoard.rows.length).toBe(10);
@@ -11,7 +13,7 @@ describe('makeBoard tests', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
   test('marks misses on board', () => {
-    testBoard.receiveAttack( { row: 1, column: 2 } );
+    testBoard.receiveAttack( { row: 1, column: 2 },  testPlayer);
     expect(testBoard.rows[1][2]).toBe('miss');
   })
 })

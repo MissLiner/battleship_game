@@ -45,19 +45,23 @@ const boardFactory = () => {
   const receiveAttack = (space, player) => {
     let row;
     let column;
+    let coordinates;
+
     if(space.dataset) {
       row = space.dataset.rowCoord;
       column = space.dataset.columnCoord;
+      coordinates = { row: row, column: column }
     } else {
       row = space.row;
       column = space.column;
+      coordinates = space;
     }
-    const coordinates = { row: row, column: column }
-    console.log(row, column);
     if(rows[row][column] !== 'open') {
       rows[row][column] = 'hit';
       hitShip(coordinates, player);
       hitCounter++;
+    } else {
+      rows[row][column] = 'miss';
     }
   }
 

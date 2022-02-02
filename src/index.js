@@ -70,7 +70,8 @@ function switchTurn() {
 function checkIfAITurn(player, opponent) {
   if(player.isComputer === true) {
     gameMessages.textContent = `It\'s ${player.name}\'s turn!`
-    player.takeAITurn();
+    player.takeAITurn(opponent);
+    displayGame(board1, board2);
     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
   } else {
     return;

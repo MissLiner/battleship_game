@@ -18,20 +18,29 @@ const submitBtn = document.getElementById('submit-btn');
 
 let board1 = boardFactory();
 let board2 = boardFactory();
-
-
-displayGame(board1, board1.rows, 'public');
-
-// create human player
-
-
 let player1;
-const player2 = playerFactory('Hal', true, board1);
-board2.placeArmada(player2.getArmada());
-
+let player2;
 let player1turn = true;
 let phase = 'setup';
 let activeSpace;
+let shipCounter = 0;
+let turnCounter1 = 0;
+let turnCounter2 = 0;
+
+function switchTurn() {
+  if(player1turn === true) { 
+    player1turn = false;
+    turnCounter1++;
+  } else {  
+    player1turn = true;
+    turnCounter2++;
+  }
+}
+
+// = playerFactory('Hal', true, board1);
+// board2.placeArmada(player2.getArmada());
+
+displayGame(board1, board1.rows, 'public');
 
 // should i make value of name a promise, and create player when it is fulfilled?
 
@@ -59,8 +68,6 @@ nameInputBtn.addEventListener('click', () => {
 })
 
 // PLACE PLAYER 1 SHIPS
-
-
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
@@ -76,9 +83,6 @@ gameBoardContainer.addEventListener('click', (e) => {
   activeSpace = e.target;
   activeSpace.classList.add('active');
 })
-
-
-let shipCounter = 0;
 
 submitBtn.addEventListener('click', () => {
   const row = activeSpace.dataset.rowCoord;
@@ -155,17 +159,8 @@ function takeAITurn(player, oppBoard) {
   setTimeout(() => { switchTurn(); }, 6000);
 }
 
-let turnCounter1 = 0;
-let turnCounter2 = 0;
-function switchTurn() {
-  if(player1turn === true) { 
-    player1turn = false;
-    turnCounter1++;
-  } else {  
-    player1turn = true;
-    turnCounter2++;
-  }
-}
+
+
 
 // TO DO
 // -Allow manual ship placement

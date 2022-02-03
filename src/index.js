@@ -96,8 +96,9 @@ function switchTurn() {
     }
   }
   definePlayers();
-  board1.updateStatus(myBoard);
-  board2.updateStatus(myBoard);
+  board1.updateStatus(yourBoard);
+  board2.updateStatus(yourBoard);
+  displayGame(board1, board2);
 }
 
 function showPlacementDialog(player) {
@@ -166,6 +167,9 @@ function confirmShips() {
 function startGame() {
   phase = 'gameplay';
   writeAdminMessage('firstGuess');
+  definePlayers();
+  board1.updateStatus(yourBoard);
+  board2.updateStatus(yourBoard);
   displayGame(board1, board2);
 }
 function loopGame() {
@@ -173,8 +177,6 @@ function loopGame() {
   clearActiveSpace();
   displayGame(board1, board2);
   switchTurn();
-  definePlayers();
-  displayGame(board1, board2);
   writeGameMessage(currentPlayer, activeSpace);
 }
 
@@ -182,6 +184,8 @@ function loopGame() {
 player2 = playerFactory('Hal', true, board1);
 board2.placeArmada(player2.getArmada());
 
+board1.updateStatus(myBoard);
+board2.updateStatus(myBoard);
 displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1

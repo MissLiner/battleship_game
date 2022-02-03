@@ -160,6 +160,17 @@ function writeErrMessage(err) {
   }
   alert(errMessages[err]);
 }
+function confirmShips() {
+  writeAdminMessage(confirmArmada);
+  hide(shipMessages);
+  hide(positionForm);
+}
+function startGame() {
+  shipCounter = 0;
+  phase = 'gameplay';
+  writeAdminMessage('firstGuess');
+  displayGame(board1, board2);
+}
 function loopGame() {
   currentPlayer.takeTurn(otherPlayer, activeSpace);
   clearActiveSpace();
@@ -200,7 +211,7 @@ armadaBtn.addEventListener('click', () => {
   myBoard.placeArmada(currentPlayer.getArmada());
   shipCounter = 5;
   displayGame(board1, board2);
-  startGame();
+  confirmShips();
 })
 
 gameDisplayBox.addEventListener('click', (e) => {
@@ -243,22 +254,20 @@ submitBtn.addEventListener('click', () => {
       if(shipCounter < 5) {
         showPlacementDialog(currentPlayer, shipCounter);
       } else {
-        startGame();
+        confirmShips();
       }
     } else {
       alert(writeErrMessage('coord'));
     }
   }
   else if(phase === 'setup' && shipCounter > 4) {
-    shipCounter = 0;
-    phase = 'gameplay';
-    writeAdminMessage('firstGuess');
-    displayGame(board1, board2);
+    startGame();
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
     if(activeSpace === '') {
       writeErrMessage('noguess');
+      return;
     }
     loopGame();
     if(currentPlayer.isComputer === true) {

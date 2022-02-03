@@ -80,9 +80,9 @@ function radioValue() {
   }
 } 
 function switchTurn() {
-  const gameOver = currentBoard.checkIfAllSunk();
+  const gameOver = myBoard.checkIfAllSunk();
   if(gameOver === true) {
-    alert(`GAME OVER: ${currentPlayer.name} won!`);
+    alert(`GAME OVER: ${otherPlayer.name} won!`);
   } else {
     if(player1turn === true) { 
       player1turn = false;
@@ -92,20 +92,11 @@ function switchTurn() {
       turnCounter2++;
     }
   }
-  board1.updateStatus(currentBoard);
-  board2.updateStatus(currentBoard);
+  definePlayers();
+  board1.updateStatus(myBoard);
+  board2.updateStatus(myBoard);
 }
-function checkIfAITurn(player, opponent) {
-  if(player.isComputer === true) {
-    gameMessages.textContent = `It\'s ${player.name}\'s turn!`
-    player.takeAITurn(opponent);
-    switchTurn();
-    displayGame(board1, board2);
-    gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
-  } else {
-    return;
-  }
-}
+
 function showPlacementDialog(player, shipNumber) {
   let order;
   switch(shipNumber) {
@@ -209,12 +200,31 @@ submitBtn.addEventListener('click', () => {
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
-    yourBoard.receiveAttack(activeSpace, otherPlayer);
+    currentPlayer.takeTurn(otherPlayer, activeSpace);
     displayGame(board1, board2);
     switchTurn();
     definePlayers();
     displayGame(board1, board2);
-    checkIfAITurn(currentPlayer, otherPlayer);
-    definePlayers();
+    gameMessages.textContent = `It\'s ${currentPlayer.name}\'s turn!`;
+    if(currentPlayer.isComputer === true) {
+      currentPlayer.takeTurn(otherPlayer);
+      switchTurn();
+      definePlayers();
+      displayGame(board1, board2);
+    }
+    
   }
+  function generateMessage() {
+
+  }
+  // function checkIfAITurn(player, opponent) {
+  //   if(player.isComputer === true) {
+      
+  //     player.takeAITurn(opponent);
+  //     switchTurn();
+  //     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
+  //   } else {
+  //     return;
+  //   }
+  // }
 })

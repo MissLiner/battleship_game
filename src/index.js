@@ -79,10 +79,9 @@ function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
       return directionInputs[i].value;
-    } else {
-      return false;
     }
   }
+  return false;
 } 
 function switchTurn() {
   const gameOver = myBoard.checkIfAllSunk();
@@ -238,12 +237,12 @@ submitBtn.addEventListener('click', () => {
   }
   // DO THIS - clean up code below
   if(phase === 'setup' && shipCounter < 5) {
-    if(radioValue() === false) {
+    const direction = radioValue();
+    if(direction === false) {
       writeErrMessage('direction');
       return;
     }
 
-    const direction = radioValue();
     if(activeSpace) {
       const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
       myBoard.drawShip(newShip.getPositions(), newShip.name);

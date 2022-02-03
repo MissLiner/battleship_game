@@ -17,6 +17,7 @@ import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
+// import regeneratorRuntime from './regenerator-runtime';
 
 //DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
@@ -173,11 +174,20 @@ function startGame() {
   displayGame(board1, board2);
 }
 function loopGame() {
-  currentPlayer.takeTurn(otherPlayer, activeSpace);
-  clearActiveSpace();
-  displayGame(board1, board2);
-  switchTurn();
-  writeGameMessage(currentPlayer, activeSpace);
+  const moveSlow = async () => {
+    const result = await currentPlayer.takeTurn(otherPlayer, activeSpace);
+    clearActiveSpace();
+    displayGame(board1, board2);
+    if(currentPlayer.isComputer === true) {
+      setTimeout(() => { displayGame(board1, board2); }, 3000);
+    }
+  }
+  const moveSlow2 = async () => {
+    const result = await moveSlow()
+    switchTurn();
+    writeGameMessage(currentPlayer, activeSpace);
+  }
+  moveSlow2();
 }
 
 //CREATE COMPUTER PLAYER2
@@ -270,6 +280,7 @@ submitBtn.addEventListener('click', () => {
     }
     loopGame();
     if(currentPlayer.isComputer === true) {
+      switchTurn();
       loopGame();
     }
   }

@@ -36,7 +36,7 @@ let phase = 'setup';
 let activeSpace;
 let shipCounter = 0;
 let player1turn = true;
-let turnCounter1 = 0;
+let turnCounter1 = 0; //DOTHIS
 let turnCounter2 = 0;
 
 let currentPlayer;
@@ -65,17 +65,22 @@ function hide(elem) {
 function show(elem) {
   elem.classList.remove('hidden');
 }
-function toggleActive(newSpace) {
+function toggleActiveSpace(newSpace) {
   if(activeSpace) {
     activeSpace.classList.remove('active');
   }
   activeSpace = newSpace;
   activeSpace.classList.add('active');
 }
+function clearActiveSpace() {
+  activeSpace = '';
+}
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
       return directionInputs[i].value;
+    } else {
+      return false;
     }
   }
 } 
@@ -115,12 +120,20 @@ function showPlacementDialog(player, shipNumber) {
   gameMessages.textContent = `${player.name}, please place your ${order} ship.`;
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
 }
-function startGame() {
-  gameMessages.textContent = 'Are you ready to play? Click Submit to lock in your choices.';
-  hide(shipMessages);
-  hide(positionForm);
+function writeAdminMessage(purpose) {
+  const adminMessages = {
+    confirmArmada: 'Are you ready to play? Click Submit to lock in your choices.',
+    firstGuess: `${currentPlayer.name}, time for a battle at sea! Choose your first target.`,
+    winningHuman: `You've got ${otherPlayer.name} on the ropes now!`,
+    losingHuman: `Focus, ${currentPlayer.name}, your armada is in trouble!`,
+    winQuick: `YOU WON, ${currentPlayer.name}!!! And it only took you ${currentPlayer.getTurns()} turns to annihilate ${otherPlayer.name}`,
+    winSlow: `I was worried for a minute there, but YOU WON, ${currentPlayer.name}! Way to hang in there, it took ${otherPlayer.getTurns()} turns.`,
+    loseQuick: `${currentPlayer.name} won! They slayed ${otherPlayer.name} in only ${currentPlayer.getTurns()} turns.`,
+    loseSlow: `You almost had it, ${otherPlayer.name}, but ${currentPlayer.name} WON in ${currentPlayer.getTurns()} turns.`,
+  }
+  gameMessages.textContent = adminMessages[purpose];
 }
-function generateMessage() {
+function writeGameMessage() {
   const humanMessages = [
     `Your turn, ${currentPlayer.name}.`,
     `Are you gonna let a computer beat you?!?`,
@@ -137,7 +150,7 @@ function generateMessage() {
   const messIndex = currentPlayer.getRandomInt(messArr.length - 1);
   gameMessages.textContent = messArr[messIndex];
 }
-function generateErrMessage(err) {
+function writeErrMessage(err) {
   const errMessages = {
     name: 'Please tell me, what should I call you?',
     direction: 'Please add a direction for your ship',
@@ -147,13 +160,14 @@ function generateErrMessage(err) {
   }
   alert(errMessages[err]);
 }
-function gameLoop() {
+function loopGame() {
   currentPlayer.takeTurn(otherPlayer, activeSpace);
+  clearActiveSpace();
   displayGame(board1, board2);
   switchTurn();
   definePlayers();
   displayGame(board1, board2);
-  generateMessage(currentPlayer, activeSpace);
+  writeGameMessage(currentPlayer, activeSpace);
 }
 
 //CREATE COMPUTER PLAYER2
@@ -165,8 +179,7 @@ displayGame(board1, board2);
 // CREATE HUMAN PLAYER1
 nameInputBtn.addEventListener('click', () => {
   if(!nameInput.value) {
-    generateErrMessage('name');
-    // gameMessages.textContent = 'Please tell me, what should I call you?';
+    writeErrMessage('name');
     return;
   }
   else if(player1turn = true) {
@@ -193,9 +206,9 @@ armadaBtn.addEventListener('click', () => {
 gameDisplayBox.addEventListener('click', (e) => {
   if(e.target.classList.contains('space')) {
     if(!e.target.classList.contains('miss') && !e.target.classList.contains('hit')) {
-      toggleActive(e.target);
+      toggleActiveSpace(e.target);
     } else {
-      //gameMessages.textContent = 'No need to attack there, you already did! Please choose another space.'
+      alert(writeErrMessage('dupe'));
     }
   }
 })
@@ -214,6 +227,11 @@ submitBtn.addEventListener('click', () => {
   }
   // DO THIS - clean up code below
   if(phase === 'setup' && shipCounter < 5) {
+    if(radioValue() === false) {
+      writeErrMessage('direction');
+      return;
+    }
+
     const direction = radioValue();
     if(activeSpace) {
       const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
@@ -221,24 +239,30 @@ submitBtn.addEventListener('click', () => {
       activeSpace.classList.remove('active');
       displayGame(board1, board2);
       shipCounter++;
+      clearActiveSpace();
       if(shipCounter < 5) {
         showPlacementDialog(currentPlayer, shipCounter);
       } else {
         startGame();
       }
+    } else {
+      alert(writeErrMessage('coord'));
     }
   }
   else if(phase === 'setup' && shipCounter > 4) {
     shipCounter = 0;
     phase = 'gameplay';
-    gameMessages.textContent = `${currentPlayer.name}, time for a battle at sea! Choose your first target.`;
+    writeAdminMessage('firstGuess');
     displayGame(board1, board2);
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
-    gameLoop();
+    if(activeSpace === '') {
+      writeErrMessage('noguess');
+    }
+    loopGame();
     if(currentPlayer.isComputer === true) {
-      gameLoop();
+      loopGame();
     }
   }
 })

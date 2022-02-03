@@ -205,7 +205,7 @@ submitBtn.addEventListener('click', () => {
     switchTurn();
     definePlayers();
     displayGame(board1, board2);
-    gameMessages.textContent = `It\'s ${currentPlayer.name}\'s turn!`;
+    
     if(currentPlayer.isComputer === true) {
       currentPlayer.takeTurn(otherPlayer);
       switchTurn();
@@ -215,14 +215,28 @@ submitBtn.addEventListener('click', () => {
     
   }
   function generateMessage() {
-
+    const humanMessages = [
+      `Your turn, ${currentPlayer.name}.`,
+      `Are you gonna let a computer beat you?!?`,
+      `You got this, ${currentPlayer.name}!`,
+      `Back to you, ${opponent.name}, choose wisely!`,
+    ]
+    const AIMessages = [
+      `It\'s ${currentPlayer.name}\'s turn.`,
+      `${currentPlayer.name} is thinking hard right now . . .`,
+      `I hope ${currentPlayer.name} isn't using this game to plan the robot revolution!`,
+    ]
+    let messArr;
+    currentPlayer.isComputer === true ? messArr = AIMessages : messArr = humanMessages;
+    const messIndex = currentPlayer.getRandomInt(messArr.length - 1);
+    gameMessages.textContent = messArr[messIndex];
   }
   // function checkIfAITurn(player, opponent) {
   //   if(player.isComputer === true) {
       
   //     player.takeAITurn(opponent);
   //     switchTurn();
-  //     gameMessages.textContent = `Back to you, ${opponent.name}, choose wisely!`;
+  //     
   //   } else {
   //     return;
   //   }

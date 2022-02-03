@@ -6,6 +6,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
   const allShipPositions = [];
   const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
   let shipCounter = 0;
+  let turnCounter = 0;
 
   // HUMAN FUNCTIONS
   function placeShip(firstSpace, direction, counter) {
@@ -122,13 +123,15 @@ const playerFactory = (name, isComputer, oppBoard) => {
     } else {
       oppBoard.receiveAttack(coord, oppPlayer);
     }
+    turnCounter++;
   }
 
   //GETTERS
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
+  function getTurns() { return turnCounter };
 
-  return { name, getShips, placeShip, getArmada, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeTurn, autoBuildArmada, getRandomInt };
+  return { name, getShips, placeShip, getArmada, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeTurn, autoBuildArmada, getRandomInt, getTurns };
 }
 export { playerFactory };

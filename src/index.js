@@ -36,8 +36,6 @@ let phase = 'setup';
 let activeSpace;
 let shipCounter = 0;
 let player1turn = true;
-let turnCounter1 = 0; //DOTHIS
-let turnCounter2 = 0;
 
 let currentPlayer;
 let otherPlayer;
@@ -57,7 +55,7 @@ function definePlayers() {
     yourBoard = board2;
   }
 }
-
+definePlayers();
 //BASIC FUNCTIONS
 function hide(elem) {
   elem.classList.add('hidden');
@@ -160,7 +158,7 @@ function writeErrMessage(err) {
   alert(errMessages[err]);
 }
 function confirmShips() {
-  writeAdminMessage(confirmArmada);
+  writeAdminMessage('confirmArmada');
   hide(shipMessages);
   hide(positionForm);
 }

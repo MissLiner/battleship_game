@@ -9,10 +9,11 @@ const playerFactory = (name, isComputer, oppBoard) => {
   let turnCounter = 0;
 
   // HUMAN FUNCTIONS
-  function placeShip(firstSpace, direction, counter) {
-    const newShip = shipFactory(ships[counter].name, ships[counter].size, firstSpace, direction);
+  function placeShip(firstSpace, direction) {
+    const newShip = shipFactory(ships[shipCounter].name, ships[shipCounter].size, firstSpace, direction);
     newShip.positionShip();
     armadaArr.push(newShip);
+    shipCounter++;
     return newShip;
   }
 
@@ -131,7 +132,8 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
   function getTurns() { return turnCounter };
+  function getShipCounter() { return shipCounter };
 
-  return { name, getShips, placeShip, getArmada, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeTurn, autoBuildArmada, getRandomInt, getTurns };
+  return { name, isComputer, getShips, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, autoBuildArmada, getArmada, getAllShipPositions, getRandomInt, getTurns, getShipCounter };
 }
 export { playerFactory };

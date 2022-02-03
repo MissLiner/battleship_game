@@ -34,7 +34,6 @@ let player2;
 
 let phase = 'setup';
 let activeSpace;
-let shipCounter = 0;
 let player1turn = true;
 
 let currentPlayer;
@@ -88,10 +87,8 @@ function switchTurn() {
   } else {
     if(player1turn === true) { 
       player1turn = false;
-      turnCounter1++;
     } else {  
       player1turn = true;
-      turnCounter2++;
     }
   }
   definePlayers();
@@ -99,7 +96,8 @@ function switchTurn() {
   board2.updateStatus(myBoard);
 }
 
-function showPlacementDialog(player, shipNumber) {
+function showPlacementDialog(player) {
+  const shipNumber = player.getShipCounter();
   let order;
   switch(shipNumber) {
     case 0: order = 'first';
@@ -163,7 +161,6 @@ function confirmShips() {
   hide(positionForm);
 }
 function startGame() {
-  shipCounter = 0;
   phase = 'gameplay';
   writeAdminMessage('firstGuess');
   displayGame(board1, board2);
@@ -192,10 +189,10 @@ nameInputBtn.addEventListener('click', () => {
   }
   else if(player1turn = true) {
     player1 = playerFactory(nameInput.value, false, board2);
-    showPlacementDialog(player1, 0);
+    showPlacementDialog(player1);
   } else {
     player2 = playerFactory(nameInput.value, false, board1);
-    showPlacementDialog(player2, 0);
+    showPlacementDialog(player2);
   }
   definePlayers();
   show(positionForm);
@@ -206,7 +203,6 @@ nameInputBtn.addEventListener('click', () => {
 armadaBtn.addEventListener('click', () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
-  shipCounter = 5;
   displayGame(board1, board2);
   confirmShips();
 })
@@ -234,7 +230,7 @@ submitBtn.addEventListener('click', () => {
     coord = { row: row, column: column};
   }
   // DO THIS - clean up code below
-  if(phase === 'setup' && shipCounter < 5) {
+  if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
     const direction = radioValue();
     if(direction === false) {
       writeErrMessage('direction');
@@ -242,14 +238,13 @@ submitBtn.addEventListener('click', () => {
     }
 
     if(activeSpace) {
-      const newShip = currentPlayer.placeShip(coord, direction, shipCounter);
+      const newShip = currentPlayer.placeShip(coord, direction);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
       activeSpace.classList.remove('active');
       displayGame(board1, board2);
-      shipCounter++;
       clearActiveSpace();
-      if(shipCounter < 5) {
-        showPlacementDialog(currentPlayer, shipCounter);
+      if(currentPlayer.getShipCounter() < 5) {
+        showPlacementDialog(currentPlayer);
       } else {
         confirmShips();
       }
@@ -257,7 +252,7 @@ submitBtn.addEventListener('click', () => {
       alert(writeErrMessage('coord'));
     }
   }
-  else if(phase === 'setup' && shipCounter > 4) {
+  else if(phase === 'setup' && currentPlayer.getShipCounter() > 4) {
     startGame();
   }
   // TAKE TURN

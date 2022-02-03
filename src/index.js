@@ -125,7 +125,7 @@ function generateMessage() {
     `Your turn, ${currentPlayer.name}.`,
     `Are you gonna let a computer beat you?!?`,
     `You got this, ${currentPlayer.name}!`,
-    `Back to you, ${opponent.name}, choose wisely!`,
+    `Back to you, ${currentPlayer.name}, choose wisely!`,
   ]
   const AIMessages = [
     `It\'s ${currentPlayer.name}\'s turn.`,
@@ -136,6 +136,16 @@ function generateMessage() {
   currentPlayer.isComputer === true ? messArr = AIMessages : messArr = humanMessages;
   const messIndex = currentPlayer.getRandomInt(messArr.length - 1);
   gameMessages.textContent = messArr[messIndex];
+}
+function generateErrMessage(err) {
+  const errMessages = {
+    name: 'Please tell me, what should I call you?',
+    direction: 'Please add a direction for your ship',
+    coord: 'Please choose your ships\'s starting position',
+    dupe: 'No need to attack there, you already did! Please choose another space.',
+    noguess: `You must choose a coordinate to attack before submitting.`,
+  }
+  alert(errMessages[err]);
 }
 function gameLoop() {
   currentPlayer.takeTurn(otherPlayer, activeSpace);
@@ -154,8 +164,9 @@ displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
 nameInputBtn.addEventListener('click', () => {
-  if(nameInput.value === null) {
-    gameMessages.textContent = 'Please tell me, what should I call you?';
+  if(!nameInput.value) {
+    generateErrMessage('name');
+    // gameMessages.textContent = 'Please tell me, what should I call you?';
     return;
   }
   else if(player1turn = true) {
@@ -184,7 +195,7 @@ gameDisplayBox.addEventListener('click', (e) => {
     if(!e.target.classList.contains('miss') && !e.target.classList.contains('hit')) {
       toggleActive(e.target);
     } else {
-      gameMessages.textContent = 'No need to attack there, you already did! Please choose another space.'
+      //gameMessages.textContent = 'No need to attack there, you already did! Please choose another space.'
     }
   }
 })
@@ -201,7 +212,7 @@ submitBtn.addEventListener('click', () => {
     column = Number(column);
     coord = { row: row, column: column};
   }
-
+  // DO THIS - clean up code below
   if(phase === 'setup' && shipCounter < 5) {
     const direction = radioValue();
     if(activeSpace) {

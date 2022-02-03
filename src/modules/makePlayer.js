@@ -129,6 +129,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
 
-  return { name, getShips, placeShip, getArmada, makeGuess, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeTurn, autoBuildArmada };
+  return { name, getShips, placeShip, getArmada, checkForDupes, findOpenSpaces, getAllShipPositions, pickDirection, isComputer, takeTurn, autoBuildArmada, getRandomInt };
 }
 export { playerFactory };

@@ -30,8 +30,11 @@ function displayGame(board1, board2) {
       const gameBoard = document.createElement('div');
       gameBoard.classList.add('gameboard');
       gameBoard.id = gameBoardID;
-      if(board.status === 'active') {
+      if(board.getStatus() === 'active') {
         gameBoard.classList.add('active');
+      }
+      else if(gameBoard.classList.contains('active')) {
+        gameBoard.classList.remove('active');
       }
       boardBox.appendChild(gameBoard);
       for(let i = 0; i < 10; i++) {

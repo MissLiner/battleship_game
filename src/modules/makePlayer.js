@@ -66,7 +66,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
   }
  
   const autoBuildArmada = () => {
-    for (let i = 0; i < ships.length; i++) {
+    for (let i = shipCounter; i < ships.length; i++) {
       let dupeCounter = 0;
       let dupeCheckArr = [];
       let isDupe = false;
@@ -86,6 +86,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
         allShipPositions.push(position);
       }
       armadaArr.push(newShip);
+      shipCounter++;
     }
   }
 

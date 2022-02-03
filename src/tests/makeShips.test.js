@@ -4,7 +4,7 @@ const makePlayer = require('../modules/makePlayer');
 const makeBoard = require('../modules/makeBoard')
 
 
-describe('makeShips tests', () => {
+describe.skip('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, { row: 1, column: 3 }, 'horizontal');
   testShip.positionShip();
   

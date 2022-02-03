@@ -1,13 +1,16 @@
-//fix gameplay so the right board and previous attacks are showing, and AI takes the right amount of time and shows its work
-// should i make value of name a promise, and create player when it is fulfilled?
+
 // TO DO
-// -Set up game over
-// -Show your own board while hitting other
+// -Add active board highlight
+// -Slow down AI turn so you can watch
+// -Figure out how to submit attacks so it makes sense
+// -Fix up game over
+// -set up reset game
 // -Show whose turn it is
+// -Clean up code, functions to modules where possible
 
 // -Change colors as ships sink / are sunk
 // -Have AI guess near spaces to hit
-// -display both boards
+// -Enable two human players
 
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
@@ -103,7 +106,6 @@ function showPlacementDialog(player) {
     case 0: order = 'first';
     break;
     case 1: order = 'second';
-      hide(armadaBtn);
     break;
     case 2: order = 'third';
     break;

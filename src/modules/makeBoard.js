@@ -17,8 +17,8 @@ const boardFactory = (name) => {
       }
     }
   })()
-  function updateStatus(currentBoard) {
-    if(currentBoard.name === name) {
+  function updateStatus(board) {
+    if(board.name === this.name) {
       status = 'active';
     } else {
       status = 'inactive';
@@ -80,8 +80,9 @@ const boardFactory = (name) => {
       return true;
     }
   }
+  function getStatus() { return status };
   
-  return { rows, status, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus }
+  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus }
 }
 
 export { boardFactory } 

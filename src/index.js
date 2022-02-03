@@ -1,6 +1,7 @@
 
 // TO DO
 // -Add active board highlight
+// -Add ship tally on screen for each player
 // -Slow down AI turn so you can watch
 // -Figure out how to submit attacks so it makes sense
 // -Fix up game over

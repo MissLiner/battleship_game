@@ -111,14 +111,14 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
-    oppBoard.toggleActiveSpace(guess);
+    oppBoard.updateActiveSpace(guess);
   }
 
-  function takeTurn(oppPlayer, coord) {
+  function takeTurn(oppPlayer) {
         if(isComputer === true) {
           makeGuess(oppPlayer);
         } else {
-          oppBoard.receiveAttack(coord, oppPlayer);
+          oppBoard.receiveAttack(oppPlayer);
         }
         turnCounter++;
   }

@@ -6,36 +6,34 @@ import { takeTurn } from "../index";
 function displayGame(board1, board2) {
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
-  
-  function toggleActiveSpace(board) {
-    if(board.activeSpace) {
-      activeSpace.classList.remove('active');
-    }
-    activeSpace = newSpace;
-    activeSpace.classList.add('active');
-  }
 
-  function addAttackListener(div) {
-    div.addEventListener('click', (e) => {
-      const classes = e.target.classList;
-      if(classes.contains('space')) {
-        if(!classes.contains('miss') && !classes.contains('hit')) {
-          toggleActiveSpace(e.target);
-        } else {
-          alert(writeErrMessage('dupe'));
-        }
-      }
-    })
-  }
+ 
   
   function displayBoard(board, boardBox, gameBoardID, audience) {
+
     if(document.getElementById(gameBoardID)) {
       document.getElementById(gameBoardID).remove();
+    }
+    function transformSpace(space) {
+      let rowNum = space.dataset.rowCoord;
+      rowNum = Number(rowNum);
+      let colNum = space.dataset.columnCoord;
+      colNum = Number(colNum);
+      const coord = { row: rowNum, column: colNum };
+      return coord;
+    }
+    function transformCoord(coord) {
+      space.dataset.rowCoord = coord[row];
+      space.dataset.columnCoord = coord[column];
     }
 
     function displayStatus(div, row, column) {
       const spaceStatus = board.rows[row][column];
       div.classList.add(spaceStatus);
+      const coord = transformSpace(div);
+      if(coord === board.getActiveSpace()) {
+        div.classList.add('active');
+      }
     } 
     function addSpace(row, rowNumber) {
       for(let x = 0; x < 10; x++) {
@@ -46,6 +44,22 @@ function displayGame(board1, board2) {
         row.appendChild(space);
         displayStatus(space, rowNumber, x);
       }
+    }
+    function addAttackListener(div, board) {
+      div.addEventListener('click', (e) => {
+        const classes = e.target.classList;
+        if(classes.contains('space')) {
+          if(!classes.contains('miss') && !classes.contains('hit')) {
+            const coord = transformSpace(e.target);
+            board.updateActiveSpace(coord);
+            buildBoard(board);
+          } else {
+            return;
+            // board.updateActiveSpace('');
+            // alert(writeErrMessage('dupe'));
+          }
+        }
+      })
     }
     function buildBoard() {
       const gameBoard = document.createElement('div');
@@ -67,8 +81,11 @@ function displayGame(board1, board2) {
       }
     }
     buildBoard();
+    addAttackListener();
   }
   displayBoard(board1, boardBox1, 'gameboard-1', 'private');
+  addAttackListener(document.getElementById('gameboard-1', board1));
   displayBoard(board2, boardBox2, 'gameboard-2', 'public');
+  addAttackListener(document.getElementById('gameboard-2', board2));
 }
 export { displayGame };

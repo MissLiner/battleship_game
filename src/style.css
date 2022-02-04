@@ -112,9 +112,9 @@ body {
 .hit {
   background-color: red;
 }
-.active {
+/* .active {
   background-color: yellowgreen !important;
-}
+} */
 .Destroyer {
   background-color: violet;
 }

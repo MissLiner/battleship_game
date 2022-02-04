@@ -44,34 +44,40 @@ const boardFactory = (name) => {
     }
   }
 
-  function hitShip(coordinates, player) {
+  function hitShip(player) {
     for(let i = 0; i < player.getArmada().length; i++) {
       const positionArray = player.getArmada()[i].getPositions();
       for(let x = 0; x < positionArray.length; x++) {
-        if(positionArray[x].row === coordinates.row && positionArray[x].column === coordinates.column) {
+        if(positionArray[x].row === activeSpace.row && positionArray[x].column === activeSpace.column) {
           player.getArmada()[i].hit();
         }
       }
     }
   }
 
-  const receiveAttack = (space, player) => {
+  const receiveAttack = (player) => {
     let row;
     let column;
-    let coordinates;
+    // let coordinates;
 
-    if(space.dataset) {
-      row = space.dataset.rowCoord;
-      column = space.dataset.columnCoord;
-      coordinates = { row: row, column: column }
-    } else {
-      row = space.row;
-      column = space.column;
-      coordinates = space;
+    if(activeSpace) {
+      row = activeSpace[row];
+      column = activeSpace[column];
+      // coordinates = { row: row, column: column }
     }
+
+    // if(space.dataset) {
+    //   row = space.dataset.rowCoord;
+    //   column = space.dataset.columnCoord;
+    //   coordinates = { row: row, column: column }
+    // } else {
+    //   row = space.row;
+    //   column = space.column;
+    //   coordinates = space;
+    // }
     if(rows[row][column] !== 'open') {
       rows[row][column] = 'hit';
-      hitShip(coordinates, player);
+      hitShip(player);
       hitCounter++;
     } else {
       rows[row][column] = 'miss';
@@ -86,8 +92,9 @@ const boardFactory = (name) => {
     }
   }
   function getStatus() { return status };
+  function getActiveSpace() {return activeSpace };
   
-  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace }
+  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace, getActiveSpace }
 }
 
 export { boardFactory } 

@@ -67,9 +67,6 @@ function show(elem) {
   elem.classList.remove('hidden');
 }
 
-function clearActiveSpace() {
-  activeSpace = '';
-}
 function radioValue() {
   for(let i = 0; i < directionInputs.length; i++) {
     if(directionInputs[i].checked) {
@@ -167,15 +164,15 @@ function startGame() {
   displayGame(board1, board2);
 }
 function loopGame() {
-  currentPlayer.takeTurn(otherPlayer, activeSpace);
+  currentPlayer.takeTurn(otherPlayer, activeSpace); //rewrite
   clearActiveSpace();
   if(currentPlayer.isComputer === true) {
     setTimeout(() => { displayGame(board1, board2); }, 2000);
     setTimeout(() => { switchTurn() }, 4000);
-    setTimeout(() => { writeGameMessage(currentPlayer, activeSpace) }, 4000);
+    setTimeout(() => { writeGameMessage() }, 4000);
   } else {
     switchTurn();
-    writeGameMessage(currentPlayer, activeSpace);
+    writeGameMessage();
   }
 }
 
@@ -213,31 +210,20 @@ armadaBtn.addEventListener('click', () => {
   confirmShips();
 })
 
-function addAttackListener(div) {
-  div.addEventListener('click', (e) => {
-    const classes = e.target.classList;
-    if(classes.contains('space')) {
-      if(!classes.contains('miss') && !classes.contains('hit')) {
-        toggleActiveSpace(e.target);
-      } else {
-        alert(writeErrMessage('dupe'));
-      }
-    }
-  })
-}
+
 
 submitBtn.addEventListener('click', () => {
-  let row;
-  let column;
-  let coord;
+  // let row;
+  // let column;
+  // let coord;
 
-  if(activeSpace) {
-    row = activeSpace.dataset.rowCoord;
-    row = Number(row);
-    column = activeSpace.dataset.columnCoord;
-    column = Number(column);
-    coord = { row: row, column: column};
-  }
+  // if(activeSpace) {
+  //   row = activeSpace.dataset.rowCoord;
+  //   row = Number(row);
+  //   column = activeSpace.dataset.columnCoord;
+  //   column = Number(column);
+  //   coord = { row: row, column: column};
+  // }
   // DO THIS - clean up code below
   if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
     const direction = radioValue();
@@ -246,13 +232,13 @@ submitBtn.addEventListener('click', () => {
       return;
     }
 
-    if(activeSpace) {
+    if(myBoard.getActiveSpace()) {
       const newShip = currentPlayer.placeShip(coord, direction);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
-      activeSpace.classList.remove('active');
+      // activeSpace.classList.remove('active');
+      myBoard.updateActiveSpace('');
       displayGame(board1, board2);
-
-      clearActiveSpace();
+      // clearActiveSpace();
       if(currentPlayer.getShipCounter() < 5) {
         showPlacementDialog(currentPlayer);
       } else {
@@ -267,7 +253,7 @@ submitBtn.addEventListener('click', () => {
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
-    if(activeSpace === '') {
+    if(myBoard.getActiveSpace() === '') {
       writeErrMessage('noguess');
       return;
     }

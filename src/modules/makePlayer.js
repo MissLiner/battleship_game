@@ -111,7 +111,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
-    oppBoard.receiveAttack(allOpenSpaces[guess], oppPlayer);
+    oppBoard.toggleActiveSpace(guess);
   }
 
   function takeTurn(oppPlayer, coord) {

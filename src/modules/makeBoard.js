@@ -4,7 +4,7 @@ const boardFactory = (name) => {
   const rows = [];
   let hitCounter = 0;
   let status;
-  let activeSpace;
+  let activeSpace = '';
 
   (function popBoard() { 
     for (let i=0; i < 10; i++) {
@@ -24,6 +24,10 @@ const boardFactory = (name) => {
     } else {
       status = 'inactive';
     }
+  }
+
+  function updateActiveSpace(newSpace) {
+    activeSpace = newSpace;
   }
 
   function drawShip(shipPositions, name) {
@@ -83,7 +87,7 @@ const boardFactory = (name) => {
   }
   function getStatus() { return status };
   
-  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus }
+  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace }
 }
 
 export { boardFactory } 

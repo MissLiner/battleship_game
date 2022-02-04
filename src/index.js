@@ -226,7 +226,7 @@ function transformSpace(space) {
 gameboardBoxes.forEach(box => {
   box.addEventListener('click', (e) => {
     if(box.classList.contains('active')) {
-      const spaces = document.querySelectorAll('space');
+      const spaces = document.querySelectorAll('.space');
       for(let space of spaces) {
         if(space.classList.contains('active-space')) {
           space.classList.remove('active-space');
@@ -241,23 +241,11 @@ gameboardBoxes.forEach(box => {
       else if(phase === 'gameplay') {
         yourBoard.updateActiveSpace(coord);
       }
-      // displayGame(board1, board2);
     }
   })
 })
 
 submitBtn.addEventListener('click', () => {
-  // let row;
-  // let column;
-  // let coord;
-
-  // if(activeSpace) {
-  //   row = activeSpace.dataset.rowCoord;
-  //   row = Number(row);
-  //   column = activeSpace.dataset.columnCoord;
-  //   column = Number(column);
-  //   coord = { row: row, column: column};
-  // }
   // DO THIS - clean up code below
   if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
     const direction = radioValue();
@@ -269,7 +257,6 @@ submitBtn.addEventListener('click', () => {
     if(myBoard.getActiveSpace()) {
       const newShip = currentPlayer.placeShip(coord, direction);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
-      // activeSpace.classList.remove('active');
       myBoard.updateActiveSpace('');
       displayGame(board1, board2);
       // clearActiveSpace();

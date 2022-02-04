@@ -2,7 +2,6 @@
 // TO DO
 // -Fix space highlighting not to work on computers board or when not turn
 // -Add ship tally on screen for each player
-// -Slow down AI turn so you can watch
 // -Figure out how to submit attacks so it makes sense
 // -Fix up game over
 // -set up reset game
@@ -67,13 +66,7 @@ function hide(elem) {
 function show(elem) {
   elem.classList.remove('hidden');
 }
-function toggleActiveSpace(newSpace) {
-  if(activeSpace) {
-    activeSpace.classList.remove('active');
-  }
-  activeSpace = newSpace;
-  activeSpace.classList.add('active');
-}
+
 function clearActiveSpace() {
   activeSpace = '';
 }
@@ -184,25 +177,7 @@ function loopGame() {
     switchTurn();
     writeGameMessage(currentPlayer, activeSpace);
   }
-
 }
-// take the turn(currentplayer = human)
-//     clear activespace
-//     switch turn
-//      -playerturn1 true -> false
-//      -defineplayers(currentplayer = computer)
-//      -update both boards(active board switches from 1 -> 2)
-//      -display the game (should have correct green highlight)
-//     dislay computer player message
-//     check if player is now computer, if not, end, if so:
-//         -take computer turn after 3 seconds
-//         -display game for 3 seconds
-//         -switchturn:
-//             -playerturn1 false -> true
-//             -defineplayers(currentplayer = human)
-//             -update both boards(active board switches from 2 -> 1)
-//             -display the game (should have correct green highlight)
-//        -display human player message
 
 //CREATE COMPUTER PLAYER2
 player2 = playerFactory('Hal', true, board1);
@@ -238,15 +213,18 @@ armadaBtn.addEventListener('click', () => {
   confirmShips();
 })
 
-gameDisplayBox.addEventListener('click', (e) => {
-  if(e.target.classList.contains('space')) {
-    if(!e.target.classList.contains('miss') && !e.target.classList.contains('hit')) {
-      toggleActiveSpace(e.target);
-    } else {
-      alert(writeErrMessage('dupe'));
+function addAttackListener(div) {
+  div.addEventListener('click', (e) => {
+    const classes = e.target.classList;
+    if(classes.contains('space')) {
+      if(!classes.contains('miss') && !classes.contains('hit')) {
+        toggleActiveSpace(e.target);
+      } else {
+        alert(writeErrMessage('dupe'));
+      }
     }
-  }
-})
+  })
+}
 
 submitBtn.addEventListener('click', () => {
   let row;
@@ -273,6 +251,7 @@ submitBtn.addEventListener('click', () => {
       myBoard.drawShip(newShip.getPositions(), newShip.name);
       activeSpace.classList.remove('active');
       displayGame(board1, board2);
+
       clearActiveSpace();
       if(currentPlayer.getShipCounter() < 5) {
         showPlacementDialog(currentPlayer);

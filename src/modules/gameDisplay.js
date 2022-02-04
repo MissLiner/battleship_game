@@ -7,6 +7,27 @@ function displayGame(board1, board2) {
   const boardBox1 = document.getElementById('board-box-1');
   const boardBox2 = document.getElementById('board-box-2');
   
+  function toggleActiveSpace(board) {
+    if(board.activeSpace) {
+      activeSpace.classList.remove('active');
+    }
+    activeSpace = newSpace;
+    activeSpace.classList.add('active');
+  }
+
+  function addAttackListener(div) {
+    div.addEventListener('click', (e) => {
+      const classes = e.target.classList;
+      if(classes.contains('space')) {
+        if(!classes.contains('miss') && !classes.contains('hit')) {
+          toggleActiveSpace(e.target);
+        } else {
+          alert(writeErrMessage('dupe'));
+        }
+      }
+    })
+  }
+  
   function displayBoard(board, boardBox, gameBoardID, audience) {
     if(document.getElementById(gameBoardID)) {
       document.getElementById(gameBoardID).remove();
@@ -32,6 +53,7 @@ function displayGame(board1, board2) {
       gameBoard.id = gameBoardID;
       if(board.getStatus() === 'active') {
         gameBoard.classList.add('active');
+        addAttackListener(gameBoard);
       }
       else if(gameBoard.classList.contains('active')) {
         gameBoard.classList.remove('active');

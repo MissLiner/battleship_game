@@ -4,6 +4,7 @@ const boardFactory = (name) => {
   const rows = [];
   let hitCounter = 0;
   let status;
+  let activeSpace;
 
   (function popBoard() { 
     for (let i=0; i < 10; i++) {
@@ -86,20 +87,3 @@ const boardFactory = (name) => {
 }
 
 export { boardFactory } 
-
-  // let armadaStatus = 'afloat';
-  // const shipLengths = [2, 3, 3, 4, 5];
-  // const armadaArr = [];
-  // const allShipPositions = [];
-
-  // function checkIfShipOffBoard() {
-  //   const allSpaces = [];
-  //   for(let i = 0; i < allShipPositions.length; i++) {
-  //     allSpaces.push(allShipPositions[i].row);
-  //     allSpaces.push(allShipPositions[i].column);
-  //   }
-  //   const offBoard = allSpaces.filter(value => value > 9);
-  //   if(offBoard.length > 0) {
-  //     throw 'ship is off board' + offBoard.length;
-  //   }
-  // }

@@ -107,20 +107,26 @@ const playerFactory = (name, isComputer, oppBoard) => {
     return allOpenSpaces;
   }
 
-  const makeGuess = (oppPlayer) => {
+  function makeGuess(oppPlayer) {
     const allOpenSpaces = findOpenSpaces();
     const maxNum = allOpenSpaces.length;
     const guess = getRandomInt(maxNum);
     setTimeout(() => { oppBoard.receiveAttack(allOpenSpaces[guess], oppPlayer); }, 3000);
   }
-  
-  const takeTurn = (oppPlayer, coord) => {
-    if(isComputer === true) {
-      makeGuess(oppPlayer);
-    } else {
-      oppBoard.receiveAttack(coord, oppPlayer);
-    }
-    turnCounter++;
+
+  function takeTurn(oppPlayer, coord) {
+    let takeTurnP = new Promise((resolve) => {
+        if(isComputer === true) {
+          makeGuess(oppPlayer);
+          turnCounter++;
+          resolve();
+        } else {
+          oppBoard.receiveAttack(coord, oppPlayer);
+          turnCounter++;
+          resolve();
+        }
+      })
+    return takeTurnP;
   }
 
   //GETTERS

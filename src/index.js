@@ -56,7 +56,7 @@ function definePlayers() {
     currentPlayer = player2;
     otherPlayer = player1;
     myBoard = board2;
-    yourBoard = board2;
+    yourBoard = board1;
   }
 }
 definePlayers();
@@ -174,21 +174,33 @@ function startGame() {
   displayGame(board1, board2);
 }
 function loopGame() {
-  const moveSlow = async () => {
-    const result = await currentPlayer.takeTurn(otherPlayer, activeSpace);
-    clearActiveSpace();
-    displayGame(board1, board2);
-    if(currentPlayer.isComputer === true) {
-      setTimeout(() => { displayGame(board1, board2); }, 3000);
-    }
-  }
-  const moveSlow2 = async () => {
-    const result = await moveSlow()
-    switchTurn();
-    writeGameMessage(currentPlayer, activeSpace);
-  }
-  moveSlow2();
+  currentPlayer.takeTurn(otherPlayer, activeSpace)
+    .then(() => clearActiveSpace())
+    .then(() => {
+      if(currentPlayer.isComputer === true) {
+        setTimeout(() => { displayGame(board1, board2); }, 3000);
+      } 
+    })
+    .then(() => switchTurn())
+    .then(() => writeGameMessage(currentPlayer, activeSpace))
 }
+// take the turn(currentplayer = human)
+//     clear activespace
+//     switch turn
+//      -playerturn1 true -> false
+//      -defineplayers(currentplayer = computer)
+//      -update both boards(active board switches from 1 -> 2)
+//      -display the game (should have correct green highlight)
+//     dislay computer player message
+//     check if player is now computer, if not, end, if so:
+//         -take computer turn after 3 seconds
+//         -display game for 3 seconds
+//         -switchturn:
+//             -playerturn1 false -> true
+//             -defineplayers(currentplayer = human)
+//             -update both boards(active board switches from 2 -> 1)
+//             -display the game (should have correct green highlight)
+//        -display human player message
 
 //CREATE COMPUTER PLAYER2
 player2 = playerFactory('Hal', true, board1);
@@ -280,7 +292,6 @@ submitBtn.addEventListener('click', () => {
     }
     loopGame();
     if(currentPlayer.isComputer === true) {
-      switchTurn();
       loopGame();
     }
   }

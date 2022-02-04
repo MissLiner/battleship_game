@@ -1,6 +1,6 @@
 
 // TO DO
-// -Add active board highlight
+// -Fix space highlighting not to work on computers board or when not turn
 // -Add ship tally on screen for each player
 // -Slow down AI turn so you can watch
 // -Figure out how to submit attacks so it makes sense
@@ -174,15 +174,17 @@ function startGame() {
   displayGame(board1, board2);
 }
 function loopGame() {
-  currentPlayer.takeTurn(otherPlayer, activeSpace)
-    .then(() => clearActiveSpace())
-    .then(() => {
-      if(currentPlayer.isComputer === true) {
-        setTimeout(() => { displayGame(board1, board2); }, 3000);
-      } 
-    })
-    .then(() => switchTurn())
-    .then(() => writeGameMessage(currentPlayer, activeSpace))
+  currentPlayer.takeTurn(otherPlayer, activeSpace);
+  clearActiveSpace();
+  if(currentPlayer.isComputer === true) {
+    setTimeout(() => { displayGame(board1, board2); }, 2000);
+    setTimeout(() => { switchTurn() }, 4000);
+    setTimeout(() => { writeGameMessage(currentPlayer, activeSpace) }, 4000);
+  } else {
+    switchTurn();
+    writeGameMessage(currentPlayer, activeSpace);
+  }
+
 }
 // take the turn(currentplayer = human)
 //     clear activespace

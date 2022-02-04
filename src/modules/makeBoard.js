@@ -92,9 +92,9 @@ const boardFactory = (name) => {
     }
   }
   function getStatus() { return status };
-  function getActiveSpace() {return activeSpace };
+  function getActiveSpace() { return activeSpace };
   
-  return { rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace, getActiveSpace }
+  return { activeSpace, rows, getStatus, name, drawShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace, getActiveSpace }
 }
 
 export { boardFactory } 

@@ -29,6 +29,8 @@ const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
 const armadaBtn = document.getElementById('armada-btn');
+const gameboardBox1 = document.getElementById('gameboard-box-1');
+const gameboardBox2 = document.getElementById('gameboard-box-2');
 
 //GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -203,6 +205,8 @@ nameInputBtn.addEventListener('click', () => {
 })
 
 // PLACE PLAYER1 SHIPS
+
+
 armadaBtn.addEventListener('click', () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
@@ -210,7 +214,37 @@ armadaBtn.addEventListener('click', () => {
   confirmShips();
 })
 
+const gameboardBoxes = document.querySelectorAll('.gameboard-box');
+function transformSpace(space) {
+  let rowNum = space.dataset.rowCoord;
+  rowNum = Number(rowNum);
+  let colNum = space.dataset.columnCoord;
+  colNum = Number(colNum);
+  const coord = { row: rowNum, column: colNum };
+  return coord;
+}
+gameboardBoxes.forEach(box => {
+  box.addEventListener('click', (e) => {
+    if(box.classList.contains('active')) {
+      const spaces = document.querySelectorAll('space');
+      for(let space of spaces) {
+        if(space.classList.contains('active-space')) {
+          space.classList.remove('active-space');
+        }
+      }
+      e.target.classList.add('active-space');
 
+      const coord = transformSpace(e.target);
+      if(phase === 'setup') {
+        myBoard.updateActiveSpace(coord);
+      } 
+      else if(phase === 'gameplay') {
+        yourBoard.updateActiveSpace(coord);
+      }
+      // displayGame(board1, board2);
+    }
+  })
+})
 
 submitBtn.addEventListener('click', () => {
   // let row;

@@ -25,7 +25,14 @@ body {
 }
 .active {
   border: solid;
-  border-color: limegreen;
+  border-color: limegreen !important;
+}
+.active-space {
+  border: solid;
+  border-width: 2px !important;
+  border-color: limegreen !important;
+  height: 36px !important;
+  width: 36px !important;
 }
 .board-box {
   display: grid;
@@ -75,9 +82,14 @@ body {
 .gameboard {
   background-color: transparent;
   display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  height: 400px;
+  width: 400px;
+}
+.gameboard-box {
+  background-color: transparent;
   grid-column-start: 2;
   grid-row-start: 2;
-  grid-template-rows: repeat(10, 1fr);
   height: 400px;
   width: 400px;
 }

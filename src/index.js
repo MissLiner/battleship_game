@@ -166,8 +166,8 @@ function startGame() {
   displayGame(board1, board2);
 }
 function loopGame() {
-  currentPlayer.takeTurn(otherPlayer, activeSpace); //rewrite
-  clearActiveSpace();
+  currentPlayer.takeTurn(otherPlayer, yourBoard.getActiveSpace()); //rewrite
+  yourBoard.updateActiveSpace('');
   if(currentPlayer.isComputer === true) {
     setTimeout(() => { displayGame(board1, board2); }, 2000);
     setTimeout(() => { switchTurn() }, 4000);
@@ -276,7 +276,7 @@ submitBtn.addEventListener('click', () => {
   }
   // TAKE TURN
   else if(phase === 'gameplay') {
-    if(myBoard.getActiveSpace() === '') {
+    if(yourBoard.getActiveSpace() === '') {
       writeErrMessage('noguess');
       return;
     }

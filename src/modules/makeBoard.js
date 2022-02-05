@@ -61,8 +61,8 @@ const boardFactory = (name) => {
     // let coordinates;
 
     if(activeSpace) {
-      row = activeSpace[row];
-      column = activeSpace[column];
+      row = activeSpace.row;
+      column = activeSpace.column;
       // coordinates = { row: row, column: column }
     }
 

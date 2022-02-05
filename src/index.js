@@ -60,7 +60,7 @@ function definePlayers() {
     yourBoard = board1;
   }
 }
-definePlayers();
+// definePlayers();
 //BASIC FUNCTIONS
 function hide(elem) {
   elem.classList.add('hidden');
@@ -182,8 +182,8 @@ function loopGame() {
 player2 = playerFactory('Hal', true, board1);
 board2.placeArmada(player2.getArmada());
 
-board1.updateStatus(myBoard);
-board2.updateStatus(myBoard);
+// board1.updateStatus(myBoard);
+// board2.updateStatus(myBoard);
 displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
@@ -200,6 +200,9 @@ nameInputBtn.addEventListener('click', () => {
     showPlacementDialog(player2);
   }
   definePlayers();
+  board1.updateStatus(myBoard);
+  board2.updateStatus(myBoard);
+  displayGame(board1, board2);
   show(positionForm);
   hide(nameForm);
 })
@@ -255,11 +258,10 @@ submitBtn.addEventListener('click', () => {
     }
 
     if(myBoard.getActiveSpace()) {
-      const newShip = currentPlayer.placeShip(coord, direction);
+      const newShip = currentPlayer.placeShip(myBoard.getActiveSpace(), direction);
       myBoard.drawShip(newShip.getPositions(), newShip.name);
       myBoard.updateActiveSpace('');
       displayGame(board1, board2);
-      // clearActiveSpace();
       if(currentPlayer.getShipCounter() < 5) {
         showPlacementDialog(currentPlayer);
       } else {

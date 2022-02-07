@@ -53,7 +53,7 @@ describe('makePlayer tests', () => {
       testBoard2.hitShip(testPlayer2);
       testBoard2.updateActiveSpace(testPlayer2.getArmada()[0].getPositions()[1]);
       testBoard2.hitShip(testPlayer2);
-      expect(testPlayer1.getArmada()[0].getStatus()).toBe('sunk');
+      expect(testPlayer2.getArmada()[0].getStatus()).toBe('sunk');
     })
   
     test('dupe check - with dupes', () => {

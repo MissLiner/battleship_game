@@ -44,15 +44,18 @@ const boardFactory = (name) => {
   }
 
   // GAMEPLAY
+
   function hitShip(player) {
     for(let i = 0; i < player.getArmada().length; i++) {
       const positionArray = player.getArmada()[i].getPositions();
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === activeSpace.row && positionArray[x].column === activeSpace.column) {
           player.getArmada()[i].hit();
+          return 'hello';
         }
       }
     }
+    return 'goodbye';
   }
   const receiveAttack = (player) => {
     let row;

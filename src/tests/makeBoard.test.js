@@ -1,7 +1,7 @@
 const makeBoard = require ('../modules/makeBoard');
 const makePlayer = require('../modules/makePlayer');
 
-describe('makeBoard tests', () => {
+describe.skip('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory('testBoard');
   const testBoard2 = makeBoard.boardFactory('testBoard2');
   const testPlayer = makePlayer.playerFactory('Hal', true, testBoard);

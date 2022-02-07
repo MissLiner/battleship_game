@@ -39,16 +39,17 @@ describe('makePlayer tests', () => {
       expect(testPlayer1.getArmada()[1].getHits()).toBe(1);
     })
     test('board sends hit to ship',() => {
-      oppBoard.hitShip(testPlayer1.getArmada()[2].getPositions()[0], testPlayer1);
+      testBoard1.updateActiveSpace(testPlayer1.getArmada()[2].getPositions()[0]);
+      testBoard1.hitShip(testPlayer1);
       expect(testPlayer1.getArmada()[2].getHits()).toBe(1);
     })
     test('ship doesn\'t sink on first hit',() => {
-      oppBoard.hitShip(testPlayer1.getArmada()[2].getPositions()[0], testPlayer1);
+      testBoard2.hitShip(testPlayer1.getArmada()[2].getPositions()[0], testPlayer1);
       expect(testPlayer1.getArmada()[2].getStatus()).toBe('afloat');
     })
     test('board sinks ship', () => {
-      oppBoard.hitShip(testPlayer1.getArmada()[0].getPositions()[0], testPlayer1);
-      oppBoard.hitShip(testPlayer1.getArmada()[0].getPositions()[1], testPlayer1);
+      testBoard2.hitShip(testPlayer1.getArmada()[0].getPositions()[0], testPlayer1);
+      testBoard2.hitShip(testPlayer1.getArmada()[0].getPositions()[1], testPlayer1);
       expect(testPlayer1.getArmada()[0].getStatus()).toBe('sunk');
     })
   

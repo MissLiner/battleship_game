@@ -1,13 +1,11 @@
-
 // TO DO
-// -Fix space highlighting not to work on computers board or when not turn
+
+// -Separate submit buttons
 // -Add ship tally on screen for each player
-// -Figure out how to submit attacks so it makes sense
 // -Fix up game over
 // -set up reset game
-// -Show whose turn it is
+// -Show whose turn it is or label boards
 // -Clean up code, functions to modules where possible
-
 // -Change colors as ships sink / are sunk
 // -Have AI guess near spaces to hit
 // -Enable two human players
@@ -16,7 +14,6 @@ import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
-// import regeneratorRuntime from './regenerator-runtime';
 
 //DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
@@ -32,7 +29,7 @@ const armadaBtn = document.getElementById('armada-btn');
 const gameboardBox1 = document.getElementById('gameboard-box-1');
 const gameboardBox2 = document.getElementById('gameboard-box-2');
 
-//GAMEPLAY VARIABLES
+// GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
 let board2 = boardFactory('board2');
 let player1;
@@ -47,6 +44,7 @@ let otherPlayer;
 let myBoard;
 let yourBoard;
 
+// BASIC FUNCTIONS
 function definePlayers() {
   if (player1turn === true) {
     currentPlayer = player1;
@@ -60,8 +58,6 @@ function definePlayers() {
     yourBoard = board1;
   }
 }
-// definePlayers();
-//BASIC FUNCTIONS
 function hide(elem) {
   elem.classList.add('hidden');
 }
@@ -94,6 +90,7 @@ function switchTurn() {
   displayGame(board1, board2);
 }
 
+// DIALOG FUNCTIONS
 function showPlacementDialog(player) {
   const shipNumber = player.getShipCounter();
   let order;
@@ -157,6 +154,7 @@ function confirmShips() {
   hide(shipMessages);
   hide(positionForm);
 }
+// GAME FUNCTIONS
 function startGame() {
   phase = 'gameplay';
   writeAdminMessage('firstGuess');
@@ -178,12 +176,10 @@ function loopGame() {
   }
 }
 
-//CREATE COMPUTER PLAYER2
+// CREATE COMPUTER PLAYER2
 player2 = playerFactory('Hal', true, board1);
 board2.placeArmada(player2.getArmada());
 
-// board1.updateStatus(myBoard);
-// board2.updateStatus(myBoard);
 displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
@@ -208,8 +204,6 @@ nameInputBtn.addEventListener('click', () => {
 })
 
 // PLACE PLAYER1 SHIPS
-
-
 armadaBtn.addEventListener('click', () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
@@ -249,7 +243,6 @@ gameboardBoxes.forEach(box => {
 })
 
 submitBtn.addEventListener('click', () => {
-  // DO THIS - clean up code below
   if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
     const direction = radioValue();
     if(direction === false) {

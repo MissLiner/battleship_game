@@ -29,11 +29,9 @@ body {
   outline-width: 4px;
 }
 .active-space {
-  border: solid;
-  border-width: 2px !important;
-  border-color: limegreen !important;
-  height: 36px !important;
-  width: 36px !important;
+  outline-style: solid;
+  outline-color: limegreen;
+  outline-width: 4px;
 }
 .board-box {
   display: grid;
@@ -70,7 +68,6 @@ body {
   grid-template-rows: repeat(10, 1fr);
   height: 400px;
   line-height: 40px;
-  /* margin-left: 0px; */
   width: 40px;
 }
 .number-space {

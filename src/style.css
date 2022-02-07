@@ -29,9 +29,9 @@ body {
   outline-width: 4px;
 }
 .active-space {
-  outline-style: solid;
-  outline-color: limegreen;
-  outline-width: 4px;
+  outline: solid !important;
+  outline-color: yellow !important;
+  outline-width: 2px !important;
 }
 .board-box {
   display: grid;
@@ -95,9 +95,9 @@ body {
   display: none;
 }
 .space {
-  border: solid;
-  border-color: white;
-  border-width: 1px;
+  /* border: solid;
+  border-color: transparent; */
+  border: none;
   height:38px;
   width: 38px;
 }

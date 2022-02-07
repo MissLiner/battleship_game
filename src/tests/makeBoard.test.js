@@ -1,10 +1,11 @@
 const makeBoard = require ('../modules/makeBoard');
 const makePlayer = require('../modules/makePlayer');
 
-describe.skip('makeBoard tests', () => {
+describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory('testBoard');
   const testBoard2 = makeBoard.boardFactory('testBoard2');
   const testPlayer = makePlayer.playerFactory('Hal', true, testBoard);
+  const testPlayer2 = makePlayer.playerFactory('Human', false, testBoard2);
 
   test('draws correct number of rows', () => {
     expect(testBoard.rows.length).toBe(10);
@@ -12,9 +13,10 @@ describe.skip('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test('marks misses on board', () => {
-    testBoard.receiveAttack( { row: 1, column: 2 },  testPlayer);
-    expect(testBoard.rows[1][2]).toBe('miss');
+  test.only('marks misses on board', () => {
+    testBoard2.updateActiveSpace( { row: 0, column: 0 } );
+    testBoard2.receiveAttack(testPlayer2);
+    expect(testBoard2.rows[0][0]).toBe('miss');
   })
   test('updates active board status', () => {
     let activeBoard = testBoard;

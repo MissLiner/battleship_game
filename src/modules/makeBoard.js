@@ -51,11 +51,10 @@ const boardFactory = (name) => {
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === activeSpace.row && positionArray[x].column === activeSpace.column) {
           player.getArmada()[i].hit();
-          return 'hello';
+          return;
         }
       }
     }
-    return 'goodbye';
   }
   const receiveAttack = (player) => {
     let row;

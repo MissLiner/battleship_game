@@ -12,18 +12,16 @@ describe('makePlayer tests', () => {
   const testPlayer2 = makePlayer.playerFactory('Nemesis', true, testBoard1);
   const testPlayer3 = makePlayer.playerFactory('Human', false, testBoard3);
 
-  test.only('shipCounter works - one ship', () => {
+  test('shipCounter works - one ship', () => {
     testPlayer3.placeShip( { row: 0, column:0 }, 'horizontal');
     expect(testPlayer3.getShipCounter()).toBe(1);
   })
-  test.only('shipCounter works - armada', () => {
+  test('shipCounter works - armada', () => {
     testPlayer3.autoBuildArmada();
     expect(testPlayer3.getShipCounter()).toBe(5);
   })
 
-
   describe('armada tests', () => { 
-
     testBoard1.placeArmada(testPlayer1.getArmada());
     testBoard2.placeArmada(testPlayer2.getArmada());
   

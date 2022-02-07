@@ -11,6 +11,7 @@
 // -Enable two human players
 
 // FUNCTIONS ONLY EXTERNAL FOR TESTING
+
 //  MAKEPLAYER
 //  -checkForDupes
 //  -findOpenSpaces (NOT TESTED EITHER)

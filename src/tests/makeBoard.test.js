@@ -1,6 +1,5 @@
 const makeBoard = require ('../modules/makeBoard');
 const makePlayer = require('../modules/makePlayer');
-const makeShips = require('../modules/makeShips');
 
 describe('makeBoard tests', () => {
   const testBoard = makeBoard.boardFactory('testBoard');
@@ -17,12 +16,12 @@ describe('makeBoard tests', () => {
     testBoard.receiveAttack( { row: 1, column: 2 },  testPlayer);
     expect(testBoard.rows[1][2]).toBe('miss');
   })
-  test.only('updates active board status', () => {
+  test('updates active board status', () => {
     let activeBoard = testBoard;
     testBoard.updateStatus(activeBoard);
     expect(testBoard.getStatus()).toBe('active');
   })
-  test.only('updates inactive board status', () => {
+  test('updates inactive board status', () => {
     let activeBoard = testBoard;
     testBoard2.updateStatus(activeBoard);
     expect(testBoard2.getStatus()).toBe('inactive');

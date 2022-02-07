@@ -1,23 +1,28 @@
 function displayGame(board1, board2) {
   const gameboardBox1 = document.getElementById('gameboard-box-1');
   const gameboardBox2 = document.getElementById('gameboard-box-2');
-  const gameboardBoxes = document.querySelectorAll('.gameboard-box');
 
-  gameboardBoxes.forEach(box => {
-    if(box.firstChild) {
-      box.removeChild(box.firstChild);
-    }
-  })
-
-  function displayBoard(board, gameboardBox, gameBoardID) {
-    if(document.getElementById(gameBoardID)) {
-      document.getElementById(gameBoardID).remove();
+  function displayBoard(board, gameboardBox, gameBoardID, audience) {
+    if(gameboardBox.firstChild) {
+      gameboardBox.removeChild(gameboardBox.firstChild);
     }
 
     function displayStatus(div, row, column) {
       const spaceStatus = board.rows[row][column];
-      div.classList.add(spaceStatus);
-      const coord = [ row, column ];
+      if(audience === 'private') {
+        div.classList.add(spaceStatus);
+      } else {
+        switch(spaceStatus) {
+          case 'hit': 
+            div.classList.add('hit');
+          case 'miss': 
+            div.classList.add('miss');
+          case 'sunk': 
+            div.classList.add('sunk');
+          default: 
+            div.classList.add('open');
+        }
+      }
     } 
     function addSpace(row, rowNumber) {
       for(let x = 0; x < 10; x++) {
@@ -50,7 +55,7 @@ function displayGame(board1, board2) {
     }
     buildBoard();
   }
-  displayBoard(board1, gameboardBox1, 'gameboard-1', 'public');
-  displayBoard(board2, gameboardBox2, 'gameboard-2', 'private');
+  displayBoard(board1, gameboardBox1, 'gameboard-1', 'private');
+  displayBoard(board2, gameboardBox2, 'gameboard-2', 'public');
 }
 export { displayGame };

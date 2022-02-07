@@ -15,6 +15,8 @@
 //  -checkForDupes
 //  -findOpenSpaces (NOT TESTED EITHER)
 //  -pickDirection
+//  MAKEBOARD
+//  -hitShip
 
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
@@ -42,7 +44,6 @@ let player1;
 let player2;
 
 let phase = 'setup';
-let activeSpace;
 let player1turn = true;
 
 let currentPlayer;

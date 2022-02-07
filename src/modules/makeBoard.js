@@ -1,4 +1,3 @@
-
 const boardFactory = (name) => {
   const rows = [];
   let hitCounter = 0;
@@ -17,6 +16,8 @@ const boardFactory = (name) => {
       }
     }
   })()
+
+  // SETTERS
   const updateStatus = (board) => {
     if(board.name === this.name) {
       status = 'active';
@@ -24,25 +25,25 @@ const boardFactory = (name) => {
       status = 'inactive';
     }
   }
-
   const updateActiveSpace = (newSpace) => {
     activeSpace = newSpace;
   }
 
-  function placeShip(shipPositions, name) {
+  // SHIP PLACEMENT
+  const placeShip = (shipPositions, name) => {
     for(let i = 0; i < shipPositions.length; i++) {
       const rowPos = shipPositions[i].row;
       const colPos = shipPositions[i].column;
       rows[rowPos][colPos] = name;
     }
   }
-
   const placeArmada = (armadaArr) => {
     for (let ship of armadaArr) {
       placeShip(ship.getPositions(), ship.name);
     }
   }
 
+  // GAMEPLAY
   function hitShip(player) {
     for(let i = 0; i < player.getArmada().length; i++) {
       const positionArray = player.getArmada()[i].getPositions();
@@ -53,27 +54,14 @@ const boardFactory = (name) => {
       }
     }
   }
-
   const receiveAttack = (player) => {
     let row;
     let column;
-    // let coordinates;
 
     if(activeSpace) {
       row = activeSpace.row;
       column = activeSpace.column;
-      // coordinates = { row: row, column: column }
     }
-
-    // if(space.dataset) {
-    //   row = space.dataset.rowCoord;
-    //   column = space.dataset.columnCoord;
-    //   coordinates = { row: row, column: column }
-    // } else {
-    //   row = space.row;
-    //   column = space.column;
-    //   coordinates = space;
-    // }
     if(rows[row][column] !== 'open') {
       rows[row][column] = 'hit';
       hitShip(player);
@@ -82,18 +70,19 @@ const boardFactory = (name) => {
       rows[row][column] = 'miss';
     }
   }
-
-  const checkIfAllSunk= () => {
+  const checkIfAllSunk = () => {
     const shipSpaceTotal = 17;
     if(shipSpaceTotal === hitCounter) {
       status = 'sunk';
       return true;
     }
   }
+
+  // GETTERS
   function getStatus() { return status };
   function getActiveSpace() { return activeSpace };
   
-  return { activeSpace, rows, getStatus, name, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, updateStatus, updateActiveSpace, getActiveSpace }
+  return { name, rows, updateStatus, updateActiveSpace, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, getStatus, getActiveSpace }
 }
 
 export { boardFactory } 

@@ -30,13 +30,12 @@ const shipMessages = document.getElementById('ship-messages');
 const nameForm = document.getElementById('name-form');
 const nameInput = document.getElementById('name-input');
 const nameInputBtn = document.getElementById('name-input-btn');
-const gameDisplayBox = document.getElementById('game-display-box');
 const positionForm = document.getElementById('position-form');
 const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
 const armadaBtn = document.getElementById('armada-btn');
-const gameboardBox1 = document.getElementById('gameboard-box-1');
-const gameboardBox2 = document.getElementById('gameboard-box-2');
+const player1Name = document.getElementById('player1-name');
+const player2Name = document.getElementById('player2-name');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -187,7 +186,7 @@ function loopGame() {
 // CREATE COMPUTER PLAYER2
 player2 = playerFactory('Hal', true, board1);
 board2.placeArmada(player2.getArmada());
-
+player2Name.textContent = player2.name;
 displayGame(board1, board2);
 
 // CREATE HUMAN PLAYER1
@@ -199,9 +198,11 @@ nameInputBtn.addEventListener('click', () => {
   else if(player1turn = true) {
     player1 = playerFactory(nameInput.value, false, board2);
     showPlacementDialog(player1);
+    player1Name.textContent = player1.name;
   } else {
     player2 = playerFactory(nameInput.value, false, board1);
     showPlacementDialog(player2);
+    player2Name.textContent = player2.name;
   }
   definePlayers();
   board1.updateStatus(myBoard);

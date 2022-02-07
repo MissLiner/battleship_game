@@ -80,6 +80,7 @@ body {
 }
 .player-name {
   display: grid;
+  font-size:larger;
   grid-column-start: 2;
 }
 .row {

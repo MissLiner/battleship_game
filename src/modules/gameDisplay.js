@@ -1,9 +1,3 @@
-import { boardFactory } from "./makeBoard";
-import { playerFactory } from "./makePlayer";
-import { shipFactory } from "./makeShips";
-import { takeTurn } from "../index";
-import { AstPath } from "prettier";
-
 function displayGame(board1, board2) {
   const gameboardBox1 = document.getElementById('gameboard-box-1');
   const gameboardBox2 = document.getElementById('gameboard-box-2');
@@ -15,40 +9,15 @@ function displayGame(board1, board2) {
     }
   })
 
-  function transformSpace(space) {
-    let rowNum = space.dataset.rowCoord;
-    rowNum = Number(rowNum);
-    let colNum = space.dataset.columnCoord;
-    colNum = Number(colNum);
-    const coord = { row: rowNum, column: colNum };
-    return coord;
-  }
-
-  function displayBoard(board, gameboardBox, gameBoardID, audience) {
-
+  function displayBoard(board, gameboardBox, gameBoardID) {
     if(document.getElementById(gameBoardID)) {
       document.getElementById(gameBoardID).remove();
     }
-
-    // function transformCoord(coord) {
-    //   space.dataset.rowCoord = coord[row];
-    //   space.dataset.columnCoord = coord[column];
-    // }
 
     function displayStatus(div, row, column) {
       const spaceStatus = board.rows[row][column];
       div.classList.add(spaceStatus);
       const coord = [ row, column ];
-      //console.log(coord);
-      // let aspace = board.getActiveSpace();
-      // let actcoord = [ aspace.row, aspace.column ];
-
-      // // const actRow = aspace.row;
-      // // const actCol = aspace.column;
-      // //if(actRow === row && actCol === column) 
-      // if(actcoord === coord) {
-      //   div.classList.add('active');
-      // }
     } 
     function addSpace(row, rowNumber) {
       for(let x = 0; x < 10; x++) {
@@ -80,40 +49,8 @@ function displayGame(board1, board2) {
       }
     }
     buildBoard();
-
-    // gameBoard.addEventListener('click', (e) => {
-    //   const classes = e.target.classList;
-    //   if(!classes.contains('miss') && !classes.contains('hit')) {
-    //     const coord = transformSpace(e.target);
-    //     board.updateActiveSpace(coord);
-    //     buildBoard
-    //     //e.target.classList.add('active');
-    //   } else {
-    //     return;
-    //     // board.updateActiveSpace('');
-    //     // alert(writeErrMessage('dupe'));
-    //   }
-    // })
   }
-  // function addAttackListener(div, board) {
-  //   div.addEventListener('click', (e) => {
-  //     const classes = e.target.classList;
-  //     if(classes.contains('space')) {
-  //       if(!classes.contains('miss') && !classes.contains('hit')) {
-  //         const coord = transformSpace(e.target);
-  //         board.updateActiveSpace(coord);
-  //         buildBoard(board);
-  //       } else {
-  //         return;
-  //         // board.updateActiveSpace('');
-  //         // alert(writeErrMessage('dupe'));
-  //       }
-  //     }
-  //   })
-  // }
-  displayBoard(board1, gameboardBox1, 'gameboard-1', 'private');
-  //addAttackListener(document.getElementById('gameboard-1', board1));
-  displayBoard(board2, gameboardBox2, 'gameboard-2', 'public');
-  //addAttackListener(document.getElementById('gameboard-2', board2));
+  displayBoard(board1, gameboardBox1, 'gameboard-1', 'public');
+  displayBoard(board2, gameboardBox2, 'gameboard-2', 'private');
 }
 export { displayGame };

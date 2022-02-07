@@ -15,6 +15,12 @@ body {
   height: auto;
   width: 920px;
 }
+#row-number-box-1 {
+  grid-column-start: 1;
+}
+#row-number-box-2 {
+  grid-column-start: 11;
+}
 #submit-btn {
   display: grid;
   grid-row-start: 12;
@@ -23,15 +29,11 @@ body {
 #title {
   margin-top: 20px;
 }
-.active {
+
+.active-board {
   outline-style: solid;
   outline-color: limegreen;
   outline-width: 4px;
-}
-.active-space {
-  outline: solid !important;
-  outline-color: yellow !important;
-  outline-width: 2px !important;
 }
 .board-box {
   display: grid;
@@ -53,30 +55,6 @@ body {
   line-height: 40px;
   width: 400px;
 }
-#row-number-box-1 {
-  grid-column-start: 1;
-}
-#row-number-box-2 {
-  grid-column-start: 11;
-}
-.row-number-box { 
-  border: none;
-  background-color: transparent;
-  display: grid;
-  grid-row-start: 2;
-  grid-template-columns:  1fr;
-  grid-template-rows: repeat(10, 1fr);
-  height: 400px;
-  line-height: 40px;
-  width: 40px;
-}
-.number-space {
-  border: none;
-  background: transparent;
-  display: grid;
-  height: 10px;
-  width: 10px;
-}
 .gameboard {
   background-color: transparent;
   display: grid;
@@ -94,13 +72,6 @@ body {
 .hidden {
   display: none;
 }
-.space {
-  /* border: solid;
-  border-color: transparent; */
-  border: none;
-  height:38px;
-  width: 38px;
-}
 .number-space {
   border: none;
   background-color: transparent;
@@ -113,6 +84,29 @@ body {
   height: 40px;
   width: 400px;
 }
+.row-number-box { 
+  border: none;
+  background-color: transparent;
+  display: grid;
+  grid-row-start: 2;
+  grid-template-columns:  1fr;
+  grid-template-rows: repeat(10, 1fr);
+  height: 400px;
+  line-height: 40px;
+  width: 40px;
+}
+
+/* SPACE FORMATTING */
+.space {
+  border: none;
+  height:38px;
+  width: 38px;
+}
+.active-space {
+  outline: solid !important;
+  outline-color: yellow !important;
+  outline-width: 2px !important;
+}
 .open {
   background-color: rgb(6, 66, 177);
 }
@@ -122,9 +116,7 @@ body {
 .hit {
   background-color: red;
 }
-/* .active {
-  background-color: yellowgreen !important;
-} */
+
 .Destroyer {
   background-color: violet;
 }

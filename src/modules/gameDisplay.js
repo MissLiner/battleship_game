@@ -40,10 +40,10 @@ function displayGame(board1, board2) {
       gameBoard.classList.add('gameboard');
       gameBoard.id = gameBoardID;
       if(board.getStatus() === 'active') {
-        gameboardBox.classList.add('active');
+        gameboardBox.classList.add('active-board');
       }
-      else if(gameboardBox.classList.contains('active')) {
-        gameboardBox.classList.remove('active');
+      else if(gameboardBox.classList.contains('active-board')) {
+        gameboardBox.classList.remove('active-board');
       }
       gameboardBox.appendChild(gameBoard);
       for(let i = 0; i < 10; i++) {

@@ -230,7 +230,7 @@ function transformSpace(space) {
 }
 gameboardBoxes.forEach(box => {
   box.addEventListener('click', (e) => {
-    if(box.classList.contains('active')) {
+    if(box.classList.contains('active-board')) {
       const spaces = document.querySelectorAll('.space');
       for(let space of spaces) {
         if(space.classList.contains('active-space')) {

@@ -13,7 +13,7 @@ describe('makeBoard tests', () => {
   test('draws correct number of columns', () => {
     expect(testBoard.rows[0].length).toBe(10);
   })
-  test.only('marks misses on board', () => {
+  test('marks misses on board', () => {
     testBoard2.updateActiveSpace( { row: 0, column: 0 } );
     testBoard2.receiveAttack(testPlayer2);
     expect(testBoard2.rows[0][0]).toBe('miss');

@@ -19,7 +19,7 @@ const boardFactory = (name) => {
 
   // SETTERS
   const updateStatus = (board) => {
-    if(board.name === this.name) {
+    if(board.name === name) {
       status = 'active';
     } else {
       status = 'inactive';

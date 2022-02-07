@@ -29,7 +29,7 @@ describe('makeBoard tests', () => {
   })
   test('places ship on board', () => {
     const testHorPositions = [ { row: 2, column: 6 }, { row: 2, column: 7 }];
-    testBoard2.drawShip(testHorPositions, 'Submarine');
+    testBoard2.placeShip(testHorPositions, 'Submarine');
     expect(testBoard2.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'Submarine', 'Submarine', 'open', 'open']);
   })
 })

@@ -258,7 +258,7 @@ submitBtn.addEventListener('click', () => {
 
     if(myBoard.getActiveSpace()) {
       const newShip = currentPlayer.placeShip(myBoard.getActiveSpace(), direction);
-      myBoard.drawShip(newShip.getPositions(), newShip.name);
+      myBoard.placeShip(newShip.getPositions(), newShip.name);
       myBoard.updateActiveSpace('');
       displayGame(board1, board2);
       if(currentPlayer.getShipCounter() < 5) {

@@ -10,6 +10,12 @@
 // -Have AI guess near spaces to hit
 // -Enable two human players
 
+// FUNCTIONS ONLY EXTERNAL FOR TESTING
+//  MAKEPLAYER
+//  -checkForDupes
+//  -findOpenSpaces (NOT TESTED EITHER)
+//  -pickDirection
+
 import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';

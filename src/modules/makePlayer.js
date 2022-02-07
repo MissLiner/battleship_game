@@ -1,4 +1,3 @@
-import { boardFactory } from "./makeBoard"
 import { shipFactory } from "./makeShips";
 
 const playerFactory = (name, isComputer, oppBoard) => {
@@ -8,16 +7,9 @@ const playerFactory = (name, isComputer, oppBoard) => {
   let shipCounter = 0;
   let turnCounter = 0;
 
-  // HUMAN FUNCTIONS
-  function placeShip(firstSpace, direction) {
-    const newShip = shipFactory(ships[shipCounter].name, ships[shipCounter].size, firstSpace, direction);
-    newShip.positionShip();
-    armadaArr.push(newShip);
-    shipCounter++;
-    return newShip;
-  }
 
-  // AI FUNCTIONS
+
+  // AI FUNCTIONS (INTERNAL TO MODULE)
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
   }
@@ -31,7 +23,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
     }
     return direction;
   }
-
   function pickFirstSpace(size, direction) {
     let rowIndex;
     let columnIndex;
@@ -47,7 +38,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const position = { row: rowIndex, column: columnIndex };
     return position;
   }
-
   function autoPlaceShip(ship) {
     const direction = pickDirection();
     const firstSpace = pickFirstSpace(ship.size, direction);
@@ -55,7 +45,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
     newShip.positionShip();
     return newShip;
   }
-
   function checkForDupes(arr) {
     for(let item of arr) {
       const dupes1 = arr.filter(newItem1 => newItem1.row === item.row);
@@ -65,6 +54,36 @@ const playerFactory = (name, isComputer, oppBoard) => {
     return false;
   }
  
+  function findOpenSpaces() {
+    const allOpenSpaces = [];
+    for(let i = 0; i < 10; i++) {
+      for(let x = 0; x < 10; x++) {
+        if(oppBoard.rows[i][x] !== 'miss' && oppBoard.rows[i][x] !== 'hit') {
+          let position = { row: i, column: x };
+          allOpenSpaces.push(position);
+        }
+      }
+    }
+    return allOpenSpaces;
+  }
+  function makeGuess() {
+    const allOpenSpaces = findOpenSpaces();
+    const maxNum = allOpenSpaces.length;
+    const guessIndex = getRandomInt(maxNum);
+    const guess = allOpenSpaces[guessIndex];
+    oppBoard.updateActiveSpace(guess);
+  }
+
+  // HUMAN FUNCTIONS
+  const placeShip = (firstSpace, direction) => {
+    const newShip = shipFactory(ships[shipCounter].name, ships[shipCounter].size, firstSpace, direction);
+    newShip.positionShip();
+    armadaArr.push(newShip);
+    shipCounter++;
+    return newShip;
+  }
+
+  // HUMAN/AI FUNCTIONS
   const autoBuildArmada = () => {
     for (let i = shipCounter; i < ships.length; i++) {
       let dupeCounter = 0;
@@ -89,47 +108,24 @@ const playerFactory = (name, isComputer, oppBoard) => {
       shipCounter++;
     }
   }
-
   if(isComputer === true) {
     autoBuildArmada();
   }
-
-  const findOpenSpaces = () => {
-    const allOpenSpaces = [];
-    for(let i = 0; i < 10; i++) {
-      for(let x = 0; x < 10; x++) {
-        if(oppBoard.rows[i][x] !== 'miss' && oppBoard.rows[i][x] !== 'hit') {
-          let position = { row: i, column: x };
-          allOpenSpaces.push(position);
-        }
-      }
+  const takeTurn = (oppPlayer) => {
+    if(isComputer === true) {
+      makeGuess();
     }
-    return allOpenSpaces;
+    oppBoard.receiveAttack(oppPlayer);
+    turnCounter++;
   }
 
-  function makeGuess() {
-    const allOpenSpaces = findOpenSpaces();
-    const maxNum = allOpenSpaces.length;
-    const guessIndex = getRandomInt(maxNum);
-    const guess = allOpenSpaces[guessIndex];
-    oppBoard.updateActiveSpace(guess);
-  }
-
-  function takeTurn(oppPlayer) {
-        if(isComputer === true) {
-          makeGuess();
-        }
-        oppBoard.receiveAttack(oppPlayer);
-        turnCounter++;
-  }
-
-  //GETTERS
+  // GETTERS
   function getArmada() { return armadaArr };
   function getAllShipPositions() { return allShipPositions };
   function getShips() { return ships };
   function getTurns() { return turnCounter };
   function getShipCounter() { return shipCounter };
 
-  return { name, isComputer, getShips, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, autoBuildArmada, getArmada, getAllShipPositions, getRandomInt, getTurns, getShipCounter };
+  return { name, isComputer, getRandomInt, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, autoBuildArmada, getArmada, getAllShipPositions, getShips, getTurns, getShipCounter };
 }
 export { playerFactory };

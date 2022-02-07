@@ -23,7 +23,7 @@ body {
 }
 #submit-btn {
   display: grid;
-  grid-row-start: 12;
+  grid-row-start: 13;
   grid-column-start: 2;
 }
 #title {
@@ -38,8 +38,8 @@ body {
 .board-box {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(12, 1fr);
-  height: 480px;
+  grid-template-rows: repeat(13, 1fr);
+  height: 500px;
   margin-top: 20px;
   width: 440px;
 } 
@@ -77,6 +77,10 @@ body {
   background-color: transparent;
   height: 40px;
   width: 40px;
+}
+.player-name {
+  display: grid;
+  grid-column-start: 2;
 }
 .row {
   display: grid;

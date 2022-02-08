@@ -7,13 +7,21 @@ body {
   background-color:rgb(169, 203, 233);
 }
 
+#armada-btn {
+  margin-left: 10px;
+}
 #game-dialog {
   margin-top: 20px;
+  width: fit-content;
 }
 #game-display-box {
   display: flex;
   height: auto;
   width: 1020px;
+}
+#message-box {
+  display: flex;
+  width: 100%;
 }
 #position-form {
   position:absolute;
@@ -75,7 +83,7 @@ body {
   width: 400px;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .number-space {
   border: none;
@@ -87,6 +95,7 @@ body {
   display: grid;
   font-size:larger;
   grid-column-start: 2;
+  margin-top: 10px;
 }
 .row {
   display: grid;

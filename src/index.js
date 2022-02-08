@@ -114,7 +114,7 @@ function showPlacementDialog(player) {
     case 4: order = 'fifth and final';
     break;
   }
-  gameMessages.textContent = `${player.name}, please place your ${order} ship.`;
+  gameMessages.textContent = `${player.name}, please place your ${order} ship, or I can do for you!`;
   shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
 }
 function writeAdminMessage(purpose) {
@@ -208,6 +208,7 @@ nameInputBtn.addEventListener('click', () => {
   hide(boardBox2);
   hide(nameForm);
   show(positionForm);
+  show(armadaBtn); 
 
   definePlayers();
   board1.updateStatus(myBoard);

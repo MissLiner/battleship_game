@@ -10,7 +10,10 @@
 <body>
   <h1 id="title">Battleship</h1>
   <div id="game-dialog">
-    <div id="game-messages"></div>
+    <div id="message-box">
+      <div id="game-messages"></div>
+      <input type="button" id="armada-btn" class="hidden" value="Build my armada">
+    </div>
     
     <form id="name-form">
     <label>Are you ready to play? Just tell me your name:
@@ -18,12 +21,12 @@
     </label>
     <input type="button" id="name-input-btn" value="Submit"></button>
     </form>
+  
   </div>
   <form id="position-form" class="hidden">
     <div id="ship-messages"></div>
     <label>Horizontal<input type="radio" name="direction" id="horizontal" value="horizontal"></input></label>
     <label>Vertical<input type="radio" name="direction" id="vertical" value="vertical"></input></label>
-    <input type="button" id="armada-btn" value="Build my armada for me">
   </form>
   <div id="game-display-box">
     <div id="board-box-1" class="board-box">

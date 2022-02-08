@@ -3,7 +3,6 @@
 // -Separate submit buttons
 // -Add ship tally on screen for each player
 // -Fix up game over
-// -set up reset game
 // -Clean up code, functions to modules where possible
 // -Change colors as ships sink / are sunk
 // -Have AI guess near spaces to hit
@@ -44,6 +43,7 @@ const halGIF = document.getElementById('hal-gif');
 const resetBtn = document.getElementById('reset-btn');
 const rematchBtn = document.getElementById('rematch-btn');
 const gameOverBox = document.getElementById('game-over-box');
+const box2 = document.getElementById('box-2');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -175,6 +175,7 @@ function writeErrMessage(err) {
 }
 function confirmShips() {
   writeAdminMessage('confirmArmada');
+  hide(box2);
   hide(positionForm);
   hide(armadaBtn);
   show(submitBtn);
@@ -186,6 +187,7 @@ function startGame() {
   definePlayers();
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
+  show(box2);
   show(boardBox2);
   displayGame(board1, board2);
 }

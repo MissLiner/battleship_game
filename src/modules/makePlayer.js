@@ -1,11 +1,14 @@
 import { shipFactory } from "./makeShips";
 
 const playerFactory = (name, isComputer, oppBoard) => {
+  const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
+
   const armadaArr = [];
   const allShipPositions = [];
-  const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
+
   let shipCounter = 0;
   let turnCounter = 0;
+  let winCounter = 0;
 
   // AI FUNCTIONS (INTERNAL TO MODULE)
   function getRandomInt(maxNum) {
@@ -120,6 +123,23 @@ const playerFactory = (name, isComputer, oppBoard) => {
     oppBoard.receiveAttack(oppPlayer);
     turnCounter++;
   }
+  function emptyArr(fullArr) {
+    while(fullArr.length > 0) {
+      fullArr.pop();
+    }
+  }
+  const reset = () => {
+    emptyArr(armadaArr);
+    emptyArr(allShipPositions);
+    shipCounter = 0;
+    turnCounter = 0;
+    if(isComputer === true) {
+      autoBuildArmada();
+    }
+  }
+  const addWin = () => {
+    winCounter++;
+  }
 
   // GETTERS
   function getArmada() { return armadaArr };
@@ -128,6 +148,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getTurns() { return turnCounter };
   function getShipCounter() { return shipCounter };
 
-  return { name, isComputer, getRandomInt, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, setName, autoBuildArmada, getArmada, getAllShipPositions, getShips, getTurns, getShipCounter };
+  return { name, isComputer, getRandomInt, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, setName, autoBuildArmada, reset, addWin, getArmada, getAllShipPositions, getShips, getTurns, getShipCounter };
 }
 export { playerFactory };

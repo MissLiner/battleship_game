@@ -96,6 +96,7 @@ function switchTurn() {
   displayGame(board1, board2);
 }
 function endGame(player) {
+  player.addWin();
   if(player.isComputer === false) {
     if(player.getTurns() < 66) {
       writeAdminMessage('winQuick');
@@ -332,5 +333,10 @@ submitBtn.addEventListener('click', () => {
 rematchBtn.addEventListener('click', () => {
   board1.reset();
   board2.reset();
-
+  player1.reset();
+  player2.reset();
+  player1turn = true;
+  phase = 'setup';
+  definePlayers();
+  displayGame(board1, board2);
 })

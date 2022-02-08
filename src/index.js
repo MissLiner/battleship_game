@@ -156,8 +156,9 @@ function writeErrMessage(err) {
 }
 function confirmShips() {
   writeAdminMessage('confirmArmada');
-  hide(shipMessages);
   hide(positionForm);
+  hide(armadaBtn);
+  show(submitBtn);
 }
 // GAME FUNCTIONS
 function startGame() {
@@ -166,15 +167,18 @@ function startGame() {
   definePlayers();
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
+  show(boardBox2);
   displayGame(board1, board2);
 }
 function loopGame() {
   currentPlayer.takeTurn(otherPlayer, yourBoard.getActiveSpace()); //rewrite
   yourBoard.updateActiveSpace('');
   if(currentPlayer.isComputer === true) {
+    hide(submitBtn);
     setTimeout(() => { displayGame(board1, board2); }, 2000);
     setTimeout(() => { switchTurn() }, 4000);
     setTimeout(() => { writeGameMessage() }, 4000);
+    setTimeout(() => { show(submitBtn) }, 4500);
   } else {
     switchTurn();
     writeGameMessage();
@@ -224,9 +228,6 @@ armadaBtn.addEventListener('click', () => {
 
 placeshipBtn.addEventListener('click', () => {
   const direction = directionInput.value;    
-  // else if(phase === 'setup' && currentPlayer.getShipCounter() > 4) {
-  //   startGame();
-  // }
   if(direction === false) {
     writeErrMessage('direction');
     return;
@@ -240,7 +241,6 @@ placeshipBtn.addEventListener('click', () => {
       showPlacementDialog(currentPlayer);
     } else {
       confirmShips();
-      hide(positionForm);
     }
   } else {
     alert(writeErrMessage('coord'));
@@ -282,9 +282,11 @@ gameboardBoxes.forEach(box => {
 })
 
 submitBtn.addEventListener('click', () => {
-
+  if(phase === 'setup') {
+    startGame();
+  }
   // TAKE TURN
-  if(phase === 'gameplay') {
+  else if(phase === 'gameplay') {
     if(yourBoard.getActiveSpace() === '') {
       writeErrMessage('noguess');
       return;

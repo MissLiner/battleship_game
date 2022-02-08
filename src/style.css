@@ -31,9 +31,6 @@ body {
   margin-top: -120px;
   padding: 20px;
   width: 250px;
-  /* left: 30px;
-  top: 175px;
-  width: 250px; */
 }
 #row-number-box-1 {
   grid-column-start: 1;

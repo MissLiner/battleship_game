@@ -39,6 +39,7 @@ const boardBox2 = document.getElementById('board-box-2');
 const shipName = document.getElementById('ship-name');
 const shipLength = document.getElementById('ship-length');
 const directionInput = document.getElementById('direction-input');
+const shipPosition = document.getElementById('ship-position');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -241,6 +242,9 @@ gameboardBoxes.forEach(box => {
 
       const coord = transformSpace(e.target);
       if(phase === 'setup') {
+        const row = coord.row;
+        const column = String.fromCharCode(coord.column + 65);
+        shipPosition.textContent = `${column}-${row}`;
         myBoard.updateActiveSpace(coord);
       } 
       else if(phase === 'gameplay') {

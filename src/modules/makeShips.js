@@ -18,9 +18,9 @@ const shipFactory = (name, size, firstPosition, direction) => {
       let newColumn = Number(colPos) + 1 + i;
       let newRow = Number(rowPos) + 1 + i;
       let newPosition;
-      if(direction === 'horizontal') {
+      if(direction === 'Horizontal') {
         newPosition = { row: rowPos, column: newColumn }
-      } else if(direction === 'vertical') {
+      } else if(direction === 'Vertical') {
         newPosition = { row: newRow, column: colPos }
       }
       positions.push(newPosition); 

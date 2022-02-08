@@ -23,6 +23,7 @@ import './style.css';
 import { boardFactory } from './modules/makeBoard';
 import { playerFactory } from './modules/makePlayer';
 import { displayGame } from './modules/gameDisplay';
+import { doc } from 'prettier';
 
 //DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
@@ -40,6 +41,7 @@ const shipName = document.getElementById('ship-name');
 const shipLength = document.getElementById('ship-length');
 const directionInput = document.getElementById('direction-input');
 const shipPosition = document.getElementById('ship-position');
+const placeshipBtn = document.getElementById('placeship-btn');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -220,6 +222,31 @@ armadaBtn.addEventListener('click', () => {
   confirmShips();
 })
 
+placeshipBtn.addEventListener('click', () => {
+  const direction = directionInput.value;    
+  // else if(phase === 'setup' && currentPlayer.getShipCounter() > 4) {
+  //   startGame();
+  // }
+  if(direction === false) {
+    writeErrMessage('direction');
+    return;
+  }
+  if(myBoard.getActiveSpace()) {
+    const newShip = currentPlayer.placeShip(myBoard.getActiveSpace(), direction);
+    myBoard.placeShip(newShip.getPositions(), newShip.name);
+    myBoard.updateActiveSpace('');
+    displayGame(board1, board2);
+    if(currentPlayer.getShipCounter() < 5) {
+      showPlacementDialog(currentPlayer);
+    } else {
+      confirmShips();
+      hide(positionForm);
+    }
+  } else {
+    alert(writeErrMessage('coord'));
+  }
+})
+
 const gameboardBoxes = document.querySelectorAll('.gameboard-box');
 function transformSpace(space) {
   let rowNum = space.dataset.rowCoord;
@@ -255,32 +282,9 @@ gameboardBoxes.forEach(box => {
 })
 
 submitBtn.addEventListener('click', () => {
-  if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
-    const direction = directionInput.value;
-    if(direction === false) {
-      writeErrMessage('direction');
-      return;
-    }
 
-    if(myBoard.getActiveSpace()) {
-      const newShip = currentPlayer.placeShip(myBoard.getActiveSpace(), direction);
-      myBoard.placeShip(newShip.getPositions(), newShip.name);
-      myBoard.updateActiveSpace('');
-      displayGame(board1, board2);
-      if(currentPlayer.getShipCounter() < 5) {
-        showPlacementDialog(currentPlayer);
-      } else {
-        confirmShips();
-      }
-    } else {
-      alert(writeErrMessage('coord'));
-    }
-  }
-  else if(phase === 'setup' && currentPlayer.getShipCounter() > 4) {
-    startGame();
-  }
   // TAKE TURN
-  else if(phase === 'gameplay') {
+  if(phase === 'gameplay') {
     if(yourBoard.getActiveSpace() === '') {
       writeErrMessage('noguess');
       return;

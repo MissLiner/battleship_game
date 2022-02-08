@@ -13,7 +13,7 @@ describe('makePlayer tests', () => {
   const testPlayer3 = makePlayer.playerFactory('Human', false, testBoard3);
 
   test('shipCounter works - one ship', () => {
-    testPlayer3.placeShip( { row: 0, column:0 }, 'horizontal');
+    testPlayer3.placeShip( { row: 0, column:0 }, 'Horizontal');
     expect(testPlayer3.getShipCounter()).toBe(1);
   })
   test('shipCounter works - armada', () => {
@@ -66,7 +66,7 @@ describe('makePlayer tests', () => {
     })
     test('assigns initial direction', () => {
       mockRandom([0.1]);
-      expect(testPlayer1.pickDirection()).toBe('vertical');
+      expect(testPlayer1.pickDirection()).toBe('Vertical');
       resetMockRandom();
     })
   })

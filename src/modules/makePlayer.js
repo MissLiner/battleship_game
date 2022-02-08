@@ -17,9 +17,9 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const directNum = getRandomInt(1);
     let direction;
     if (directNum === 1) {
-      direction = 'horizontal';
+      direction = 'Horizontal';
     } else {
-      direction = 'vertical';
+      direction = 'Vertical';
     }
     return direction;
   }
@@ -28,7 +28,7 @@ const playerFactory = (name, isComputer, oppBoard) => {
     let columnIndex;
     let adjustedMax = 9 - size;
 
-    if (direction === 'horizontal') {
+    if (direction === 'Horizontal') {
       rowIndex = getRandomInt(9);
       columnIndex = getRandomInt(adjustedMax);
     } else {

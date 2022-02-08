@@ -3,7 +3,7 @@ const makeShips = require('../modules/makeShips');
 
 describe('makeShips tests', () => {
   const testShip = makeShips.shipFactory('testPlayer', 5, 
-    { row: 1, column: 3 }, 'horizontal');
+    { row: 1, column: 3 }, 'Horizontal');
   testShip.positionShip();
   
   test('ship has size', () => {

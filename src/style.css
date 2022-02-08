@@ -19,6 +19,11 @@ body {
   height: auto;
   width: 1020px;
 }
+#game-over-box {
+  left: 40px;
+  position: absolute;
+  top: 40px;
+}
 #hal-gif {
   display: grid;
   grid-column-start: 4;

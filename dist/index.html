@@ -14,6 +14,7 @@
       <div id="game-messages"></div>
       <input type="button" id="armada-btn" class="hidden" value="Build my armada">
     </div>
+
     <input type="button" id="submit-btn" class="hidden" value="Submit">
     <form id="name-form">
       <label>Are you ready to play? Just tell me your name:
@@ -21,6 +22,7 @@
       </label>
       <input type="button" id="name-input-btn" value="Submit"></button>
     </form>
+
   </div>
   
   <div id="game-display-box">
@@ -50,9 +52,9 @@
         <div class="number-space">10</div>
       </div>
       <div id="gameboard-box-1" class="gameboard-box"></div>
-      <div id="player1-name" class="player-name">Player 1</div>
-      
+      <div id="player1-name" class="player-name">Player 1</div> 
     </div>
+
     <div id="box-2">
       <form id="position-form" class="hidden">
         <div id="ship-message"><em>Please choose a direction and click a starting space.</em></div>
@@ -67,38 +69,43 @@
         <div class="ship-info-span">Position: <span id="ship-position"></span></div>
         <input type="button" id="placeship-btn" value="Place Ship">
       </form>
-    <div id="board-box-2" class="board-box"> 
-      <div id="col-number-box-2" class="col-number-box">
-        <div class="number-space">A</div>
-        <div class="number-space">B</div>
-        <div class="number-space">C</div>
-        <div class="number-space">D</div>
-        <div class="number-space">E</div>
-        <div class="number-space">F</div>
-        <div class="number-space">G</div>
-        <div class="number-space">H</div>
-        <div class="number-space">I</div>
-        <div class="number-space">J</div>
+
+      <div id="board-box-2" class="board-box"> 
+        <div id="col-number-box-2" class="col-number-box">
+          <div class="number-space">A</div>
+          <div class="number-space">B</div>
+          <div class="number-space">C</div>
+          <div class="number-space">D</div>
+          <div class="number-space">E</div>
+          <div class="number-space">F</div>
+          <div class="number-space">G</div>
+          <div class="number-space">H</div>
+          <div class="number-space">I</div>
+          <div class="number-space">J</div>
+        </div>
+        <div id="row-number-box-2" class="row-number-box">
+          <div class="number-space">1</div>
+          <div class="number-space">2</div>
+          <div class="number-space">3</div>
+          <div class="number-space">4</div>
+          <div class="number-space">5</div>
+          <div class="number-space">6</div>
+          <div class="number-space">7</div>
+          <div class="number-space">8</div>
+          <div class="number-space">9</div>
+          <div class="number-space">10</div>
+        </div>
+        <div id="gameboard-box-2" class="gameboard-box"></div>
+        <div id="name-box" class="player-name">
+          <iframe id="hal-gif" src="https://giphy.com/embed/R9vSQdiH6I5Bqi9xzx" frameBorder="0" class="giphy-embed hidden" allowFullScreen></iframe><p><a class="hidden" href="https://giphy.com/gifs/cores-coresdamagia-da-magia-R9vSQdiH6I5Bqi9xzx">via GIPHY</a></p>
+          <div id="player2-name" >Player 2</div>
+        </div> 
       </div>
-      <div id="row-number-box-2" class="row-number-box">
-        <div class="number-space">1</div>
-        <div class="number-space">2</div>
-        <div class="number-space">3</div>
-        <div class="number-space">4</div>
-        <div class="number-space">5</div>
-        <div class="number-space">6</div>
-        <div class="number-space">7</div>
-        <div class="number-space">8</div>
-        <div class="number-space">9</div>
-        <div class="number-space">10</div>
-      </div>
-      <div id="gameboard-box-2" class="gameboard-box"></div>
-      <div id="name-box" class="player-name">
-        <iframe id="hal-gif" src="https://giphy.com/embed/R9vSQdiH6I5Bqi9xzx" frameBorder="0" class="giphy-embed hidden" allowFullScreen></iframe><p><a class="hidden" href="https://giphy.com/gifs/cores-coresdamagia-da-magia-R9vSQdiH6I5Bqi9xzx">via GIPHY</a></p>
-        <div id="player2-name" >Player 2</div>
-      </div> 
     </div>
   </div>
+  <div id="game-over-box">
+    <input type="button" id="reset-btn"  value="New Player">
+    <input type="button" id="rematch-btn" value="Rematch">
   </div>
 </body>
 </html>

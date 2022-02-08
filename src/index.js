@@ -41,6 +41,9 @@ const directionInput = document.getElementById('direction-input');
 const shipPosition = document.getElementById('ship-position');
 const placeshipBtn = document.getElementById('placeship-btn');
 const halGIF = document.getElementById('hal-gif');
+const resetBtn = document.getElementById('reset-btn');
+const rematchBtn = document.getElementById('rematch-btn');
+const gameOverBox = document.getElementById('game-over-box');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -79,20 +82,7 @@ function show(elem) {
 function switchTurn() {
   const gameOver = yourBoard.checkIfAllSunk();
   if(gameOver === true) {
-    endGame();
-    if(currentPlayer.isComputer === false) {
-      if(currentPlayer.getTurns() < 66) {
-        writeAdminMessage('winQuick');
-      } else {
-        writeAdminMessage('winSlow');
-      }
-    } else {
-      if(currentPlayer.getTurns() < 66) {
-        writeAdminMessage('loseQuick');
-      } else {
-        writeAdminMessage('loseSlow');
-      }
-    }
+    endGame(currentPlayer);
   } else {
     if(player1turn === true) { 
       player1turn = false;
@@ -104,6 +94,22 @@ function switchTurn() {
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
   displayGame(board1, board2);
+}
+function endGame(player) {
+  if(player.isComputer === false) {
+    if(player.getTurns() < 66) {
+      writeAdminMessage('winQuick');
+    } else {
+      writeAdminMessage('winSlow');
+    }
+  } else {
+    if(player.getTurns() < 66) {
+      writeAdminMessage('loseQuick');
+    } else {
+      writeAdminMessage('loseSlow');
+    }
+  }
+  show(gameOverBox);
 }
 
 // DIALOG FUNCTIONS
@@ -202,10 +208,19 @@ function loopGame() {
 }
 
 // CREATE COMPUTER PLAYER2
-player2 = playerFactory('Hal', true, board1);
-board2.placeArmada(player2.getArmada());
-player2Name.textContent = player2.name;
-displayGame(board1, board2);
+function createPlayerAI(turn) {
+  if(turn === 1) {
+    player1 = playerFactory('Hal 9000', true, board2);
+    board1.placeArmada(player1.getArmada());
+    player1.setName(player1Name);
+  } else {
+    player2 = playerFactory('Hal 9000', true, board1);
+    board2.placeArmada(player2.getArmada());
+    player2.setName(player2Name);
+  }
+  displayGame(board1, board2);
+}
+createPlayerAI(2);
 
 // CREATE HUMAN PLAYER1
 nameInputBtn.addEventListener('click', () => {
@@ -312,4 +327,10 @@ submitBtn.addEventListener('click', () => {
       loopGame();
     }
   }
+})
+
+rematchBtn.addEventListener('click', () => {
+  board1.reset();
+  board2.reset();
+
 })

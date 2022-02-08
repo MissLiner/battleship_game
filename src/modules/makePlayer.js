@@ -7,8 +7,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   let shipCounter = 0;
   let turnCounter = 0;
 
-
-
   // AI FUNCTIONS (INTERNAL TO MODULE)
   function getRandomInt(maxNum) {
     return Math.floor(Math.random() * (maxNum + 1));
@@ -85,6 +83,9 @@ const playerFactory = (name, isComputer, oppBoard) => {
   }
 
   // HUMAN/AI FUNCTIONS
+  const setName = (div) => {
+    div.textContent = name;
+  }
   const autoBuildArmada = () => {
     for (let i = shipCounter; i < ships.length; i++) {
       let dupeCounter = 0;
@@ -127,6 +128,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
   function getTurns() { return turnCounter };
   function getShipCounter() { return shipCounter };
 
-  return { name, isComputer, getRandomInt, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, autoBuildArmada, getArmada, getAllShipPositions, getShips, getTurns, getShipCounter };
+  return { name, isComputer, getRandomInt, placeShip, checkForDupes, findOpenSpaces, pickDirection, takeTurn, setName, autoBuildArmada, getArmada, getAllShipPositions, getShips, getTurns, getShipCounter };
 }
 export { playerFactory };

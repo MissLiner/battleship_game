@@ -79,12 +79,22 @@ const boardFactory = (name) => {
       return true;
     }
   }
+  const reset = () => {
+    hitCounter = 0;
+    status = '';
+    activeSpace = '';
+    for(let row of rows) {
+      for(let i = 0; i < 10; i++) {
+        row[i] = 'open';
+      }
+    }
+  }
 
   // GETTERS
   function getStatus() { return status };
   function getActiveSpace() { return activeSpace };
   
-  return { name, rows, updateStatus, updateActiveSpace, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, getStatus, getActiveSpace }
+  return { name, rows, updateStatus, updateActiveSpace, placeShip, placeArmada, receiveAttack, checkIfAllSunk, hitShip, reset, getStatus, getActiveSpace }
 }
 
 export { boardFactory } 

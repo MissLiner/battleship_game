@@ -4,7 +4,6 @@
 // -Add ship tally on screen for each player
 // -Fix up game over
 // -set up reset game
-// -Show whose turn it is or label boards
 // -Clean up code, functions to modules where possible
 // -Change colors as ships sink / are sunk
 // -Have AI guess near spaces to hit
@@ -27,7 +26,6 @@ import { doc } from 'prettier';
 
 //DOM CONSTANTS
 const gameMessages = document.getElementById('game-messages');
-const shipMessages = document.getElementById('ship-messages');
 const nameForm = document.getElementById('name-form');
 const nameInput = document.getElementById('name-input');
 const nameInputBtn = document.getElementById('name-input-btn');
@@ -79,9 +77,22 @@ function show(elem) {
   elem.classList.remove('hidden');
 }
 function switchTurn() {
-  const gameOver = myBoard.checkIfAllSunk();
+  const gameOver = yourBoard.checkIfAllSunk();
   if(gameOver === true) {
-    alert(`GAME OVER: ${otherPlayer.name} won!`);
+    endGame();
+    if(currentPlayer.isComputer === false) {
+      if(currentPlayer.getTurns() < 66) {
+        writeAdminMessage('winQuick');
+      } else {
+        writeAdminMessage('winSlow');
+      }
+    } else {
+      if(currentPlayer.getTurns() < 66) {
+        writeAdminMessage('loseQuick');
+      } else {
+        writeAdminMessage('loseSlow');
+      }
+    }
   } else {
     if(player1turn === true) { 
       player1turn = false;

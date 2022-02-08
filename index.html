@@ -10,23 +10,21 @@
 <body>
   <h1 id="title">Battleship</h1>
   <div id="game-over-box" class="hidden">
-    <input type="button" id="reset-btn"  value="New Player">
-    <input type="button" id="rematch-btn" value="Rematch">
+    <button id="reset-btn">Reset Player</button>
+    <button id="rematch-btn">New Game</button>
   </div>
   <div id="game-dialog">
     <div id="message-box">
-      <div id="game-messages"></div>
-      <input type="button" id="armada-btn" class="hidden" value="Build my armada">
+      <div id="game-messages"></div><button id="armada-btn" class="hidden">Place ships randomly</button>
     </div>
 
-    <input type="button" id="submit-btn" class="hidden" value="Submit">
+    <button id="submit-btn" class="hidden">Submit</button>
     <form id="name-form">
       <label>Are you ready to play? Just tell me your name:
         <input id="name-input" type="text" name="name" placeholder="Enter name">
       </label>
-      <input type="button" id="name-input-btn" value="Submit"></button>
+      <button id="name-input-btn">Submit</button>
     </form>
-
   </div>
   
   <div id="game-display-box">
@@ -61,6 +59,7 @@
 
     <div id="box-2">
       <form id="position-form" class="hidden">
+        
         <div id="ship-message"><em>Please choose a direction and click a starting space.</em></div>
         <div class="ship-info-span">Class:   <span id="ship-name"></span></div>
         <div class="ship-info-span">Length:  <span id="ship-length"></span></div>
@@ -71,7 +70,7 @@
           </select> 
         </label>
         <div class="ship-info-span">Position: <span id="ship-position"></span></div>
-        <input type="button" id="placeship-btn" value="Place Ship">
+        <button id="placeship-btn">Place Ship</button>
       </form>
 
       <div id="board-box-2" class="board-box"> 

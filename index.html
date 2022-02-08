@@ -14,19 +14,25 @@
       <div id="game-messages"></div>
       <input type="button" id="armada-btn" class="hidden" value="Build my armada">
     </div>
-    
     <form id="name-form">
-    <label>Are you ready to play? Just tell me your name:
-      <input id="name-input" type="text" name="name" placeholder="Enter name">
-    </label>
-    <input type="button" id="name-input-btn" value="Submit"></button>
+      <label>Are you ready to play? Just tell me your name:
+        <input id="name-input" type="text" name="name" placeholder="Enter name">
+      </label>
+      <input type="button" id="name-input-btn" value="Submit"></button>
     </form>
-  
   </div>
   <form id="position-form" class="hidden">
-    <div id="ship-messages"></div>
-    <label>Horizontal<input type="radio" name="direction" id="horizontal" value="horizontal"></input></label>
-    <label>Vertical<input type="radio" name="direction" id="vertical" value="vertical"></input></label>
+    <div id="ship-message"><em>Please choose a direction and click a starting space.</em></div>
+    <div class="ship-info-span">Ship Class:   <span id="ship-name"></span></div>
+    <div class="ship-info-span">Ship Length:  <span id="ship-length"></span></div>
+    <label>Direction:
+      <select id="direction-input" name="direction">
+        <option>Horizontal</option>
+        <option>Vertical</option>
+      </select> 
+   </label>
+    <!-- <label>Horizontal<input type="radio" name="direction" id="horizontal" value="horizontal"></input></label>
+    <label>Vertical<input type="radio" name="direction" id="vertical" value="vertical"></input></label> -->
   </form>
   <div id="game-display-box">
     <div id="board-box-1" class="board-box">

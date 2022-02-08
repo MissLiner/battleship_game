@@ -207,7 +207,20 @@ function loopGame() {
     writeGameMessage();
   }
 }
-
+function startSetup() {
+  phase = 'setup';
+  
+  definePlayers();
+  showPlacementDialog(currentPlayer);
+  hide(boardBox2);
+  hide(nameForm);
+  hide(submitBtn);
+  show(positionForm);
+  show(armadaBtn); 
+  board1.updateStatus(myBoard);
+  board2.updateStatus(myBoard);
+  displayGame(board1, board2);
+}
 // CREATE COMPUTER PLAYER2
 function createPlayerAI(turn) {
   if(turn === 1) {
@@ -231,23 +244,15 @@ nameInputBtn.addEventListener('click', () => {
   }
   else if(player1turn = true) {
     player1 = playerFactory(nameInput.value, false, board2);
-    showPlacementDialog(player1);
+    //showPlacementDialog(player1);
     player1Name.textContent = player1.name;
   } else {
     player2 = playerFactory(nameInput.value, false, board1);
-    showPlacementDialog(player2);
+    //showPlacementDialog(player2);
     player2Name.textContent = player2.name;
   }
-  hide(boardBox2);
-  hide(nameForm);
-  show(positionForm);
-  show(armadaBtn); 
+  startSetup();
 
-  definePlayers();
-  board1.updateStatus(myBoard);
-  board2.updateStatus(myBoard);
-  phase = 'setup';
-  displayGame(board1, board2, phase);
 })
 
 // PLACE PLAYER1 SHIPS
@@ -336,7 +341,5 @@ rematchBtn.addEventListener('click', () => {
   player1.reset();
   player2.reset();
   player1turn = true;
-  phase = 'setup';
-  definePlayers();
-  displayGame(board1, board2);
+  startSetup();
 })

@@ -33,6 +33,12 @@ describe('makeBoard tests', () => {
     testBoard2.placeShip(testHorPositions, 'Submarine');
     expect(testBoard2.rows[2]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'Submarine', 'Submarine', 'open', 'open']);
   })
+  test('resets all spaces to open', () => {
+    const testHorPositions = [ { row: 3, column: 6 }, { row: 3, column: 7 }];
+    testBoard2.placeShip(testHorPositions, 'Submarine');
+    testBoard2.reset();
+    expect(testBoard2.rows[3]).toStrictEqual(['open', 'open', 'open', 'open', 'open', 'open', 'open', 'open', 'open', 'open']);
+  }) 
 })
   
 

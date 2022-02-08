@@ -42,6 +42,7 @@ const shipLength = document.getElementById('ship-length');
 const directionInput = document.getElementById('direction-input');
 const shipPosition = document.getElementById('ship-position');
 const placeshipBtn = document.getElementById('placeship-btn');
+const halGIF = document.getElementById('hal-gif');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -175,10 +176,16 @@ function loopGame() {
   yourBoard.updateActiveSpace('');
   if(currentPlayer.isComputer === true) {
     hide(submitBtn);
+    show(halGIF);
     setTimeout(() => { displayGame(board1, board2); }, 2000);
-    setTimeout(() => { switchTurn() }, 4000);
-    setTimeout(() => { writeGameMessage() }, 4000);
-    setTimeout(() => { show(submitBtn) }, 4500);
+    // setTimeout(() => {  }, 4000);
+    // setTimeout(() => {  }, 4000);
+    setTimeout(() => { 
+      switchTurn();
+      writeGameMessage();
+      show(submitBtn);
+      hide(halGIF);
+     }, 4000);
   } else {
     switchTurn();
     writeGameMessage();

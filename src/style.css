@@ -19,9 +19,27 @@ body {
   height: auto;
   width: 1020px;
 }
+#hal-gif {
+  display: grid;
+  grid-column-start: 4;
+  grid-row-start: 1;
+  height: 20px;
+  width: 20px;
+}
 #message-box {
   display: flex;
   width: 100%;
+}
+#name-box {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1;
+  width: 250px;
+}
+#player2-name {
+  display: grid;
+  grid-column-start: 3;
+  grid-row-start: 1;
 }
 #position-form {
   background-color:rgba(248, 248, 168, 0.561);
@@ -89,6 +107,7 @@ body {
   height: 400px;
   width: 400px;
 }
+
 .hidden {
   display: none !important;
 }

@@ -189,6 +189,7 @@ function startGame() {
   board2.updateStatus(yourBoard);
   show(box2);
   show(boardBox2);
+  show(gameOverBox);
   displayGame(board1, board2);
 }
 function loopGame() {
@@ -342,6 +343,7 @@ rematchBtn.addEventListener('click', () => {
   player2.reset();
   player1turn = true;
   startSetup();
+  hide(gameOverBox);
 })
 
 resetBtn.addEventListener('click', () => {
@@ -351,6 +353,7 @@ resetBtn.addEventListener('click', () => {
   gameMessages.textContent = '';
   hide(submitBtn);
   show(nameForm);
+  hide(gameOverBox);
   phase = 'setup';
   player1turn = true;
 })

@@ -178,8 +178,6 @@ function loopGame() {
     hide(submitBtn);
     show(halGIF);
     setTimeout(() => { displayGame(board1, board2); }, 2000);
-    // setTimeout(() => {  }, 4000);
-    // setTimeout(() => {  }, 4000);
     setTimeout(() => { 
       switchTurn();
       writeGameMessage();

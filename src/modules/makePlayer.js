@@ -68,10 +68,11 @@ const playerFactory = (name, isComputer, oppBoard) => {
   }
   function makeGuess() {
     const allOpenSpaces = findOpenSpaces();
-    const maxNum = allOpenSpaces.length;
+    const maxNum = allOpenSpaces.length - 1;
     const guessIndex = getRandomInt(maxNum);
     const guess = allOpenSpaces[guessIndex];
     oppBoard.updateActiveSpace(guess);
+    console.log(guess);
   }
 
   // HUMAN FUNCTIONS

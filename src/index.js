@@ -208,15 +208,16 @@ function loopGame() {
   }
 }
 function startSetup() {
-  phase = 'setup';
-  
-  definePlayers();
-  showPlacementDialog(currentPlayer);
   hide(boardBox2);
   hide(nameForm);
   hide(submitBtn);
   show(positionForm);
   show(armadaBtn); 
+
+  phase = 'setup';
+  definePlayers();
+  showPlacementDialog(currentPlayer);
+
   board1.updateStatus(myBoard);
   board2.updateStatus(myBoard);
   displayGame(board1, board2);
@@ -244,15 +245,12 @@ nameInputBtn.addEventListener('click', () => {
   }
   else if(player1turn = true) {
     player1 = playerFactory(nameInput.value, false, board2);
-    //showPlacementDialog(player1);
     player1Name.textContent = player1.name;
   } else {
     player2 = playerFactory(nameInput.value, false, board1);
-    //showPlacementDialog(player2);
     player2Name.textContent = player2.name;
   }
   startSetup();
-
 })
 
 // PLACE PLAYER1 SHIPS
@@ -342,4 +340,15 @@ rematchBtn.addEventListener('click', () => {
   player2.reset();
   player1turn = true;
   startSetup();
+})
+
+resetBtn.addEventListener('click', () => {
+  board1.reset();
+  board2.reset();
+  displayGame(board1, board2);
+  gameMessages.textContent = '';
+  hide(submitBtn);
+  show(nameForm);
+  phase = 'setup';
+  player1turn = true;
 })

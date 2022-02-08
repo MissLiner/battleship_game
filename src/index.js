@@ -36,6 +36,7 @@ const submitBtn = document.getElementById('submit-btn');
 const armadaBtn = document.getElementById('armada-btn');
 const player1Name = document.getElementById('player1-name');
 const player2Name = document.getElementById('player2-name');
+const boardBox2 = document.getElementById('board-box-2');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -43,7 +44,7 @@ let board2 = boardFactory('board2');
 let player1;
 let player2;
 
-let phase = 'setup';
+let phase = 'name';
 let player1turn = true;
 
 let currentPlayer;
@@ -204,12 +205,15 @@ nameInputBtn.addEventListener('click', () => {
     showPlacementDialog(player2);
     player2Name.textContent = player2.name;
   }
+  hide(boardBox2);
+  hide(nameForm);
+  show(positionForm);
+
   definePlayers();
   board1.updateStatus(myBoard);
   board2.updateStatus(myBoard);
-  displayGame(board1, board2);
-  show(positionForm);
-  hide(nameForm);
+  phase = 'setup';
+  displayGame(board1, board2, phase);
 })
 
 // PLACE PLAYER1 SHIPS

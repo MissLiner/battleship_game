@@ -11,7 +11,7 @@
   <h1 id="title">Battleship</h1>
   <div id="game-dialog">
     <div id="game-messages"></div>
-    <div id="ship-messages"></div>
+    
     <form id="name-form">
     <label>Are you ready to play? Just tell me your name:
       <input id="name-input" type="text" name="name" placeholder="Enter name">
@@ -20,6 +20,7 @@
     </form>
   </div>
   <form id="position-form" class="hidden">
+    <div id="ship-messages"></div>
     <label>Horizontal<input type="radio" name="direction" id="horizontal" value="horizontal"></input></label>
     <label>Vertical<input type="radio" name="direction" id="vertical" value="vertical"></input></label>
     <input type="button" id="armada-btn" value="Build my armada for me">
@@ -52,10 +53,9 @@
       </div>
       <div id="gameboard-box-1" class="gameboard-box"></div>
       <div id="player1-name" class="player-name">Player 1</div>
-      <button id="submit-btn">Submit</button>
+      <button id="submit-btn" class="hidden">Submit</button>
     </div>
     
-  
     <div id="board-box-2" class="board-box"> 
       <div id="col-number-box-2" class="col-number-box">
         <div class="number-space">A</div>

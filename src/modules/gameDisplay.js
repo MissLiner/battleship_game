@@ -1,4 +1,4 @@
-function displayGame(board1, board2) {
+function displayGame(board1, board2, phase) {
   const gameboardBox1 = document.getElementById('gameboard-box-1');
   const gameboardBox2 = document.getElementById('gameboard-box-2');
 

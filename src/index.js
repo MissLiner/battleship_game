@@ -31,12 +31,14 @@ const nameForm = document.getElementById('name-form');
 const nameInput = document.getElementById('name-input');
 const nameInputBtn = document.getElementById('name-input-btn');
 const positionForm = document.getElementById('position-form');
-const directionInputs = document.getElementsByName('direction');
 const submitBtn = document.getElementById('submit-btn');
 const armadaBtn = document.getElementById('armada-btn');
 const player1Name = document.getElementById('player1-name');
 const player2Name = document.getElementById('player2-name');
 const boardBox2 = document.getElementById('board-box-2');
+const shipName = document.getElementById('ship-name');
+const shipLength = document.getElementById('ship-length');
+const directionInput = document.getElementById('direction-input');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory('board1');
@@ -72,15 +74,6 @@ function hide(elem) {
 function show(elem) {
   elem.classList.remove('hidden');
 }
-
-function radioValue() {
-  for(let i = 0; i < directionInputs.length; i++) {
-    if(directionInputs[i].checked) {
-      return directionInputs[i].value;
-    }
-  }
-  return false;
-} 
 function switchTurn() {
   const gameOver = myBoard.checkIfAllSunk();
   if(gameOver === true) {
@@ -115,7 +108,8 @@ function showPlacementDialog(player) {
     break;
   }
   gameMessages.textContent = `${player.name}, please place your ${order} ship, or I can do for you!`;
-  shipMessages.textContent = `This ship is a ${player.getShips()[shipNumber].name}, and it's ${player.getShips()[shipNumber].size} spaces long. Pick a direction and the first space.`;
+  shipName.textContent = `${player.getShips()[shipNumber].name}`;
+  shipLength.textContent = `${player.getShips()[shipNumber].size} spaces`;
 }
 function writeAdminMessage(purpose) {
   const adminMessages = {
@@ -258,7 +252,7 @@ gameboardBoxes.forEach(box => {
 
 submitBtn.addEventListener('click', () => {
   if(phase === 'setup' && currentPlayer.getShipCounter() < 5) {
-    const direction = radioValue();
+    const direction = directionInput.value;
     if(direction === false) {
       writeErrMessage('direction');
       return;

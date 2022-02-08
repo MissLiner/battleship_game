@@ -24,15 +24,23 @@ body {
   width: 100%;
 }
 #position-form {
+  background-color:rgba(248, 248, 168, 0.561);
+  border: solid;
+  border-color: olive;
+  padding: 20px;
   position:absolute;
-  right: 60px;
-  width: 300px;
+  left: 30px;
+  top: 175px;
+  width: 250px;
 }
 #row-number-box-1 {
   grid-column-start: 1;
 }
 #row-number-box-2 {
   grid-column-start: 11;
+}
+#ship-messages {
+  margin-bottom: 20px;
 }
 #submit-btn {
   display: grid;
@@ -113,6 +121,10 @@ body {
   height: 400px;
   line-height: 40px;
   width: 40px;
+}
+.ship-info-span {
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* SPACE FORMATTING */

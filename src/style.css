@@ -1,25 +1,64 @@
+@font-face {
+  font-family: 'hominisnormal';
+  src: url('resources/HOMINIS-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'plexifont';
+  src: url('resources/plexifont-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 * {
-  font-family: helvetica, arial, sans-serif;
+  font-family: courier;
   margin: auto;
   text-align: center;
 }
 body {
-  background-color:rgb(144, 197, 237);
+  background-color:rgb(222, 222, 222);
 }
-input {
-  border-radius:4px;
-  border-color:rgb(42, 176, 186);
-  border: outset;
+/* https://www.bestcssbuttongenerator.com/ */
+input[type="button"] {
+  box-shadow: 0px 1px 0px 0px #f0f7fa;
+  background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
+  background-color:#33bdef;
+  border-radius:6px;
+  border:1px solid #057fd0;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:0px -1px 0px #5b6178;
+}
+input[type="button"]:hover {
+  background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
+  background-color:#019ad2;
+}
+input[type="button"]:active {
+  position:relative;
+  top:1px;
+}
+#title {
+  font-family: 'hominisnormal';
+  font-size: 40px;
+  font-weight:100;
+  color: rgb(193, 37, 37);
 }
 #armada-btn {
   margin-left: 10px;
 }
 #game-dialog {
-  background-color: rgb(227, 247, 249);
-  border:double;
-  border-color:rgb(42, 176, 186);
+  background-color: rgb(212, 238, 247);
+  border: 4px ridge rgba(192, 192, 193, 0.63);
+  border-radius: 6px;
+  font-family:Courier;
   margin-top: 20px;
-  padding:10px 20px 10px 20px;
+  padding:5px 20px 5px 20px;
   width: fit-content;
 }
 #game-display-box {
@@ -56,7 +95,7 @@ input {
 }
 #placeship-btn {
   margin-top:20px;
-  padding: 5px;
+  /* padding: 5px; */
 }
 #player2-name {
   display: grid;
@@ -64,7 +103,7 @@ input {
   grid-row-start: 1;
 }
 #position-form {
-  background-color:rgb(193, 234, 249);
+  background-color:rgb(212, 238, 247);
   border: double;
   border-color: rgb(42, 176, 186);
   border-width: 4px;
@@ -97,9 +136,7 @@ input {
 }
 #submit-btn {
   grid-column-start: 2;
-  height: 25px;
   margin-top:10px;
-  width: 80px;
 }
 #submit-btn-box {
   margin-top: 495px;
@@ -151,6 +188,7 @@ input {
 }
 .input {
   border: inset;
+  height:initial;
 }
 .number-space {
   border: none;
@@ -201,7 +239,7 @@ input {
   outline-width: 2px !important;
 }
 .open {
-  background-color: rgb(6, 66, 177);
+  background-color: rgb(10, 206, 228);
 }
 .miss {
   background-color: gray !important;

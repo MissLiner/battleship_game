@@ -109,7 +109,7 @@ function showPlacementDialog(player) {
       order = "fifth and final";
       break;
   }
-  gameMessages.textContent = `${player.name}, please place your ${order} ship (or I can do for you ->)`;
+  gameMessages.textContent = `${player.name}, please place your <b>${order}</b> ship (or I can do for you ->)`;
   shipName.textContent = `${player.getShips()[shipNumber].name}`;
   shipLength.textContent = `${player.getShips()[shipNumber].size} spaces`;
 }

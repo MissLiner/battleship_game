@@ -211,13 +211,13 @@ function loopGame() {
     show(halGIF);
     setTimeout(() => {
       displayGame(board1, board2);
-    }, 20);
+    }, 2000);
     setTimeout(() => {
       switchTurn();
       writeGameMessage();
       show(submitBtn);
       hide(halGIF);
-    }, 25);
+    }, 2500);
   } else {
     switchTurn();
   }

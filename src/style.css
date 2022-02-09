@@ -4,16 +4,22 @@
   text-align: center;
 }
 body {
-  background-color:rgb(169, 203, 233);
+  background-color:rgb(144, 197, 237);
 }
 input {
   border-radius:4px;
+  border-color:rgb(42, 176, 186);
+  border: outset;
 }
 #armada-btn {
   margin-left: 10px;
 }
 #game-dialog {
+  background-color: rgb(227, 247, 249);
+  border:double;
+  border-color:rgb(42, 176, 186);
   margin-top: 20px;
+  padding:10px 20px 10px 20px;
   width: fit-content;
 }
 #game-display-box {
@@ -48,17 +54,22 @@ input {
   grid-template-rows: 1fr;
   width: 400px;
 }
+#placeship-btn {
+  margin-top:20px;
+  padding: 5px;
+}
 #player2-name {
   display: grid;
   grid-column-start: 3;
   grid-row-start: 1;
 }
 #position-form {
-  background-color:rgba(248, 248, 168, 0.561);
-  border: solid;
-  border-color: olive;
-  margin-left: -100px;
-  margin-top: -120px;
+  background-color:rgb(193, 234, 249);
+  border: double;
+  border-color: rgb(42, 176, 186);
+  border-width: 4px;
+  margin-left: -180px;
+  margin-top: -40px;
   padding: 20px;
   width: 250px;
 }
@@ -68,8 +79,21 @@ input {
 #row-number-box-2 {
   grid-column-start: 11;
 }
-#ship-messages {
-  margin-bottom: 20px;
+#ship-info {
+  width:200px;
+}
+#ship-message {
+  padding-bottom: 20px;
+}
+#ship-name {
+  border-bottom: solid;
+  font-weight:bold;
+  font-size:20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+#ship-position {
+  width: 80px;
 }
 #submit-btn {
   grid-column-start: 2;
@@ -125,6 +149,9 @@ input {
 .hidden {
   display: none !important;
 }
+.input {
+  border: inset;
+}
 .number-space {
   border: none;
   background-color: transparent;
@@ -154,9 +181,12 @@ input {
   line-height: 40px;
   width: 40px;
 }
-.ship-info-span {
-  margin-bottom: 10px;
-  margin-top: 10px;
+.ship-detail {
+  display:block;
+  left: 0;
+  text-align: left;
+  padding: 10px;
+  width: 200px;
 }
 
 /* SPACE FORMATTING */

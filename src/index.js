@@ -1,26 +1,7 @@
-// TO DO
-
-// -Add ship tally on screen for each player
-// -Fix up game over
-// -Clean up code, functions to modules where possible
-// -Change colors as ships sink / are sunk
-// -Have AI guess near spaces to hit
-// -Enable two human players
-
-// FUNCTIONS ONLY EXTERNAL FOR TESTING
-
-//  MAKEPLAYER
-//  -checkForDupes
-//  -findOpenSpaces (NOT TESTED EITHER)
-//  -pickDirection
-//  MAKEBOARD
-//  -hitShip
-
 import "./style.css";
 import { boardFactory } from "./modules/makeBoard";
 import { playerFactory } from "./modules/makePlayer";
 import { displayGame } from "./modules/gameDisplay";
-import { doc } from "prettier";
 
 //DOM CONSTANTS
 const gameMessages = document.getElementById("game-messages");
@@ -43,6 +24,7 @@ const resetBtn = document.getElementById("reset-btn");
 const rematchBtn = document.getElementById("rematch-btn");
 const gameOverBox = document.getElementById("game-over-box");
 const box2 = document.getElementById("box-2");
+const gameboardBoxes = document.querySelectorAll(".gameboard-box");
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory("board1");
@@ -78,6 +60,14 @@ function hide(elem) {
 function show(elem) {
   elem.classList.remove('hidden');
 }
+function transformSpace(space) {
+  let rowNum = space.dataset.rowCoord;
+  rowNum = Number(rowNum);
+  let colNum = space.dataset.columnCoord;
+  colNum = Number(colNum);
+  const coord = { row: rowNum, column: colNum };
+  return coord;
+}
 function switchTurn() {
   const gameOver = yourBoard.checkIfAllSunk();
   if (gameOver === true) {
@@ -93,23 +83,6 @@ function switchTurn() {
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
   displayGame(board1, board2);
-}
-function endGame(player) {
-  player.addWin();
-  if (player.isComputer === false) {
-    if (player.getTurns() < 66) {
-      writeAdminMessage("winQuick");
-    } else {
-      writeAdminMessage("winSlow");
-    }
-  } else {
-    if (player.getTurns() < 66) {
-      writeAdminMessage("loseQuick");
-    } else {
-      writeAdminMessage("loseSlow");
-    }
-  }
-  show(gameOverBox);
 }
 
 // DIALOG FUNCTIONS
@@ -198,6 +171,21 @@ function confirmShips() {
   show(submitBtn);
 }
 // GAME FUNCTIONS
+function startSetup() {
+  hide(boardBox2);
+  hide(nameForm);
+  hide(submitBtn);
+  show(positionForm);
+  show(armadaBtn);
+
+  phase = 'setup';
+  definePlayers();
+  showPlacementDialog(currentPlayer);
+
+  board1.updateStatus(myBoard);
+  board2.updateStatus(myBoard);
+  displayGame(board1, board2);
+}
 function startGame() {
   phase = "gameplay";
   writeAdminMessage("firstGuess");
@@ -229,21 +217,24 @@ function loopGame() {
     writeGameMessage();
   }
 }
-function startSetup() {
-  hide(boardBox2);
-  hide(nameForm);
-  hide(submitBtn);
-  show(positionForm);
-  show(armadaBtn);
-
-  phase = 'setup';
-  definePlayers();
-  showPlacementDialog(currentPlayer);
-
-  board1.updateStatus(myBoard);
-  board2.updateStatus(myBoard);
-  displayGame(board1, board2);
+function endGame(player) {
+  player.addWin();
+  if (player.isComputer === false) {
+    if (player.getTurns() < 66) {
+      writeAdminMessage("winQuick");
+    } else {
+      writeAdminMessage("winSlow");
+    }
+  } else {
+    if (player.getTurns() < 66) {
+      writeAdminMessage("loseQuick");
+    } else {
+      writeAdminMessage("loseSlow");
+    }
+  }
+  show(gameOverBox);
 }
+
 // CREATE COMPUTER PLAYER2
 function createPlayerAI(turn) {
   if (turn === 1) {
@@ -306,15 +297,6 @@ placeshipBtn.addEventListener("click", () => {
   }
 });
 
-const gameboardBoxes = document.querySelectorAll(".gameboard-box");
-function transformSpace(space) {
-  let rowNum = space.dataset.rowCoord;
-  rowNum = Number(rowNum);
-  let colNum = space.dataset.columnCoord;
-  colNum = Number(colNum);
-  const coord = { row: rowNum, column: colNum };
-  return coord;
-}
 gameboardBoxes.forEach((box) => {
   box.addEventListener("click", (e) => {
     if (box.classList.contains("active-board")) {
@@ -378,3 +360,18 @@ resetBtn.addEventListener("click", () => {
   phase = "setup";
   player1turn = true;
 });
+
+// TO DO
+
+// -Fix up game over
+// -Have AI guess near spaces to hit
+// -Enable two human players
+
+// FUNCTIONS ONLY EXTERNAL FOR TESTING
+
+//  MAKEPLAYER
+//  -checkForDupes
+//  -findOpenSpaces (NOT TESTED EITHER)
+//  -pickDirection
+//  MAKEBOARD
+//  -hitShip

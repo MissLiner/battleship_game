@@ -43,21 +43,15 @@ input[type="button"]:active {
   position:relative;
   top:1px;
 }
-#title {
-  font-family: 'hominisnormal';
-  font-size: 40px;
-  font-weight:100;
-  color: rgb(193, 37, 37);
-}
 #armada-btn {
   margin-left: 10px;
 }
 #game-dialog {
   background-color: rgb(212, 238, 247);
   border: 4px ridge rgba(192, 192, 193, 0.63);
-  border-radius: 6px;
+  border-radius: 4px;
   font-family:Courier;
-  margin-top: 20px;
+  margin-top: 15px;
   padding:5px 20px 5px 20px;
   width: fit-content;
 }
@@ -95,7 +89,6 @@ input[type="button"]:active {
 }
 #placeship-btn {
   margin-top:20px;
-  /* padding: 5px; */
 }
 #player2-name {
   display: grid;
@@ -136,16 +129,19 @@ input[type="button"]:active {
 }
 #submit-btn {
   grid-column-start: 2;
-  margin-top:10px;
+  margin-top:5px;
 }
 #submit-btn-box {
   margin-top: 495px;
   width: 1020px;
 }
 #title {
-  margin-top: 20px;
+  font-family: 'hominisnormal';
+  font-size: 40px;
+  font-weight:100;
+  color: rgb(193, 37, 37);
+  margin-top:15px;
 }
-
 .active-board {
   outline-style: solid;
   outline-color: limegreen;

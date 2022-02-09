@@ -318,9 +318,9 @@ gameboardBoxes.forEach((box) => {
 
       const coord = transformSpace(e.target);
       if (phase === "setup") {
-        const row = coord.row;
+        const row = coord.row + 1;
         const column = String.fromCharCode(coord.column + 65);
-        shipPosition.textContent = `${column}-${row}`;
+        shipPosition.value = `${column}-${row}`;
         myBoard.updateActiveSpace(coord);
       } else if (phase === "gameplay") {
         yourBoard.updateActiveSpace(coord);

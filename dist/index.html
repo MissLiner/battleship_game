@@ -67,14 +67,15 @@
         <div id="ship-message"><em>Choose a direction, and click on a starting space.</em></div>
         <div id="ship-info">
           <div class="ship-detail">Length: &nbsp;&nbsp;&nbsp;&nbsp;<span id="ship-length" class="ship-detail2"></span></div>
-          <label class="ship-detail">Position: &nbsp;&nbsp;<input id="ship-position" class="ship-detail2 input" placeholder="click a space"></label>
-        <label class="ship-detail">Direction: 
-          <select id="direction-input" class="ship-detail2 input" name="direction">
-            <option>Horizontal</option>
-            <option>Vertical</option>
-          </select> 
-        </label>
-        
+          <label class="ship-detail">Position: &nbsp;
+            <input id="ship-position" type="text" class="ship-detail2 input" placeholder="click a space">
+          </label>
+          <label class="ship-detail">Direction: 
+            <select id="direction-input" class="ship-detail2 input" name="direction">
+              <option>Horizontal</option>
+              <option>Vertical</option>
+            </select> 
+          </label>
         </div>
         <input type="button" id="placeship-btn" value="Place Ship">
       </form>

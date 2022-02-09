@@ -17,41 +17,41 @@
 //  MAKEBOARD
 //  -hitShip
 
-import './style.css';
-import { boardFactory } from './modules/makeBoard';
-import { playerFactory } from './modules/makePlayer';
-import { displayGame } from './modules/gameDisplay';
-import { doc } from 'prettier';
+import "./style.css";
+import { boardFactory } from "./modules/makeBoard";
+import { playerFactory } from "./modules/makePlayer";
+import { displayGame } from "./modules/gameDisplay";
+import { doc } from "prettier";
 
 //DOM CONSTANTS
-const gameMessages = document.getElementById('game-messages');
-const nameForm = document.getElementById('name-form');
-const nameInput = document.getElementById('name-input');
-const nameInputBtn = document.getElementById('name-input-btn');
-const positionForm = document.getElementById('position-form');
-const submitBtn = document.getElementById('submit-btn');
-const armadaBtn = document.getElementById('armada-btn');
-const player1Name = document.getElementById('player1-name');
-const player2Name = document.getElementById('player2-name');
-const boardBox2 = document.getElementById('board-box-2');
-const shipName = document.getElementById('ship-name');
-const shipLength = document.getElementById('ship-length');
-const directionInput = document.getElementById('direction-input');
-const shipPosition = document.getElementById('ship-position');
-const placeshipBtn = document.getElementById('placeship-btn');
-const halGIF = document.getElementById('hal-gif');
-const resetBtn = document.getElementById('reset-btn');
-const rematchBtn = document.getElementById('rematch-btn');
-const gameOverBox = document.getElementById('game-over-box');
-const box2 = document.getElementById('box-2');
+const gameMessages = document.getElementById("game-messages");
+const nameForm = document.getElementById("name-form");
+const nameInput = document.getElementById("name-input");
+const nameInputBtn = document.getElementById("name-input-btn");
+const positionForm = document.getElementById("position-form");
+const submitBtn = document.getElementById("submit-btn");
+const armadaBtn = document.getElementById("armada-btn");
+const player1Name = document.getElementById("player1-name");
+const player2Name = document.getElementById("player2-name");
+const boardBox2 = document.getElementById("board-box-2");
+const shipName = document.getElementById("ship-name");
+const shipLength = document.getElementById("ship-length");
+const directionInput = document.getElementById("direction-input");
+const shipPosition = document.getElementById("ship-position");
+const placeshipBtn = document.getElementById("placeship-btn");
+const halGIF = document.getElementById("hal-gif");
+const resetBtn = document.getElementById("reset-btn");
+const rematchBtn = document.getElementById("rematch-btn");
+const gameOverBox = document.getElementById("game-over-box");
+const box2 = document.getElementById("box-2");
 
 // GAMEPLAY VARIABLES
-let board1 = boardFactory('board1');
-let board2 = boardFactory('board2');
+let board1 = boardFactory("board1");
+let board2 = boardFactory("board2");
 let player1;
 let player2;
 
-let phase = 'name';
+let phase = "name";
 let player1turn = true;
 
 let currentPlayer;
@@ -74,19 +74,19 @@ function definePlayers() {
   }
 }
 function hide(elem) {
-  elem.classList.add('hidden');
+  elem.classList.add("hidden");
 }
 function show(elem) {
-  elem.classList.remove('hidden');
+  elem.classList.remove("hidden");
 }
 function switchTurn() {
   const gameOver = yourBoard.checkIfAllSunk();
-  if(gameOver === true) {
+  if (gameOver === true) {
     endGame(currentPlayer);
   } else {
-    if(player1turn === true) { 
+    if (player1turn === true) {
       player1turn = false;
-    } else {  
+    } else {
       player1turn = true;
     }
   }
@@ -97,17 +97,17 @@ function switchTurn() {
 }
 function endGame(player) {
   player.addWin();
-  if(player.isComputer === false) {
-    if(player.getTurns() < 66) {
-      writeAdminMessage('winQuick');
+  if (player.isComputer === false) {
+    if (player.getTurns() < 66) {
+      writeAdminMessage("winQuick");
     } else {
-      writeAdminMessage('winSlow');
+      writeAdminMessage("winSlow");
     }
   } else {
-    if(player.getTurns() < 66) {
-      writeAdminMessage('loseQuick');
+    if (player.getTurns() < 66) {
+      writeAdminMessage("loseQuick");
     } else {
-      writeAdminMessage('loseSlow');
+      writeAdminMessage("loseSlow");
     }
   }
   show(gameOverBox);
@@ -117,17 +117,22 @@ function endGame(player) {
 function showPlacementDialog(player) {
   const shipNumber = player.getShipCounter();
   let order;
-  switch(shipNumber) {
-    case 0: order = 'first';
-    break;
-    case 1: order = 'second';
-    break;
-    case 2: order = 'third';
-    break;
-    case 3: order = 'fourth';
-    break;
-    case 4: order = 'fifth and final';
-    break;
+  switch (shipNumber) {
+    case 0:
+      order = "first";
+      break;
+    case 1:
+      order = "second";
+      break;
+    case 2:
+      order = "third";
+      break;
+    case 3:
+      order = "fourth";
+      break;
+    case 4:
+      order = "fifth and final";
+      break;
   }
   gameMessages.textContent = `${player.name}, please place your ${order} ship (or I can do for you ->)`;
   shipName.textContent = `${player.getShips()[shipNumber].name}`;
@@ -135,15 +140,26 @@ function showPlacementDialog(player) {
 }
 function writeAdminMessage(purpose) {
   const adminMessages = {
-    confirmArmada: 'Are you ready to play? Click Submit to lock in your choices.',
+    confirmArmada:
+      "Are you ready to play? Click Submit to lock in your choices.",
     firstGuess: `${currentPlayer.name}, time for a battle at sea! Choose your first target.`,
     winningHuman: `You've got ${otherPlayer.name} on the ropes now!`,
     losingHuman: `Focus, ${currentPlayer.name}, your armada is in trouble!`,
-    winQuick: `YOU WON, ${currentPlayer.name}!!! And it only took you ${currentPlayer.getTurns()} turns to annihilate ${otherPlayer.name}`,
-    winSlow: `I was worried for a minute there, but YOU WON, ${currentPlayer.name}! Way to hang in there, it took ${otherPlayer.getTurns()} turns.`,
-    loseQuick: `${currentPlayer.name} won! They slayed ${otherPlayer.name} in only ${currentPlayer.getTurns()} turns.`,
-    loseSlow: `You almost had it, ${otherPlayer.name}, but ${currentPlayer.name} WON in ${currentPlayer.getTurns()} turns.`,
-  }
+    winQuick: `YOU WON, ${
+      currentPlayer.name
+    }!!! And it only took you ${currentPlayer.getTurns()} turns to annihilate ${
+      otherPlayer.name
+    }`,
+    winSlow: `I was worried for a minute there, but YOU WON, ${
+      currentPlayer.name
+    }! Way to hang in there, it took ${otherPlayer.getTurns()} turns.`,
+    loseQuick: `${currentPlayer.name} won! They slayed ${
+      otherPlayer.name
+    } in only ${currentPlayer.getTurns()} turns.`,
+    loseSlow: `You almost had it, ${otherPlayer.name}, but ${
+      currentPlayer.name
+    } WON in ${currentPlayer.getTurns()} turns.`,
+  };
   gameMessages.textContent = adminMessages[purpose];
 }
 function writeGameMessage() {
@@ -152,29 +168,31 @@ function writeGameMessage() {
     `Are you gonna let a computer beat you?!?`,
     `You got this, ${currentPlayer.name}!`,
     `Back to you, ${currentPlayer.name}, choose wisely!`,
-  ]
+  ];
   const AIMessages = [
     `It\'s ${currentPlayer.name}\'s turn.`,
     `${currentPlayer.name} is thinking hard right now . . .`,
     `I hope ${currentPlayer.name} isn't using this game to plan the robot revolution!`,
-  ]
+  ];
   let messArr;
-  currentPlayer.isComputer === true ? messArr = AIMessages : messArr = humanMessages;
+  currentPlayer.isComputer === true
+    ? (messArr = AIMessages)
+    : (messArr = humanMessages);
   const messIndex = currentPlayer.getRandomInt(messArr.length - 1);
   gameMessages.textContent = messArr[messIndex];
 }
 function writeErrMessage(err) {
   const errMessages = {
-    name: 'Please tell me, what should I call you?',
-    direction: 'Please add a direction for your ship',
-    coord: 'Please choose your ships\'s starting position',
-    dupe: 'No need to attack there, you already did! Please choose another space.',
+    name: "Please tell me, what should I call you?",
+    direction: "Please add a direction for your ship",
+    coord: "Please choose your ships's starting position",
+    dupe: "No need to attack there, you already did! Please choose another space.",
     noguess: `You must choose a coordinate to attack before submitting.`,
-  }
+  };
   alert(errMessages[err]);
 }
 function confirmShips() {
-  writeAdminMessage('confirmArmada');
+  writeAdminMessage("confirmArmada");
   hide(box2);
   hide(positionForm);
   hide(armadaBtn);
@@ -182,8 +200,8 @@ function confirmShips() {
 }
 // GAME FUNCTIONS
 function startGame() {
-  phase = 'gameplay';
-  writeAdminMessage('firstGuess');
+  phase = "gameplay";
+  writeAdminMessage("firstGuess");
   definePlayers();
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
@@ -194,17 +212,19 @@ function startGame() {
 }
 function loopGame() {
   currentPlayer.takeTurn(otherPlayer, yourBoard.getActiveSpace()); //rewrite
-  yourBoard.updateActiveSpace('');
-  if(currentPlayer.isComputer === true) {
+  yourBoard.updateActiveSpace("");
+  if (currentPlayer.isComputer === true) {
     hide(submitBtn);
     show(halGIF);
-    setTimeout(() => { displayGame(board1, board2); }, 2000);
-    setTimeout(() => { 
+    setTimeout(() => {
+      displayGame(board1, board2);
+    }, 2000);
+    setTimeout(() => {
       switchTurn();
       writeGameMessage();
       show(submitBtn);
       hide(halGIF);
-     }, 4000);
+    }, 4000);
   } else {
     switchTurn();
     writeGameMessage();
@@ -215,9 +235,9 @@ function startSetup() {
   hide(nameForm);
   hide(submitBtn);
   show(positionForm);
-  show(armadaBtn); 
+  show(armadaBtn);
 
-  phase = 'setup';
+  phase = "setup";
   definePlayers();
   showPlacementDialog(currentPlayer);
 
@@ -227,12 +247,12 @@ function startSetup() {
 }
 // CREATE COMPUTER PLAYER2
 function createPlayerAI(turn) {
-  if(turn === 1) {
-    player1 = playerFactory('Hal 9000', true, board2);
+  if (turn === 1) {
+    player1 = playerFactory("Hal 9000", true, board2);
     board1.placeArmada(player1.getArmada());
     player1.setName(player1Name);
   } else {
-    player2 = playerFactory('Hal 9000', true, board1);
+    player2 = playerFactory("Hal 9000", true, board1);
     board2.placeArmada(player2.getArmada());
     player2.setName(player2Name);
   }
@@ -241,12 +261,11 @@ function createPlayerAI(turn) {
 createPlayerAI(2);
 
 // CREATE HUMAN PLAYER1
-nameInputBtn.addEventListener('click', () => {
-  if(!nameInput.value) {
-    writeErrMessage('name');
+nameInputBtn.addEventListener("click", () => {
+  if (!nameInput.value) {
+    writeErrMessage("name");
     return;
-  }
-  else if(player1turn = true) {
+  } else if ((player1turn = true)) {
     player1 = playerFactory(nameInput.value, false, board2);
     player1Name.textContent = player1.name;
   } else {
@@ -254,38 +273,41 @@ nameInputBtn.addEventListener('click', () => {
     player2Name.textContent = player2.name;
   }
   startSetup();
-})
+});
 
 // PLACE PLAYER1 SHIPS
-armadaBtn.addEventListener('click', () => {
+armadaBtn.addEventListener("click", () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
   displayGame(board1, board2);
   confirmShips();
-})
+});
 
-placeshipBtn.addEventListener('click', () => {
-  const direction = directionInput.value;    
-  if(direction === false) {
-    writeErrMessage('direction');
+placeshipBtn.addEventListener("click", () => {
+  const direction = directionInput.value;
+  if (direction === false) {
+    writeErrMessage("direction");
     return;
   }
-  if(myBoard.getActiveSpace()) {
-    const newShip = currentPlayer.placeShip(myBoard.getActiveSpace(), direction);
+  if (myBoard.getActiveSpace()) {
+    const newShip = currentPlayer.placeShip(
+      myBoard.getActiveSpace(),
+      direction
+    );
     myBoard.placeShip(newShip.getPositions(), newShip.name);
-    myBoard.updateActiveSpace('');
+    myBoard.updateActiveSpace("");
     displayGame(board1, board2);
-    if(currentPlayer.getShipCounter() < 5) {
+    if (currentPlayer.getShipCounter() < 5) {
       showPlacementDialog(currentPlayer);
     } else {
       confirmShips();
     }
   } else {
-    alert(writeErrMessage('coord'));
+    alert(writeErrMessage("coord"));
   }
-})
+});
 
-const gameboardBoxes = document.querySelectorAll('.gameboard-box');
+const gameboardBoxes = document.querySelectorAll(".gameboard-box");
 function transformSpace(space) {
   let rowNum = space.dataset.rowCoord;
   rowNum = Number(rowNum);
@@ -294,66 +316,66 @@ function transformSpace(space) {
   const coord = { row: rowNum, column: colNum };
   return coord;
 }
-gameboardBoxes.forEach(box => {
-  box.addEventListener('click', (e) => {
-    if(box.classList.contains('active-board')) {
-      const spaces = document.querySelectorAll('.space');
-      for(let space of spaces) {
-        if(space.classList.contains('active-space')) {
-          space.classList.remove('active-space');
+gameboardBoxes.forEach((box) => {
+  box.addEventListener("click", (e) => {
+    if (box.classList.contains("active-board")) {
+      const spaces = document.querySelectorAll(".space");
+      for (let space of spaces) {
+        if (space.classList.contains("active-space")) {
+          space.classList.remove("active-space");
         }
       }
-      e.target.classList.add('active-space');
+      e.target.classList.add("active-space");
 
       const coord = transformSpace(e.target);
-      if(phase === 'setup') {
+      if (phase === "setup") {
         const row = coord.row;
         const column = String.fromCharCode(coord.column + 65);
         shipPosition.textContent = `${column}-${row}`;
         myBoard.updateActiveSpace(coord);
-      } 
-      else if(phase === 'gameplay') {
+      } else if (phase === "gameplay") {
         yourBoard.updateActiveSpace(coord);
       }
     }
-  })
-})
+  });
+});
 
-submitBtn.addEventListener('click', () => {
-  if(phase === 'setup') {
+submitBtn.addEventListener("click", () => {
+  if (phase === "setup") {
     startGame();
   }
   // TAKE TURN
-  else if(phase === 'gameplay') {
-    if(yourBoard.getActiveSpace() === '') {
-      writeErrMessage('noguess');
+  else if (phase === "gameplay") {
+    if (yourBoard.getActiveSpace() === "") {
+      writeErrMessage("noguess");
       return;
     }
     loopGame();
-    if(currentPlayer.isComputer === true) {
+    if (currentPlayer.isComputer === true) {
       loopGame();
     }
   }
-})
+});
 
-rematchBtn.addEventListener('click', () => {
+rematchBtn.addEventListener("click", () => {
   board1.reset();
   board2.reset();
   player1.reset();
   player2.reset();
+  board2.placeArmada(player2.getArmada());
   player1turn = true;
   startSetup();
   hide(gameOverBox);
-})
+});
 
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener("click", () => {
   board1.reset();
   board2.reset();
   displayGame(board1, board2);
-  gameMessages.textContent = '';
+  gameMessages.textContent = "";
   hide(submitBtn);
   show(nameForm);
   hide(gameOverBox);
-  phase = 'setup';
+  phase = "setup";
   player1turn = true;
-})
+});

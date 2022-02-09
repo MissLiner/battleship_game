@@ -360,6 +360,8 @@ rematchBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => {
   board1.reset();
   board2.reset();
+  player2.autoBuildArmada();
+  board2.placeArmada(player2.getArmada());
   displayGame(board1, board2);
   gameMessages.textContent = "";
   hide(submitBtn);

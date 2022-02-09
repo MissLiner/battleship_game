@@ -28,7 +28,7 @@ input[type="button"] {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-family:Arial;
+  font-family:courier;
   font-size:15px;
   font-weight:bold;
   padding:6px 24px;
@@ -89,7 +89,7 @@ input[type="button"]:active {
 }
 #name-box {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 1fr 1fr auto 1fr 1fr;
   grid-template-rows: 1fr;
   width: 400px;
 }
@@ -252,17 +252,17 @@ input[type="button"]:active {
 }
 
 .Destroyer {
-  background-color: violet;
+  background-color: rgb(203, 197, 36);
 }
 .Submarine {
-  background-color:mediumseagreen;
+  background-color:rgb(129, 78, 136);
 }
 .Cruiser {
-  background-color:mediumslateblue;
+  background-color:rgb(77, 143, 223);
 }
 .Battleship {
-  background-color:lightsalmon;
+  background-color:rgb(227, 123, 83);
 }
 .Carrier {
-  background-color:darkcyan;
+  background-color:rgb(0, 139, 90);
 }

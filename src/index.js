@@ -215,7 +215,7 @@ function loopGame() {
       writeGameMessage();
       show(submitBtn);
       hide(halGIF);
-    }, 4000);
+    }, 2500);
   } else {
     switchTurn();
     writeGameMessage();

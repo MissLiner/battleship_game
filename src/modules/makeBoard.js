@@ -56,9 +56,7 @@ const boardFactory = (name) => {
             for(let pos of positionArray) {
               rows[pos.row][pos.column] = 'sunk';
             }
-            if(checkIfAllSunk() === true) {
-              return;
-            } else {
+            if(checkIfAllSunk() !== true) {
               setTimeout(() => { alert(`${player.name}\'s ${shipName} just sank!`); }, 500);
             }
           } else {

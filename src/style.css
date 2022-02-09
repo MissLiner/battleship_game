@@ -163,11 +163,15 @@ body {
 .open {
   background-color: rgb(6, 66, 177);
 }
+n
 .miss {
   background-color: gray;
 }
 .hit {
   background-color: red;
+}
+.sunk {
+  background-color:darkred;
 }
 
 .Destroyer {

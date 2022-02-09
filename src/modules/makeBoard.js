@@ -45,13 +45,22 @@ const boardFactory = (name) => {
 
   // GAMEPLAY
 
-  function hitShip(player) {
+  function hitShip(player, activeRow, activeCol) {
+    let shipName = rows[activeRow][activeCol];
     for(let i = 0; i < player.getArmada().length; i++) {
       const positionArray = player.getArmada()[i].getPositions();
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === activeSpace.row && positionArray[x].column === activeSpace.column) {
           player.getArmada()[i].hit();
-          return;
+          if(player.getArmada()[i].getStatus() === 'sunk') {
+            for(let pos of positionArray) {
+              rows[pos.row][pos.column] = 'sunk';
+            }
+            alert(`${player.name}\'s ${shipName} just sank!`);
+          } else {
+            rows[activeRow][activeCol] = 'hit';
+          }
+          hitCounter++;
         }
       }
     }
@@ -65,9 +74,7 @@ const boardFactory = (name) => {
       column = activeSpace.column;
     }
     if(rows[row][column] !== 'open') {
-      rows[row][column] = 'hit';
-      hitShip(player);
-      hitCounter++;
+      hitShip(player, row, column);
     } else {
       rows[row][column] = 'miss';
     }

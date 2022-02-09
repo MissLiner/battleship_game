@@ -1,6 +1,5 @@
 // TO DO
 
-// -Separate submit buttons
 // -Add ship tally on screen for each player
 // -Fix up game over
 // -Clean up code, functions to modules where possible

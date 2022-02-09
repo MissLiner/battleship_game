@@ -44,7 +44,6 @@ const boardFactory = (name) => {
   }
 
   // GAMEPLAY
-
   function hitShip(player, activeRow, activeCol) {
     let shipName = rows[activeRow][activeCol];
     for(let i = 0; i < player.getArmada().length; i++) {
@@ -52,15 +51,19 @@ const boardFactory = (name) => {
       for(let x = 0; x < positionArray.length; x++) {
         if(positionArray[x].row === activeSpace.row && positionArray[x].column === activeSpace.column) {
           player.getArmada()[i].hit();
+          hitCounter++;
           if(player.getArmada()[i].getStatus() === 'sunk') {
             for(let pos of positionArray) {
               rows[pos.row][pos.column] = 'sunk';
             }
-            alert(`${player.name}\'s ${shipName} just sank!`);
+            if(checkIfAllSunk() === true) {
+              return;
+            } else {
+              setTimeout(() => { alert(`${player.name}\'s ${shipName} just sank!`); }, 500);
+            }
           } else {
             rows[activeRow][activeCol] = 'hit';
           }
-          hitCounter++;
         }
       }
     }

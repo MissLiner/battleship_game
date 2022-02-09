@@ -73,10 +73,10 @@ function definePlayers() {
   }
 }
 function hide(elem) {
-  elem.classList.add("hidden");
+  elem.classList.add('hidden');
 }
 function show(elem) {
-  elem.classList.remove("hidden");
+  elem.classList.remove('hidden');
 }
 function switchTurn() {
   const gameOver = yourBoard.checkIfAllSunk();
@@ -211,7 +211,7 @@ function startGame() {
 }
 function loopGame() {
   currentPlayer.takeTurn(otherPlayer, yourBoard.getActiveSpace()); //rewrite
-  yourBoard.updateActiveSpace("");
+  yourBoard.updateActiveSpace('');
   if (currentPlayer.isComputer === true) {
     hide(submitBtn);
     show(halGIF);
@@ -236,7 +236,7 @@ function startSetup() {
   show(positionForm);
   show(armadaBtn);
 
-  phase = "setup";
+  phase = 'setup';
   definePlayers();
   showPlacementDialog(currentPlayer);
 

@@ -163,9 +163,8 @@ body {
 .open {
   background-color: rgb(6, 66, 177);
 }
-n
 .miss {
-  background-color: gray;
+  background-color: gray !important;
 }
 .hit {
   background-color: red;

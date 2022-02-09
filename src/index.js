@@ -13,6 +13,7 @@ const submitBtn = document.getElementById("submit-btn");
 const armadaBtn = document.getElementById("armada-btn");
 const player1Name = document.getElementById("player1-name");
 const player2Name = document.getElementById("player2-name");
+const boardBox1 = document.getElementById("board-box-1");
 const boardBox2 = document.getElementById("board-box-2");
 const shipName = document.getElementById("ship-name");
 const shipLength = document.getElementById("ship-length");
@@ -163,14 +164,9 @@ function writeErrMessage(err) {
   };
   alert(errMessages[err]);
 }
-function confirmShips() {
-  writeAdminMessage("confirmArmada");
-  hide(box2);
-  hide(positionForm);
-  hide(armadaBtn);
-  show(submitBtn);
-}
+
 // GAME FUNCTIONS
+
 function startSetup() {
   hide(boardBox2);
   hide(nameForm);
@@ -186,6 +182,13 @@ function startSetup() {
   board2.updateStatus(myBoard);
   displayGame(board1, board2);
 }
+function confirmShips() {
+  writeAdminMessage("confirmArmada");
+  hide(box2);
+  hide(positionForm);
+  hide(armadaBtn);
+  show(submitBtn);
+}
 function startGame() {
   phase = "gameplay";
   writeAdminMessage("firstGuess");
@@ -195,6 +198,7 @@ function startGame() {
   show(box2);
   show(boardBox2);
   show(gameOverBox);
+  boardBox2.appendChild(submitBtn);
   displayGame(board1, board2);
 }
 function loopGame() {
@@ -232,7 +236,7 @@ function endGame(player) {
       writeAdminMessage("loseSlow");
     }
   }
-  show(gameOverBox);
+  boardBox1.appendChild(submitBtn);
 }
 
 // CREATE COMPUTER PLAYER2
@@ -362,7 +366,7 @@ resetBtn.addEventListener("click", () => {
 });
 
 // TO DO
-
+// -Add sunk ships display
 // -Fix up game over
 // -Have AI guess near spaces to hit
 // -Enable two human players

@@ -73,7 +73,6 @@ const playerFactory = (name, isComputer, oppBoard) => {
     const guessIndex = getRandomInt(maxNum);
     const guess = allOpenSpaces[guessIndex];
     oppBoard.updateActiveSpace(guess);
-    console.log(guess);
   }
 
   // HUMAN FUNCTIONS

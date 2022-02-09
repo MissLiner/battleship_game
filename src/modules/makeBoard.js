@@ -57,7 +57,9 @@ const boardFactory = (name) => {
               rows[pos.row][pos.column] = 'sunk';
             }
             if(checkIfAllSunk() !== true) {
-              setTimeout(() => { alert(`${player.name}\'s ${shipName} just sank!`); }, 500);
+              setTimeout(() => { alert(`${player.name}\'s ${shipName} just sank!`); }, 250);
+            } else { 
+              break;
             }
           } else {
             rows[activeRow][activeCol] = 'hit';

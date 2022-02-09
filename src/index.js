@@ -73,6 +73,7 @@ function switchTurn() {
   const gameOver = yourBoard.checkIfAllSunk();
   if (gameOver === true) {
     endGame(currentPlayer);
+    return;
   } else {
     if (player1turn === true) {
       player1turn = false;
@@ -81,6 +82,7 @@ function switchTurn() {
     }
   }
   definePlayers();
+  writeGameMessage();
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
   displayGame(board1, board2);
@@ -209,20 +211,20 @@ function loopGame() {
     show(halGIF);
     setTimeout(() => {
       displayGame(board1, board2);
-    }, 2000);
+    }, 20);
     setTimeout(() => {
       switchTurn();
       writeGameMessage();
       show(submitBtn);
       hide(halGIF);
-    }, 2500);
+    }, 25);
   } else {
     switchTurn();
-    writeGameMessage();
   }
 }
 function endGame(player) {
   player.addWin();
+  displayGame(board1, board2);
   if (player.isComputer === false) {
     if (player.getTurns() < 66) {
       writeAdminMessage("winQuick");
@@ -236,7 +238,9 @@ function endGame(player) {
       writeAdminMessage("loseSlow");
     }
   }
+  show(submitBtn);
   boardBox1.appendChild(submitBtn);
+  hide(submitBtn);
 }
 
 // CREATE COMPUTER PLAYER2

@@ -355,20 +355,21 @@ rematchBtn.addEventListener("click", () => {
   player1turn = true;
   startSetup();
   hide(gameOverBox);
+  boardBox1.appendChild(submitBtn);
 });
 
 resetBtn.addEventListener("click", () => {
-  board1.reset();
-  board2.reset();
-  player2.autoBuildArmada();
-  board2.placeArmada(player2.getArmada());
-  displayGame(board1, board2);
-  gameMessages.textContent = "";
-  hide(submitBtn);
-  show(nameForm);
-  hide(gameOverBox);
   phase = "setup";
   player1turn = true;
+  board1.reset();
+  board2.reset();
+  player2.reset();
+  displayGame(board1, board2);
+  gameMessages.textContent = "";
+  show(nameForm);
+  hide(gameOverBox);
+  boardBox1.appendChild(submitBtn);
+  hide(submitBtn);
 });
 
 // TO DO

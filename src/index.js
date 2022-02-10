@@ -308,22 +308,26 @@ placeshipBtn.addEventListener("click", () => {
 gameboardBoxes.forEach((box) => {
   box.addEventListener("click", (e) => {
     if (box.classList.contains("active-board")) {
-      const spaces = document.querySelectorAll(".space");
-      for (let space of spaces) {
-        if (space.classList.contains("active-space")) {
-          space.classList.remove("active-space");
+      if(e.target.classList.contains('open') || (!e.target.classList.contains('hit') && !e.target.classList.contains('miss'))) {
+        const spaces = document.querySelectorAll(".space");
+        for (let space of spaces) {
+          if (space.classList.contains("active-space")) {
+            space.classList.remove("active-space");
+          }
         }
-      }
-      e.target.classList.add("active-space");
+        e.target.classList.add("active-space");
 
-      const coord = transformSpace(e.target);
-      if (phase === "setup") {
-        const row = coord.row + 1;
-        const column = String.fromCharCode(coord.column + 65);
-        shipPosition.value = `${column}-${row}`;
-        myBoard.updateActiveSpace(coord);
-      } else if (phase === "gameplay") {
-        yourBoard.updateActiveSpace(coord);
+        const coord = transformSpace(e.target);
+        if (phase === "setup") {
+          const row = coord.row + 1;
+          const column = String.fromCharCode(coord.column + 65);
+          shipPosition.value = `${column}-${row}`;
+          myBoard.updateActiveSpace(coord);
+        } else if (phase === "gameplay") {
+          yourBoard.updateActiveSpace(coord);
+        }
+      } else {
+        writeErrMessage('dupe');
       }
     }
   });

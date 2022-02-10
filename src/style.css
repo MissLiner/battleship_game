@@ -16,7 +16,8 @@
   text-align: center;
 }
 body {
-  background-color:rgb(222, 222, 222);
+  /* background-color:rgb(222, 222, 222); */
+  background-color:rgb(182, 181, 181);
 }
 /* https://www.bestcssbuttongenerator.com/ */
 input[type="button"] {
@@ -48,7 +49,7 @@ input[type="button"]:active {
 }
 #game-dialog {
   background-color: rgb(212, 238, 247);
-  border: 4px ridge rgba(192, 192, 193, 0.63);
+  border: 2px ridge rgba(60, 60, 60, 0.63);
   border-radius: 4px;
   font-family:Courier;
   margin-top: 15px;
@@ -136,6 +137,7 @@ input[type="button"]:active {
   width: 1020px;
 }
 #title {
+  background-color: white;
   font-family: 'hominisnormal';
   font-size: 40px;
   font-weight:100;
@@ -144,7 +146,7 @@ input[type="button"]:active {
 }
 .active-board {
   outline-style: solid;
-  outline-color: limegreen;
+  outline-color: yellow;
   outline-width: 4px;
 }
 .board-box {
@@ -165,7 +167,7 @@ input[type="button"]:active {
   width: 400px;
 }
 .gameboard {
-  background-color: transparent;
+  background-color: white;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
   height: 400px;

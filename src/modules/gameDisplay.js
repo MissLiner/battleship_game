@@ -1,4 +1,4 @@
-function displayGame(board1, board2) {
+function displayGame(board1, board2, playerView) {
   const gameboardBox1 = document.getElementById('gameboard-box-1');
   const gameboardBox2 = document.getElementById('gameboard-box-2');
 
@@ -56,6 +56,6 @@ function displayGame(board1, board2) {
     buildBoard();
   }
   displayBoard(board1, gameboardBox1, 'gameboard-1', 'private');
-  displayBoard(board2, gameboardBox2, 'gameboard-2', 'public');
+  displayBoard(board2, gameboardBox2, 'gameboard-2', playerView);
 }
 export { displayGame };

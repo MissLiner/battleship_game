@@ -26,6 +26,7 @@ const rematchBtn = document.getElementById("rematch-btn");
 const gameOverBox = document.getElementById("game-over-box");
 const box2 = document.getElementById("box-2");
 const gameboardBoxes = document.querySelectorAll(".gameboard-box");
+const revealShipsBtn = document.getElementById('reveal-ships-btn');
 
 // GAMEPLAY VARIABLES
 let board1 = boardFactory("board1");
@@ -35,6 +36,7 @@ let player2;
 
 let phase = "name";
 let player1turn = true;
+let p2View = 'public';
 
 let currentPlayer;
 let otherPlayer;
@@ -86,6 +88,16 @@ function switchTurn() {
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
   displayGame(board1, board2);
+}
+function toggleView(button) {
+  if(button.value === "reveal ships") {
+    button.value = "hide ships";
+    p2View = "private";
+  } else {
+    button.value = "reveal ships";
+    p2View = "public";
+  }
+  displayGame(board1, board2, p2View);
 }
 
 // DIALOG FUNCTIONS
@@ -304,7 +316,9 @@ placeshipBtn.addEventListener("click", () => {
     alert(writeErrMessage("coord"));
   }
 });
-
+revealShipsBtn.addEventListener("click", () => {
+  toggleView(revealShipsBtn);
+})
 gameboardBoxes.forEach((box) => {
   box.addEventListener("click", (e) => {
     if (box.classList.contains("active-board")) {

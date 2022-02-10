@@ -15,10 +15,13 @@ function displayGame(board1, board2, view) {
         switch(spaceStatus) {
           case 'hit': 
             div.classList.add('hit');
+            break;
           case 'miss': 
             div.classList.add('miss');
+            break;
           case 'sunk': 
             div.classList.add('sunk');
+            break;
           default: 
             div.classList.add('open');
         }

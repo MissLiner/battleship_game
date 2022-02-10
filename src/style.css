@@ -21,38 +21,36 @@ body {
 }
 /* https://www.bestcssbuttongenerator.com/ */
 input[type="button"] {
-  box-shadow: 0px 1px 0px 0px #f0f7fa;
-  background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%);
-  background-color:#33bdef;
-  border-radius:6px;
-  border:1px solid #057fd0;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-family:courier;
-  font-size:15px;
-  font-weight:bold;
-  padding:6px 24px;
-  text-decoration:none;
-  text-shadow:0px -1px 0px #5b6178;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ffffff 10%, #dad9d9 100%);
+	background-color:#ffffff;
+	border-radius:6px;
+	border:1px solid #9b9b9b;
+	display:inline-block;
+	cursor:pointer;
+	color:#2d2d2d;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:2.5px 20px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
 }
 input[type="button"]:hover {
-  background:linear-gradient(to bottom, #019ad2 5%, #33bdef 100%);
-  background-color:#019ad2;
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	background-color:#f6f6f6;
 }
 input[type="button"]:active {
-  position:relative;
-  top:1px;
+	position:relative;
+	top:1px;
 }
+
 #armada-btn {
   margin-left: 10px;
 }
 #game-dialog {
   background-color: rgb(213, 35, 35);
   color: white;
-  /* background-color: rgb(212, 238, 247); */
-  border: 2px ridge white;
-  border-radius: 4px;
   font-family:Courier;
   margin-top: 15px;
   padding:5px 20px 5px 20px;
@@ -100,8 +98,6 @@ input[type="button"]:active {
 }
 #position-form {
   background-color:white;
-  /* border: double;
-  border-color: rgb(42, 176, 186); */
   border-width: 4px;
   margin-left: -180px;
   margin-top: -40px;
@@ -129,7 +125,11 @@ input[type="button"]:active {
   padding-bottom: 10px;
 }
 #ship-position {
-  width: 100px;
+  width: 112px;
+}
+#direction-input {
+  padding: 1px 2px;
+  width: 122px;
 }
 #submit-btn {
   grid-column-start: 2;
@@ -150,7 +150,7 @@ input[type="button"]:active {
 .active-board {
   outline-style: solid;
   outline-color: yellow;
-  outline-width: 4px;
+  outline-width: 5px;
 }
 .board-box {
   display: grid;
@@ -203,6 +203,11 @@ input[type="button"]:active {
   grid-column-start: 2;
   margin-top: 10px; 
 }
+/* .linear-repeating {
+  border: solid;
+  border-image: repeating-linear-gradient(10deg, rgb(9, 187, 206), rgb(185, 248, 255), rgb(107, 206, 216) 20px) 5;
+  border-width: 8px;
+} */
 .row {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -224,7 +229,7 @@ input[type="button"]:active {
   display:block;
   left: 0;
   text-align: left;
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
   width: 230px;
 }
 

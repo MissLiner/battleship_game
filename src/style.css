@@ -191,7 +191,13 @@ input[type="button"]:active {
   height: 400px;
   width: 400px;
 }
-
+.game-over-btn {
+  font-weight:400 !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  text-align: center;
+  width: 90px;
+}
 .hidden {
   display: none !important;
 }

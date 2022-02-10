@@ -56,6 +56,6 @@ function displayGame(board1, board2) {
     buildBoard();
   }
   displayBoard(board1, gameboardBox1, 'gameboard-1', 'private');
-  displayBoard(board2, gameboardBox2, 'gameboard-2', 'private');
+  displayBoard(board2, gameboardBox2, 'gameboard-2', 'public');
 }
 export { displayGame };

@@ -87,7 +87,7 @@ function switchTurn() {
   writeGameMessage();
   board1.updateStatus(yourBoard);
   board2.updateStatus(yourBoard);
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
 }
 function toggleView(button) {
   if(button.value === "reveal ships") {
@@ -194,7 +194,7 @@ function startSetup() {
 
   board1.updateStatus(myBoard);
   board2.updateStatus(myBoard);
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
 }
 function confirmShips() {
   writeAdminMessage("confirmArmada");
@@ -213,7 +213,7 @@ function startGame() {
   show(boardBox2);
   show(gameOverBox);
   boardBox2.appendChild(submitBtn);
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
 }
 function loopGame() {
   currentPlayer.takeTurn(otherPlayer, yourBoard.getActiveSpace()); //rewrite
@@ -222,7 +222,7 @@ function loopGame() {
     hide(submitBtn);
     show(halGIF);
     setTimeout(() => {
-      displayGame(board1, board2);
+      displayGame(board1, board2, p2View);
     }, 2000);
     setTimeout(() => {
       switchTurn();
@@ -236,7 +236,7 @@ function loopGame() {
 }
 function endGame(player) {
   player.addWin();
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
   if (player.isComputer === false) {
     if (player.getTurns() < 66) {
       writeAdminMessage("winQuick");
@@ -266,7 +266,7 @@ function createPlayerAI(turn) {
     board2.placeArmada(player2.getArmada());
     player2.setName(player2Name);
   }
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
 }
 createPlayerAI(2);
 
@@ -289,7 +289,7 @@ nameInputBtn.addEventListener("click", () => {
 armadaBtn.addEventListener("click", () => {
   currentPlayer.autoBuildArmada();
   myBoard.placeArmada(currentPlayer.getArmada());
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
   confirmShips();
 });
 
@@ -306,7 +306,7 @@ placeshipBtn.addEventListener("click", () => {
     );
     myBoard.placeShip(newShip.getPositions(), newShip.name);
     myBoard.updateActiveSpace("");
-    displayGame(board1, board2);
+    displayGame(board1, board2, p2View);
     if (currentPlayer.getShipCounter() < 5) {
       showPlacementDialog(currentPlayer);
     } else {
@@ -382,7 +382,7 @@ resetBtn.addEventListener("click", () => {
   board1.reset();
   board2.reset();
   player2.reset();
-  displayGame(board1, board2);
+  displayGame(board1, board2, p2View);
   gameMessages.textContent = "";
   show(nameForm);
   hide(gameOverBox);

@@ -30,11 +30,24 @@ const boardFactory = (name) => {
   }
 
   // SHIP PLACEMENT
+  function checkPositions(positions) {
+    for(let pos of positions) {
+      if(rows[pos.row][pos.column] !== 'open') {
+        alert('Ship has overlapping positions');
+        return true;
+      }
+    }
+  }
   const placeShip = (shipPositions, name) => {
-    for(let i = 0; i < shipPositions.length; i++) {
-      const rowPos = shipPositions[i].row;
-      const colPos = shipPositions[i].column;
-      rows[rowPos][colPos] = name;
+    const isOverlap = checkPositions(shipPositions);
+    if(isOverlap === true) {
+      return 0;
+    } else {
+      for(let i = 0; i < shipPositions.length; i++) {
+        const rowPos = shipPositions[i].row;
+        const colPos = shipPositions[i].column;
+        rows[rowPos][colPos] = name;
+      }
     }
   }
   const placeArmada = (armadaArr) => {

@@ -200,6 +200,19 @@ function startSetup() {
   board2.updateStatus(myBoard);
   displayGame(board1, board2, p2View);
 }
+// function checkPositions(ship) {
+//   const arr1 = currentPlayer.getAllShipPositions();
+//   const arr2 = ship.getPositions();
+//   const dupeArr = arr1.concat(arr2);
+//   const isDupe = player1.checkForDupes(dupeArr);
+
+//   if(isDupe === true) {
+//     alert('Ship has overlapping positions');
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 function confirmShips() {
   writeAdminMessage("confirmArmada");
   hide(box2);
@@ -299,6 +312,7 @@ armadaBtn.addEventListener("click", () => {
 
 placeshipBtn.addEventListener("click", () => {
   const direction = directionInput.value;
+  
   if (direction === false) {
     writeErrMessage("direction");
     return;
@@ -308,13 +322,19 @@ placeshipBtn.addEventListener("click", () => {
       myBoard.getActiveSpace(),
       direction
     );
+    const placeShip =  
     myBoard.placeShip(newShip.getPositions(), newShip.name);
-    myBoard.updateActiveSpace("");
-    displayGame(board1, board2, p2View);
-    if (currentPlayer.getShipCounter() < 5) {
-      showPlacementDialog(currentPlayer);
+    if(placeShip === 0) {
+      return;
     } else {
-      confirmShips();
+      myBoard.updateActiveSpace("");
+      displayGame(board1, board2, p2View);
+      if (currentPlayer.getShipCounter() < 5) {
+          showPlacementDialog(currentPlayer);
+        } else {
+          confirmShips();
+        }
+      return;
     }
   } else {
     alert(writeErrMessage("coord"));

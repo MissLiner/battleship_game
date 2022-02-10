@@ -48,8 +48,10 @@ input[type="button"]:active {
   margin-left: 10px;
 }
 #game-dialog {
-  background-color: rgb(212, 238, 247);
-  border: 2px ridge rgba(60, 60, 60, 0.63);
+  background-color: rgb(213, 35, 35);
+  color: white;
+  /* background-color: rgb(212, 238, 247); */
+  border: 2px ridge white;
   border-radius: 4px;
   font-family:Courier;
   margin-top: 15px;
@@ -97,9 +99,9 @@ input[type="button"]:active {
   grid-row-start: 1;
 }
 #position-form {
-  background-color:rgb(212, 238, 247);
-  border: double;
-  border-color: rgb(42, 176, 186);
+  background-color:white;
+  /* border: double;
+  border-color: rgb(42, 176, 186); */
   border-width: 4px;
   margin-left: -180px;
   margin-top: -40px;
@@ -120,6 +122,7 @@ input[type="button"]:active {
 }
 #ship-name {
   border-bottom: solid;
+  color: rgb(213, 35, 35);
   font-weight:bold;
   font-size:20px;
   margin-bottom: 10px;
@@ -141,7 +144,7 @@ input[type="button"]:active {
   font-family: 'hominisnormal';
   font-size: 40px;
   font-weight:100;
-  color: rgb(193, 37, 37);
+  color: rgb(213, 35, 35);
   margin-top:15px;
 }
 .active-board {
@@ -249,18 +252,18 @@ input[type="button"]:active {
   background-color:darkred;
 }
 
-.Destroyer {
+.DESTROYER {
   background-color: rgb(203, 197, 36);
 }
-.Submarine {
+.SUBMARINE {
   background-color:rgb(129, 78, 136);
 }
-.Cruiser {
+.CRUISER {
   background-color:rgb(77, 143, 223);
 }
-.Battleship {
+.BATTLESHIP {
   background-color:rgb(227, 123, 83);
 }
-.Carrier {
+.CARRIER {
   background-color:rgb(0, 139, 90);
 }

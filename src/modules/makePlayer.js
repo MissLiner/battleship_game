@@ -1,7 +1,7 @@
 import { shipFactory } from "./makeShips";
 
 const playerFactory = (name, isComputer, oppBoard) => {
-  const ships = [ { name: 'Destroyer', size: 2 }, { name: 'Submarine', size: 3 }, { name: 'Cruiser', size: 3 }, { name: 'Battleship', size: 4 }, {name: 'Carrier', size: 5 }];
+  const ships = [ { name: 'DESTROYER', size: 2 }, { name: 'SUBMARINE', size: 3 }, { name: 'CRUISER', size: 3 }, { name: 'BATTLESHIP', size: 4 }, {name: 'CARRIER', size: 5 }];
 
   const armadaArr = [];
   const allShipPositions = [];

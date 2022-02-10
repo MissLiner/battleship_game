@@ -93,9 +93,13 @@ function toggleView(button) {
   if(button.value === "reveal ships") {
     button.value = "hide ships";
     p2View = "private";
-  } else {
+  } 
+  else if(button.value === "hide ships") {
     button.value = "reveal ships";
     p2View = "public";
+  } else {
+    alert("button error");
+    return;
   }
   displayGame(board1, board2, p2View);
 }
